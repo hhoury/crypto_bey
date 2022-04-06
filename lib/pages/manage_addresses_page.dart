@@ -5,6 +5,6 @@ class ManageAddressesPage extends StatelessWidget {
   static const routeName = '/manage-addresses';
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold();
   }
 }

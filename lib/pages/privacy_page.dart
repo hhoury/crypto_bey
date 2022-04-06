@@ -5,6 +5,10 @@ class PrivacyPage extends StatelessWidget {
   static const routeName = '/privacy';
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Privacy and Security'),
+      ),
+    );
   }
 }

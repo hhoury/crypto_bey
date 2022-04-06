@@ -6,6 +6,16 @@ class AddAddressPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('New Address'),
+      ),
+      body: Container(
+        margin: EdgeInsets.all(10),
+        child: Column(
+          children: [Text('data'), DropdownButton(items: [], onChanged: null)],
+        ),
+      ),
+    );
   }
 }

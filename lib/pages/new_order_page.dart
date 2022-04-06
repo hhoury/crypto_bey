@@ -6,6 +6,6 @@ class NewOrderPage extends StatelessWidget {
   static const routeName = '/new-order';
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold();
   }
 }

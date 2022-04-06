@@ -6,6 +6,6 @@ class OrderHistoryPage extends StatelessWidget {
   static const routeName = '/order-history';
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold();
   }
 }

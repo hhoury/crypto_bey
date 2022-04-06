@@ -5,6 +5,6 @@ class ResetPasswordPage extends StatelessWidget {
   static const routeName = '/reset-password';
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold();
   }
 }

@@ -11,6 +11,33 @@ class MyAccountPage extends StatelessWidget {
         // ignore: prefer_const_constructors
         title: Text('My Account'),
       ),
+      body: Container(
+        margin: EdgeInsets.all(15),
+        child: Column(
+          children: [
+            Row(children: [
+               Icon(Icons.person,color: Theme.of(context).colorScheme.primary),
+              TextButton(onPressed: () {}, child: Text('Personal information')),
+            ],),
+             Row(children: [
+               Icon(Icons.home,color: Theme.of(context).colorScheme.primary),
+              TextButton(onPressed: () {}, child: Text('Manage addresses')),
+            ],),
+             Row(children: [
+               Icon(Icons.lock,color: Theme.of(context).colorScheme.primary),
+              TextButton(onPressed: () {}, child: Text('privacy and security')),
+            ],),
+             Row(children: [
+               Icon(Icons.notifications,color: Theme.of(context).colorScheme.primary),
+              TextButton(onPressed: () {}, child: Text('Notifications')),
+            ],),
+             Row(children: [
+               Icon(Icons.call,color: Theme.of(context).colorScheme.primary),
+              TextButton(onPressed: () {}, child: Text('Contact us')),
+            ],),
+          ],
+        ),
+      ),
     );
   }
 }

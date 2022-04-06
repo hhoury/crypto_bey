@@ -5,6 +5,11 @@ class NotificationsPage extends StatelessWidget {
   static const routeName = '/notifications';
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Notifications'),
+      ),
+      
+    );
   }
 }
