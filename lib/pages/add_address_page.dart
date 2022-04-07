@@ -8,12 +8,22 @@ class AddAddressPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('New Address'),
+        title: const Text('New Address'),
       ),
       body: Container(
-        margin: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
         child: Column(
-          children: [Text('data'), DropdownButton(items: [], onChanged: null)],
+          children: [
+            const Text('Country'),
+            DropdownButton(items: const [], onChanged: null),
+            const Text('City'),
+            DropdownButton(items: const [], onChanged: null),
+            const Text('Address'),
+            const TextField(),
+            const Text('Unit'),
+            const TextField(),
+            const ElevatedButton(onPressed: null, child: Text('Submit'))
+          ],
         ),
       ),
     );

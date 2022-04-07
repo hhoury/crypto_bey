@@ -6,36 +6,40 @@ class SignUpPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Column(
-      children: [
-        Row(
+    return Scaffold(
+      body: Container(
+        margin: const EdgeInsets.all(10),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Image.asset('logo'),
-            Text('Crypto Bey')
+            Row(
+              children: [Image.asset('logo'), const Text('Crypto Bey')],
+            ),
+            const SizedBox(height: 20),
+            const Text('Full Name'),
+            const TextField(),
+            const Text('Phone Number'),
+            Row(
+              children: const [
+                TextField(),
+                TextField(),
+              ],
+            ),
+            const Text('Email'),
+            const TextField(),
+            const Text('Password'),
+            const TextField(),
+            const Text('Password Confirmation'),
+            const TextField(),
+            const SizedBox(
+              height: 30,
+            ),
+            ElevatedButton(onPressed: () {}, child: const Text('SIGNUP')),
+            ElevatedButton(
+                onPressed: () {}, child: const Text('I HAVE AN ACCOUNT')),
           ],
         ),
-        const SizedBox(height:20),
-        Text('Full Name'),
-        TextField(),
-        Text('Phone Number'),
-        Row(
-          children: [
-            TextField(),
-            TextField(),
-          ],
-        ),
-        Text('Email'),
-        TextField(),
-         Text('Password'),
-        TextField(),
-         Text('Password Confirmation'),
-        TextField(),
-        SizedBox(height: 30,),
-        ElevatedButton(onPressed: (){}, child: Text('SIGNUP')),
-        ElevatedButton(onPressed: (){}, child: Text('I HAVE AN ACCOUNT')),
-
-      ],
-    ),
+      ),
     );
   }
 }

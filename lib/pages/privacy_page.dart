@@ -7,7 +7,17 @@ class PrivacyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Privacy and Security'),
+        title: const Text('Privacy and Security'),
+      ),
+      body: Container(
+        margin: const EdgeInsets.all(10),
+        child: Column(
+          children: const [
+            ElevatedButton(onPressed: null, child: Text('Change Password')),
+            ElevatedButton(onPressed: null, child: Text('Reset Password')),
+            ElevatedButton(onPressed: null, child: Text('Log Out')),
+          ],
+        ),
       ),
     );
   }

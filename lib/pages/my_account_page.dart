@@ -12,29 +12,50 @@ class MyAccountPage extends StatelessWidget {
         title: Text('My Account'),
       ),
       body: Container(
-        margin: EdgeInsets.all(15),
+        margin: const EdgeInsets.all(15),
         child: Column(
           children: [
-            Row(children: [
-               Icon(Icons.person,color: Theme.of(context).colorScheme.primary),
-              TextButton(onPressed: () {}, child: Text('Personal information')),
-            ],),
-             Row(children: [
-               Icon(Icons.home,color: Theme.of(context).colorScheme.primary),
-              TextButton(onPressed: () {}, child: Text('Manage addresses')),
-            ],),
-             Row(children: [
-               Icon(Icons.lock,color: Theme.of(context).colorScheme.primary),
-              TextButton(onPressed: () {}, child: Text('privacy and security')),
-            ],),
-             Row(children: [
-               Icon(Icons.notifications,color: Theme.of(context).colorScheme.primary),
-              TextButton(onPressed: () {}, child: Text('Notifications')),
-            ],),
-             Row(children: [
-               Icon(Icons.call,color: Theme.of(context).colorScheme.primary),
-              TextButton(onPressed: () {}, child: Text('Contact us')),
-            ],),
+            Row(
+              children: [
+                Icon(Icons.person_outline,
+                    color: Theme.of(context).colorScheme.primary),
+                TextButton(
+                    onPressed: () {},
+                    child: const Text('Personal information')),
+              ],
+            ),
+            Row(
+              children: [
+                Icon(Icons.other_houses_outlined,
+                    color: Theme.of(context).colorScheme.primary),
+                TextButton(
+                    onPressed: () {}, child: const Text('Manage addresses')),
+              ],
+            ),
+            Row(
+              children: [
+                Icon(Icons.lock_outline,
+                    color: Theme.of(context).colorScheme.primary),
+                TextButton(
+                    onPressed: () {},
+                    child: const Text('privacy and security')),
+              ],
+            ),
+            Row(
+              children: [
+                Icon(Icons.error_outline_outlined,
+                    color: Theme.of(context).colorScheme.primary),
+                TextButton(
+                    onPressed: () {}, child: const Text('Notifications')),
+              ],
+            ),
+            Row(
+              children: [
+                Icon(Icons.phone_in_talk_outlined,
+                    color: Theme.of(context).colorScheme.primary),
+                TextButton(onPressed: () {}, child: const Text('Contact us')),
+              ],
+            ),
           ],
         ),
       ),

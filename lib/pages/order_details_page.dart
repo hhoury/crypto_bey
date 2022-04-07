@@ -7,6 +7,18 @@ class OrderDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Order Detail'),
+      ),
+      body: Container(
+        margin: const EdgeInsets.all(10),
+        child: Column(
+          children: [
+            Image.asset('/assets/images/delivered.png'),
+          ],
+        ),
+      ),
+    );
   }
 }

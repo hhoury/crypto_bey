@@ -7,26 +7,26 @@ class PersonalInformationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Personal information')),
+      appBar: AppBar(title: const Text('Personal information')),
       body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
         child: Column(
           children: [
-            Text('Full Name'),
-            TextField(),
-            Text('Email'),
-            TextField(),
-            Text('Phone'),
+            const Text('Full Name'),
+            const TextField(),
+            const Text('Email'),
+            const TextField(),
+            const Text('Phone'),
             Row(
-              children: [
+              children: const [
                 TextField(),
                 TextField(),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            ElevatedButton(onPressed: () {}, child: Text('SUBMIT')),
+            ElevatedButton(onPressed: () {}, child: const Text('SUBMIT')),
           ],
         ),
       ),
