@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   provider: ^6.0.2
   intl: ^0.17.0
+  flutter_svg: ^1.0.3
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +67,8 @@ flutter:
     - assets/images/delivered.png
     - assets/images/delivering.png
     - assets/images/logo.png
+    - assets/images/logo.svg
+    - assets/images/motorcycle.svg
     - assets/images/order.png
     - assets/images/payment.png
     - assets/images/verification.png
