@@ -14,7 +14,7 @@ class LoginPage extends StatelessWidget {
         child: Column(
           children: [
             ClipRRect(
-              child: SvgPicture.asset('assets/images/logo.svg',
+              child: SvgPicture.asset('assets/images/logo-svg.svg',
                   alignment: Alignment.topCenter),
             ),
             const Align(alignment: Alignment.centerLeft, child: Text('Email')),
