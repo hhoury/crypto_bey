@@ -1,9 +1,8 @@
 // ignore_for_file: use_key_in_widget_constructors
 
-import 'package:crypto_bey/widgets/order_detail_bottom.dart';
 import 'package:flutter/material.dart';
 
-class NewOrderConfirmationPage extends StatelessWidget {
+class NewOrderConfirmationScreen extends StatelessWidget {
   static const routeName = '/order-confirmation';
 
   @override

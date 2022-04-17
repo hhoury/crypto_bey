@@ -37,6 +37,7 @@ dependencies:
   provider: ^6.0.2
   intl: ^0.17.0
   flutter_svg: ^1.0.3
+  shared_preferences: ^2.0.13
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +69,7 @@ flutter:
     - assets/images/delivered.svg
     - assets/images/logo.svg
     - assets/images/logo-svg.svg
+    - assets/images/logop.png
     - assets/images/motorcycle.svg
     - assets/images/order.svg
     - assets/images/verification.svg

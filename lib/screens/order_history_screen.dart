@@ -2,10 +2,10 @@
 
 import 'package:flutter/material.dart';
 
-class OrderHistoryPage extends StatelessWidget {
+class OrderHistoryScreen extends StatelessWidget {
   static const routeName = '/order-history';
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return const Scaffold();
   }
 }

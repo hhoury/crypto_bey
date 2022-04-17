@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-class NewOrderPage extends StatelessWidget {
+class NewOrderScreen extends StatelessWidget {
   static const routeName = '/new-order';
 
   Widget _buildUploadedScreenshot() {

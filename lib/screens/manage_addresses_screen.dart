@@ -2,10 +2,10 @@ import 'package:crypto_bey/widgets/addresses_list.dart';
 import 'package:flutter/material.dart';
 
 // ignore: use_key_in_widget_constructors
-class ManageAddressesPage extends StatelessWidget {
+class ManageAddressesScreen extends StatelessWidget {
   static const routeName = '/manage-addresses';
 
-  const ManageAddressesPage();
+  const ManageAddressesScreen();
 
   @override
   Widget build(BuildContext context) {

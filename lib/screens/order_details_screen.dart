@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-class OrderDetailsPage extends StatelessWidget {
+class OrderDetailsScreen extends StatelessWidget {
   static const routeName = '/order-details';
 
   @override

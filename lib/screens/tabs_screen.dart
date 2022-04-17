@@ -1,34 +1,34 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:crypto_bey/pages/my_account_page.dart';
-import 'package:crypto_bey/pages/order_history_page.dart';
+import 'package:crypto_bey/screens/my_account_screen.dart';
+import 'package:crypto_bey/screens/order_history_screen.dart';
 import 'package:flutter/material.dart';
 
 // ignore: use_key_in_widget_constructors
-class TabsPage extends StatefulWidget {
+class TabsScreen extends StatefulWidget {
   static const routeName = '/tabs';
 
   @override
-  State<TabsPage> createState() => _TabsPageState();
+  State<TabsScreen> createState() => _TabsScreenState();
 }
 
-class _TabsPageState extends State<TabsPage> {
-  List<Map<String, Object>>? _pages;
+class _TabsScreenState extends State<TabsScreen> {
+  List<Map<String, Object>>? _screens;
 
-  int _selectedPageIndex = 0;
+  int _selectedScreenIndex = 0;
 
-  void _selectPage(index) {
+  void _selectScreen(index) {
     setState(() {
-      _selectedPageIndex = index;
+      _selectedScreenIndex = index;
     });
   }
 
   @override
   void initState() {
     super.initState();
-    _pages = [
-      {'page': OrderHistoryPage(), 'title': 'Orders History'},
-      {'page': MyAccountPage(), 'title': 'My Account'}
+    _screens = [
+      {'screen': OrderHistoryScreen(), 'title': 'Orders History'},
+      {'screen': MyAccountScreen(), 'title': 'My Account'}
     ];
   }
 
@@ -40,7 +40,6 @@ class _TabsPageState extends State<TabsPage> {
       ),
       // ignore: prefer_const_literals_to_create_immutables
       bottomNavigationBar: BottomNavigationBar(
-
         items: [
           BottomNavigationBarItem(
               backgroundColor: Theme.of(context).colorScheme.primary,
@@ -52,7 +51,7 @@ class _TabsPageState extends State<TabsPage> {
               label: 'My Account'),
         ],
         backgroundColor: Theme.of(context).colorScheme.primary,
-        currentIndex: _selectedPageIndex,
+        currentIndex: _selectedScreenIndex,
       ),
     );
   }

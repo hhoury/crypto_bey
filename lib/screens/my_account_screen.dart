@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 // ignore: use_key_in_widget_constructors
-class MyAccountPage extends StatelessWidget {
+class MyAccountScreen extends StatelessWidget {
   static const routeName = '/my-account';
+
+  void _toggleTheme(bool? isDark) {}
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +58,13 @@ class MyAccountPage extends StatelessWidget {
                 TextButton(onPressed: () {}, child: const Text('Contact us')),
               ],
             ),
+            Row(
+              children: const [
+                Icon(Icons.dark_mode_outlined),
+                Text('Dark Mode'),
+                // Switch(value: false, onChanged: _toggleTheme(value))
+              ],
+            )
           ],
         ),
       ),
