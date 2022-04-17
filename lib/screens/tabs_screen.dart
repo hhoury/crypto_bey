@@ -35,22 +35,21 @@ class _TabsScreenState extends State<TabsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Orders History'),
-      ),
+      body: _screens![_selectedScreenIndex]['screen'] as Widget,
       // ignore: prefer_const_literals_to_create_immutables
       bottomNavigationBar: BottomNavigationBar(
+        onTap: _selectScreen,
         items: [
           BottomNavigationBarItem(
               backgroundColor: Theme.of(context).colorScheme.primary,
-              icon: Icon(Icons.history_outlined),
+              icon: Icon(Icons.history_outlined, size: 32),
               label: 'Orders History'),
           BottomNavigationBarItem(
               backgroundColor: Theme.of(context).colorScheme.primary,
-              icon: Icon(Icons.person_rounded),
+              icon: Icon(Icons.person_rounded, size: 32),
               label: 'My Account'),
         ],
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: Theme.of(context).bottomAppBarTheme.color,
         currentIndex: _selectedScreenIndex,
       ),
     );

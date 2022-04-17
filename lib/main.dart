@@ -77,7 +77,7 @@ class MyApp extends StatelessWidget {
                   ChangePasswordScreen(),
               LoginScreen.routeName: (context) => LoginScreen(),
               ManageAddressesScreen.routeName: (context) =>
-                  const ManageAddressesScreen(),
+                  ManageAddressesScreen(),
               MyAccountScreen.routeName: (context) => MyAccountScreen(),
               NewOrderConfirmationScreen.routeName: (context) =>
                   NewOrderConfirmationScreen(),

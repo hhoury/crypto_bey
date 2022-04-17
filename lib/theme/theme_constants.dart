@@ -14,6 +14,7 @@ const Color darkTextFieldBackground = Color(0xFF212B37);
 const Color lightTextFieldBackground = Color(0xFFEEEEEE);
 const Color darkTabsBackgroundColor = Color(0xFF2B3A4D);
 const Color lightTabsBackgroundColor = Colors.white;
+const Color darkUnselectedTab = Color(0xFF808994);
 
 // #endregion
 const lightAppbarTheme = AppBarTheme(
@@ -101,10 +102,8 @@ const darkAppbarTheme = AppBarTheme(
 const darkTextTheme = TextTheme(
   headline1:
       TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white),
-  headline2: TextStyle(
-    fontWeight: FontWeight.bold,
-    fontSize: 16,
-  ),
+  headline2:
+      TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
   headline3: TextStyle(
     fontWeight: FontWeight.bold,
     fontSize: 16,
@@ -122,17 +121,18 @@ const darkTextTheme = TextTheme(
 );
 
 const darkColorScheme = ColorScheme(
-    brightness: Brightness.dark,
-    primary: purpleColor,
-    onPrimary: Colors.white,
-    secondary: purpleColor,
-    onSecondary: Colors.white,
-    error: Colors.red,
-    onError: Colors.white,
-    background: darkColor,
-    onBackground: Colors.white,
-    surface: darkColor,
-    onSurface: purpleColor);
+  brightness: Brightness.dark,
+  primary: purpleColor,
+  onPrimary: Colors.white,
+  secondary: purpleColor,
+  onSecondary: Colors.white,
+  error: Colors.red,
+  onError: Colors.white,
+  background: darkColor,
+  onBackground: Colors.white,
+  surface: Color(0xFF1F2730),
+  onSurface: Colors.white,
+);
 
 const InputDecorationTheme darkInputDecorationTheme = InputDecorationTheme(
   constraints: BoxConstraints(maxHeight: 50),
@@ -157,13 +157,16 @@ const InputDecorationTheme darkInputDecorationTheme = InputDecorationTheme(
 );
 
 ThemeData lightTheme = ThemeData(
-  fontFamily: 'OpenSans',
-  appBarTheme: lightAppbarTheme,
-  elevatedButtonTheme: elevatedButtonThemeData,
-  inputDecorationTheme: lightInputDecorationTheme,
-  textTheme: lightTextTheme,
-  colorScheme: lightColorScheme,
-);
+    fontFamily: 'OpenSans',
+    appBarTheme: lightAppbarTheme,
+    elevatedButtonTheme: elevatedButtonThemeData,
+    inputDecorationTheme: lightInputDecorationTheme,
+    textTheme: lightTextTheme,
+    colorScheme: lightColorScheme,
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        elevation: 4,
+        backgroundColor: Colors.white,
+        selectedItemColor: purpleColor));
 
 ThemeData darkTheme = ThemeData(
   fontFamily: 'OpenSans',
@@ -173,4 +176,11 @@ ThemeData darkTheme = ThemeData(
   primaryColor: purpleColor,
   textTheme: darkTextTheme,
   colorScheme: darkColorScheme,
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+      elevation: 4,
+      backgroundColor: Color(0xFF2B3A4D),
+      selectedItemColor: Colors.white,
+      unselectedItemColor: darkUnselectedTab),
 );

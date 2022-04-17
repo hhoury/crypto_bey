@@ -1,3 +1,4 @@
+import 'package:crypto_bey/utils/helper_widgets.dart';
 import 'package:flutter/material.dart';
 
 // ignore: use_key_in_widget_constructors
@@ -12,10 +13,25 @@ class PrivacyScreen extends StatelessWidget {
       body: Container(
         margin: const EdgeInsets.all(10),
         child: Column(
-          children: const [
-            ElevatedButton(onPressed: null, child: Text('Change Password')),
-            ElevatedButton(onPressed: null, child: Text('Reset Password')),
-            ElevatedButton(onPressed: null, child: Text('Log Out')),
+          children: [
+            addVerticalSpace(30),
+            buttonContainer(ElevatedButton(
+              onPressed: () {},
+              child: padButtonText('Change Password'),
+              style: Theme.of(context).elevatedButtonTheme.style,
+            )),
+            addVerticalSpace(20),
+            buttonContainer(ElevatedButton(
+              onPressed: () {},
+              child: padButtonText('Reset Password'),
+              // style: Theme.of(context).elevatedButtonTheme.style,
+            )),
+            addVerticalSpace(20),
+            buttonContainer(ElevatedButton(
+              onPressed: () {},
+              child: padButtonText('Log Out'),
+              style: ElevatedButton.styleFrom(primary: Colors.red),
+            ))
           ],
         ),
       ),

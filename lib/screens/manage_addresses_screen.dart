@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 class ManageAddressesScreen extends StatelessWidget {
   static const routeName = '/manage-addresses';
 
-  const ManageAddressesScreen();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,12 +14,12 @@ class ManageAddressesScreen extends StatelessWidget {
       body: Container(
         margin: const EdgeInsets.all(10),
         child: Column(
-          children: [
-            AddressesList(),
-            const Divider(
+          children: const [
+            // AddressesList(),
+            Divider(
               height: 1,
             ),
-            const TextButton(onPressed: null, child: Text('Add New Address'))
+            TextButton(onPressed: null, child: Text('Add New Address'))
           ],
         ),
       ),
