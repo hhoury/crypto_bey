@@ -88,10 +88,10 @@ class MyApp extends StatelessWidget {
               PaymentScreen.routeName: (context) => PaymentScreen(),
               PersonalInformationScreen.routeName: (context) =>
                   PersonalInformationScreen(),
-              PrivacyScreen.routeName: (context) => AddAddressScreen(),
-              ResetPasswordScreen.routeName: (context) => AddAddressScreen(),
+              PrivacyScreen.routeName: (context) => PrivacyScreen(),
+              ResetPasswordScreen.routeName: (context) => ResetPasswordScreen(),
               SignUpScreen.routeName: (context) => SignUpScreen(),
-              TabsScreen.routeName: (context) => AddAddressScreen(),
+              TabsScreen.routeName: (context) => TabsScreen(),
             },
             onUnknownRoute: (settings) {
               return MaterialPageRoute(builder: ((context) => LoginScreen()));

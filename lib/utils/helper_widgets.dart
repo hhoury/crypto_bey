@@ -16,7 +16,7 @@ Widget buttonContainer(Widget button) {
   return Align(
     alignment: Alignment.center,
     child: FractionallySizedBox(
-      widthFactor: 0.9,
+      widthFactor: 1,
       child: button,
     ),
   );

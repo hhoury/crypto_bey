@@ -36,14 +36,14 @@ class _TabsScreenState extends State<TabsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: null,
+        title: Text('Orders History'),
       ),
       // ignore: prefer_const_literals_to_create_immutables
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
               backgroundColor: Theme.of(context).colorScheme.primary,
-              icon: Icon(Icons.watch_later),
+              icon: Icon(Icons.history_outlined),
               label: 'Orders History'),
           BottomNavigationBarItem(
               backgroundColor: Theme.of(context).colorScheme.primary,

@@ -1,7 +1,6 @@
+import 'package:flutter/material.dart';
 import '../screens/login_screen.dart';
 import '../theme/theme_constants.dart';
-import 'package:flutter/material.dart';
-
 import '../utils/helper_widgets.dart';
 
 // ignore: use_key_in_widget_constructors
@@ -69,7 +68,8 @@ class SignUpScreen extends StatelessWidget {
                   style:
                       ElevatedButton.styleFrom(primary: secondaryButtonColor),
                   onPressed: () {
-                    Navigator.of(context).pushNamed(LoginScreen.routeName);
+                    Navigator.of(context)
+                        .pushReplacementNamed(LoginScreen.routeName);
                   },
                   child: padButtonText('I HAVE AN ACCOUNT'))),
             ],
