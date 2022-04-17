@@ -1,4 +1,4 @@
-import 'package:crypto_bey/constants/app_constants.dart';
+import '../constants/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

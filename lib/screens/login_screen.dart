@@ -1,8 +1,8 @@
 // ignore_for_file: use_key_in_widget_constructors
 
-import 'package:crypto_bey/screens/reset_password_screen.dart';
-import 'package:crypto_bey/screens/signup_screen.dart';
-import 'package:crypto_bey/theme/theme_manager.dart';
+import '../screens/reset_password_screen.dart';
+import '../screens/signup_screen.dart';
+import '../theme/theme_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

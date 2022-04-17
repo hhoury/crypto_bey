@@ -1,4 +1,4 @@
-import 'package:crypto_bey/models/customer.dart';
+import '../models/customer.dart';
 import 'package:flutter/material.dart';
 
 class Customers with ChangeNotifier {

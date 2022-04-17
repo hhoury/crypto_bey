@@ -1,4 +1,4 @@
-import 'package:crypto_bey/models/order.dart';
+import '../models/order.dart';
 import 'package:flutter/material.dart';
 
 class Orders with ChangeNotifier {

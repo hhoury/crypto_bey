@@ -1,5 +1,5 @@
-import 'package:crypto_bey/screens/login_screen.dart';
-import 'package:crypto_bey/theme/theme_constants.dart';
+import '../screens/login_screen.dart';
+import '../theme/theme_constants.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/helper_widgets.dart';
