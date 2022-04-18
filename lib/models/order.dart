@@ -10,6 +10,7 @@ class Order {
   DateTime purchaseDate;
   OrderStatus status;
   bool deleted;
+  Retailer retailer;
   Order(
       {required this.id,
       required this.user,
@@ -19,5 +20,6 @@ class Order {
       required this.paymentAmount,
       required this.purchaseDate,
       required this.status,
+      required this.retailer,
       this.deleted = false});
 }

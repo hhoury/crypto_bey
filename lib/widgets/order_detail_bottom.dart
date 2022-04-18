@@ -15,8 +15,8 @@ class OrderDetailBottom extends StatelessWidget {
 
   String get status {
     switch (orderStatus) {
-      case OrderStatus.Verification:
-        return 'Verification';
+      case OrderStatus.Cancelled:
+        return 'Cancelled';
       case OrderStatus.Payment:
         return 'Payment';
       case OrderStatus.Order:

@@ -17,6 +17,7 @@ const Color lightTabsBackgroundColor = Colors.white;
 const Color darkUnselectedTab = Color(0xFF808994);
 const Color lightSelectedTab = Color(0xFF303030);
 const Color lightUnSelectedTab = Color(0xFFA3A3A3);
+const Color subtitleTextColor = Color(0xFF7A8087);
 
 // #endregion
 const lightAppbarTheme = AppBarTheme(
@@ -29,10 +30,8 @@ const lightAppbarTheme = AppBarTheme(
 const lightTextTheme = TextTheme(
   headline1:
       TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.black),
-  headline2: TextStyle(
-    fontWeight: FontWeight.bold,
-    fontSize: 16,
-  ),
+  headline2:
+      TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black),
   headline3: TextStyle(
     fontWeight: FontWeight.bold,
     fontSize: 16,
@@ -40,6 +39,11 @@ const lightTextTheme = TextTheme(
   labelMedium: TextStyle(
     fontWeight: FontWeight.bold,
     color: greyTextColor,
+    fontSize: 14,
+  ),
+  subtitle1: TextStyle(
+    fontWeight: FontWeight.bold,
+    color: subtitleTextColor,
     fontSize: 14,
   ),
   button: TextStyle(
@@ -59,7 +63,7 @@ const lightColorScheme = ColorScheme(
   onError: Colors.white,
   background: darkColor,
   onBackground: Colors.white,
-  surface: darkColor,
+  surface: Colors.white,
   onSurface: Colors.indigo,
 );
 
@@ -113,7 +117,12 @@ const darkTextTheme = TextTheme(
   ),
   labelMedium: TextStyle(
     fontWeight: FontWeight.bold,
-    color: Colors.white,
+    color: greyTextColor,
+    fontSize: 14,
+  ),
+  subtitle1: TextStyle(
+    fontWeight: FontWeight.bold,
+    color: subtitleTextColor,
     fontSize: 14,
   ),
   button: TextStyle(
