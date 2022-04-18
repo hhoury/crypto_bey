@@ -13,68 +13,76 @@ class LoginScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Container(
           margin: const EdgeInsets.fromLTRB(15, 50, 15, 5),
-          child: Column(
-            children: [
-              Container(
-                width: 300,
-                height: 280,
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(15)),
-                child: Image.asset(
-                  'assets/images/logop.png',
-                  fit: BoxFit.cover,
-                  width: 200,
-                  height: 200,
-                  // semanticsLabel: 'Crypto Bey Logo',
+          child: Form(
+            child: Column(
+              children: [
+                Container(
+                  width: 300,
+                  height: 280,
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(15)),
+                  child: Image.asset(
+                    'assets/images/logop.png',
+                    fit: BoxFit.cover,
+                    width: 200,
+                    height: 200,
+                    // semanticsLabel: 'Crypto Bey Logo',
+                  ),
                 ),
-              ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text('Email',
-                    style: Theme.of(context).textTheme.labelMedium),
-              ),
-              addVerticalSpace(10),
-              TextFormField(),
-              addVerticalSpace(15),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text('Password',
-                    style: Theme.of(context).textTheme.labelMedium),
-              ),
-              addVerticalSpace(10),
-              TextFormField(),
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                    onPressed: () {
-                      Navigator.of(context)
-                          .pushNamed(ResetPasswordScreen.routeName);
-                    },
-                    child: const Text('Forgot Password')),
-              ),
-              addVerticalSpace(100),
-              buttonContainer(ElevatedButton(
-                onPressed: () {
-                  // Provider.of<ThemeProvider>(context, listen: false)
-                  //     .toggleTheme();
-                  Navigator.of(context)
-                      .pushReplacementNamed(TabsScreen.routeName);
-                },
-                child: padButtonText('LOGIN'),
-                style: Theme.of(context).elevatedButtonTheme.style,
-              )),
-              addVerticalSpace(10),
-              buttonContainer(
-                ElevatedButton(
-                  style: Theme.of(context).elevatedButtonTheme.style,
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text('Email',
+                      style: Theme.of(context).textTheme.labelMedium),
+                ),
+                addVerticalSpace(10),
+                TextFormField(
+                  textInputAction: TextInputAction.next,
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                addVerticalSpace(15),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text('Password',
+                      style: Theme.of(context).textTheme.labelMedium),
+                ),
+                addVerticalSpace(10),
+                TextFormField(
+                  textInputAction: TextInputAction.done,
+                  obscureText: true,
+                  enableSuggestions: false,
+                  autocorrect: false,
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                      onPressed: () {
+                        Navigator.of(context)
+                            .pushNamed(ResetPasswordScreen.routeName);
+                      },
+                      child: const Text('Forgot Password')),
+                ),
+                addVerticalSpace(100),
+                buttonContainer(ElevatedButton(
                   onPressed: () {
                     Navigator.of(context)
-                        .pushReplacementNamed(SignUpScreen.routeName);
+                        .pushReplacementNamed(TabsScreen.routeName);
                   },
-                  child: padButtonText('SIGN UP'),
-                ),
-              )
-            ],
+                  child: padButtonText('LOGIN'),
+                  style: Theme.of(context).elevatedButtonTheme.style,
+                )),
+                addVerticalSpace(10),
+                buttonContainer(
+                  ElevatedButton(
+                    style: Theme.of(context).elevatedButtonTheme.style,
+                    onPressed: () {
+                      Navigator.of(context)
+                          .pushReplacementNamed(SignUpScreen.routeName);
+                    },
+                    child: padButtonText('SIGN UP'),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

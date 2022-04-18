@@ -6,16 +6,18 @@ class NewOrderScreen extends StatelessWidget {
   static const routeName = '/new-order';
 
   Widget _buildUploadedScreenshot() {
-    return Container(
-      padding: const EdgeInsets.all(15),
-      child: Column(
-        children: const [
-          Text('Uploaded Screenshot'),
-          SizedBox(
-            height: 10,
-          ),
-          //    Image.network(imageUrl)
-        ],
+    return Scaffold(
+      body: Container(
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          children: const [
+            Text('Uploaded Screenshot'),
+            SizedBox(
+              height: 10,
+            ),
+            //    Image.network(imageUrl)
+          ],
+        ),
       ),
     );
   }

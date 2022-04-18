@@ -99,13 +99,6 @@ class MyAccountScreen extends StatelessWidget {
                     )),
               ],
             ),
-            Row(
-              children: const [
-                Icon(Icons.dark_mode_outlined),
-                Text('Dark Mode'),
-                // Switch(value: false, onChanged: _toggleTheme(value))
-              ],
-            )
           ],
         ),
       ),
