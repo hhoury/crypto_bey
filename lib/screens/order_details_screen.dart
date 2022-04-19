@@ -11,12 +11,14 @@ class OrderDetailsScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Order Detail'),
       ),
-      body: Container(
-        margin: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            Image.asset('/assets/images/delivered.png'),
-          ],
+      body: SafeArea(
+        child: Container(
+          margin: const EdgeInsets.all(10),
+          child: Column(
+            children: [
+              Image.asset('/assets/images/delivered.png'),
+            ],
+          ),
         ),
       ),
     );

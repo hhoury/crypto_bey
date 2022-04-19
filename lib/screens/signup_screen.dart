@@ -10,99 +10,101 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: const EdgeInsets.fromLTRB(20, 40, 30, 30),
-        child: SingleChildScrollView(
-          child: Form(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: Image.asset(
-                        'assets/images/logop.png',
-                        fit: BoxFit.cover,
-                        width: 80,
-                        height: 60,
+      body: SafeArea(
+        child: Container(
+          padding: const EdgeInsets.fromLTRB(20, 40, 30, 30),
+          child: SingleChildScrollView(
+            child: Form(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Image.asset(
+                          'assets/images/logop.png',
+                          fit: BoxFit.cover,
+                          width: 80,
+                          height: 60,
+                        ),
                       ),
-                    ),
-                    Text('Crypto Bey',
-                        style: Theme.of(context).textTheme.headline1)
-                  ],
-                ),
-                addVerticalSpace(20),
-                Text('Full Name',
-                    style: Theme.of(context).textTheme.labelMedium),
-                addVerticalSpace(10),
-                TextFormField(
-                  textInputAction: TextInputAction.next,
-                ),
-                addVerticalSpace(20),
-                Text('Phone Number',
-                    style: Theme.of(context).textTheme.labelMedium),
-                addVerticalSpace(10),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: TextFormField(
-                        keyboardType: TextInputType.number,
-                        textInputAction: TextInputAction.next,
+                      Text('Crypto Bey',
+                          style: Theme.of(context).textTheme.headline1)
+                    ],
+                  ),
+                  addVerticalSpace(20),
+                  Text('Full Name',
+                      style: Theme.of(context).textTheme.labelMedium),
+                  addVerticalSpace(10),
+                  TextFormField(
+                    textInputAction: TextInputAction.next,
+                  ),
+                  addVerticalSpace(20),
+                  Text('Phone Number',
+                      style: Theme.of(context).textTheme.labelMedium),
+                  addVerticalSpace(10),
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: TextFormField(
+                          keyboardType: TextInputType.number,
+                          textInputAction: TextInputAction.next,
+                        ),
                       ),
-                    ),
-                    addHorizontalSpace(5),
-                    Expanded(
-                      flex: 8,
-                      child: TextFormField(
-                        keyboardType: TextInputType.number,
-                        textInputAction: TextInputAction.next,
+                      addHorizontalSpace(5),
+                      Expanded(
+                        flex: 8,
+                        child: TextFormField(
+                          keyboardType: TextInputType.number,
+                          textInputAction: TextInputAction.next,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                addVerticalSpace(20),
-                Text('Email', style: Theme.of(context).textTheme.labelMedium),
-                addVerticalSpace(10),
-                TextFormField(
-                  keyboardType: TextInputType.emailAddress,
-                  textInputAction: TextInputAction.next,
-                ),
-                addVerticalSpace(20),
-                Text('Password',
-                    style: Theme.of(context).textTheme.labelMedium),
-                addVerticalSpace(10),
-                TextFormField(
-                  obscureText: true,
-                  enableSuggestions: false,
-                  autocorrect: false,
-                  textInputAction: TextInputAction.next,
-                ),
-                addVerticalSpace(20),
-                Text('Password Confirmation',
-                    style: Theme.of(context).textTheme.labelMedium),
-                addVerticalSpace(10),
-                TextFormField(
-                  obscureText: true,
-                  enableSuggestions: false,
-                  autocorrect: false,
-                  textInputAction: TextInputAction.done,
-                ),
-                addVerticalSpace(40),
-                buttonContainer(ElevatedButton(
-                    onPressed: () {}, child: padButtonText('SIGNUP'))),
-                addVerticalSpace(10),
-                buttonContainer(ElevatedButton(
-                    style:
-                        ElevatedButton.styleFrom(primary: secondaryButtonColor),
-                    onPressed: () {
-                      Navigator.of(context)
-                          .pushReplacementNamed(LoginScreen.routeName);
-                    },
-                    child: padButtonText('I HAVE AN ACCOUNT'))),
-              ],
+                    ],
+                  ),
+                  addVerticalSpace(20),
+                  Text('Email', style: Theme.of(context).textTheme.labelMedium),
+                  addVerticalSpace(10),
+                  TextFormField(
+                    keyboardType: TextInputType.emailAddress,
+                    textInputAction: TextInputAction.next,
+                  ),
+                  addVerticalSpace(20),
+                  Text('Password',
+                      style: Theme.of(context).textTheme.labelMedium),
+                  addVerticalSpace(10),
+                  TextFormField(
+                    obscureText: true,
+                    enableSuggestions: false,
+                    autocorrect: false,
+                    textInputAction: TextInputAction.next,
+                  ),
+                  addVerticalSpace(20),
+                  Text('Password Confirmation',
+                      style: Theme.of(context).textTheme.labelMedium),
+                  addVerticalSpace(10),
+                  TextFormField(
+                    obscureText: true,
+                    enableSuggestions: false,
+                    autocorrect: false,
+                    textInputAction: TextInputAction.done,
+                  ),
+                  addVerticalSpace(40),
+                  buttonContainer(ElevatedButton(
+                      onPressed: () {}, child: padButtonText('SIGNUP'))),
+                  addVerticalSpace(10),
+                  buttonContainer(ElevatedButton(
+                      style:
+                          ElevatedButton.styleFrom(primary: secondaryButtonColor),
+                      onPressed: () {
+                        Navigator.of(context)
+                            .pushReplacementNamed(LoginScreen.routeName);
+                      },
+                      child: padButtonText('I HAVE AN ACCOUNT'))),
+                ],
+              ),
             ),
           ),
         ),

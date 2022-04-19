@@ -56,6 +56,7 @@ class OrderItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       color: Theme.of(context).colorScheme.surface,
       elevation: 3,
       margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),

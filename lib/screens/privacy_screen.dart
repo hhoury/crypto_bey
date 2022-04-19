@@ -15,35 +15,37 @@ class PrivacyScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Privacy and Security'),
       ),
-      body: Container(
-        margin: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            addVerticalSpace(30),
-            buttonContainer(ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(ChangePasswordScreen.routeName);
-              },
-              child: padButtonText('Change Password'),
-              style: Theme.of(context).elevatedButtonTheme.style,
-            )),
-            addVerticalSpace(20),
-            buttonContainer(ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(ResetPasswordScreen.routeName);
-              },
-              child: padButtonText('Reset Password'),
-            )),
-            addVerticalSpace(20),
-            buttonContainer(ElevatedButton(
-              onPressed: () {
-                Provider.of<ThemeProvider>(context, listen: false)
-                    .toggleTheme();
-              },
-              child: padButtonText('Log Out'),
-              style: ElevatedButton.styleFrom(primary: Colors.red),
-            ))
-          ],
+      body: SafeArea(
+        child: Container(
+          margin: const EdgeInsets.all(10),
+          child: Column(
+            children: [
+              addVerticalSpace(30),
+              buttonContainer(ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed(ChangePasswordScreen.routeName);
+                },
+                child: padButtonText('Change Password'),
+                style: Theme.of(context).elevatedButtonTheme.style,
+              )),
+              addVerticalSpace(20),
+              buttonContainer(ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed(ResetPasswordScreen.routeName);
+                },
+                child: padButtonText('Reset Password'),
+              )),
+              addVerticalSpace(20),
+              buttonContainer(ElevatedButton(
+                onPressed: () {
+                  Provider.of<ThemeProvider>(context, listen: false)
+                      .toggleTheme();
+                },
+                child: padButtonText('Log Out'),
+                style: ElevatedButton.styleFrom(primary: Colors.red),
+              ))
+            ],
+          ),
         ),
       ),
     );
