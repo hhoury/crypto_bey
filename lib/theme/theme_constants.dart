@@ -108,7 +108,7 @@ const darkAppbarTheme = AppBarTheme(
 
 const darkTextTheme = TextTheme(
   headline1:
-      TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white),
+      TextStyle(fontWeight: FontWeight.bold, fontSize: 22, color: Colors.white),
   headline2:
       TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
   headline3: TextStyle(

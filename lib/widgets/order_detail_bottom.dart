@@ -19,8 +19,8 @@ class OrderDetailBottom extends StatelessWidget {
         return 'Cancelled';
       case OrderStatus.Payment:
         return 'Payment';
-      case OrderStatus.Order:
-        return 'Order';
+      case OrderStatus.Ordered:
+        return 'Ordered';
       case OrderStatus.Delivering:
         return 'Delivering';
       case OrderStatus.Delivered:

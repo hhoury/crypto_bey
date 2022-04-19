@@ -14,9 +14,9 @@ class OrderItem extends StatelessWidget {
       case OrderStatus.Cancelled:
         return 'Cancelled';
       case OrderStatus.Payment:
-        return 'Payment';
-      case OrderStatus.Order:
-        return 'Order';
+        return 'Waiting For Payment';
+      case OrderStatus.Ordered:
+        return 'Ordered';
       case OrderStatus.Delivering:
         return 'Delivering';
       case OrderStatus.Delivered:
@@ -40,7 +40,7 @@ class OrderItem extends StatelessWidget {
         return orderCancelledColor;
       case OrderStatus.Payment:
         return orderWaitingForPaymentColor;
-      case OrderStatus.Order:
+      case OrderStatus.Ordered:
         return orderOrderedColor;
       case OrderStatus.Delivering:
         return orderDeliveringColor;
@@ -58,42 +58,49 @@ class OrderItem extends StatelessWidget {
     return Card(
       color: Theme.of(context).colorScheme.surface,
       elevation: 3,
-      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
       child: Padding(
-        padding: const EdgeInsets.all(8),
-        child: ListTile(
-          leading: FittedBox(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: Image.asset(
-                orderStatus == 'Order' ? aliexpress : amazon,
-                fit: BoxFit.cover,
-                width: 200,
-                height: 200,
+        padding: const EdgeInsets.all(5),
+        child: InkWell(
+          child: ListTile(
+            onTap: () {},
+            leading: FittedBox(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: Image.asset(
+                  orderStatus == 'Delivering' ? aliexpress : amazon,
+                  fit: BoxFit.cover,
+                  width: 200,
+                  height: 200,
+                ),
               ),
             ),
-          ),
-          title: Text('order #$orederId',
-              style: Theme.of(context).textTheme.headline2),
-          subtitle: Text(
-            DateFormat.yMMMd().format(date),
-            style: Theme.of(context).textTheme.subtitle1,
-          ),
-          trailing: FittedBox(
-              child: Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5), color: orderStatusBg),
-            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-            child: Text(
-              orderStatus,
-              style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white), // Color(0xFF383838)),
-              // style: TextStyle(
-              //     backgroundColor: orderStatusBg,
-              // ),
+            title: Text('order #$orederId',
+                style: Theme.of(context).textTheme.headline2),
+            subtitle: Text(
+              DateFormat.yMMMd().format(date),
+              style: Theme.of(context).textTheme.subtitle1,
             ),
-          )),
+            trailing: FittedBox(
+                child: Container(
+              width: 120,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5), color: orderStatusBg),
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              child: Align(
+                alignment: Alignment.center,
+                child: Text(
+                  orderStatus,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white), // Color(0xFF383838)),
+                  // style: TextStyle(
+                  //     backgroundColor: orderStatusBg,
+                  // ),
+                ),
+              ),
+            )),
+          ),
         ),
       ),
     );

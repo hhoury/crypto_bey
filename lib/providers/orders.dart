@@ -13,7 +13,7 @@ class Orders with ChangeNotifier {
         note: 'note',
         paymentAmount: 200,
         purchaseDate: DateTime.now(),
-        status: OrderStatus.Order,
+        status: OrderStatus.Ordered,
         retailer: Retailer.Aliexpress),
     Order(
         id: '1234-32',

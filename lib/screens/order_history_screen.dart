@@ -17,7 +17,7 @@ class OrderHistoryScreen extends StatelessWidget {
         title: const Text('Orders History'),
       ),
       body: Container(
-        margin: const EdgeInsets.all(10),
+        margin: const EdgeInsets.all(5),
         child: ListView.builder(
           itemCount: orderData.orders.length,
           itemBuilder: (BuildContext context, int index) {

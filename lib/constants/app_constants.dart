@@ -2,6 +2,6 @@
 
 enum Retailer { Amazon, Aliexpress, Ebay, Other }
 
-enum OrderStatus { Cancelled, Payment, Order, Delivering, Delivered }
+enum OrderStatus { Cancelled, Payment, Ordered, Delivering, Delivered }
 
 enum BlockChain { ERC20, TRC20, OMNI }
