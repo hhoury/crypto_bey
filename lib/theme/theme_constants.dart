@@ -51,6 +51,11 @@ const lightTextTheme = TextTheme(
     fontWeight: FontWeight.bold,
     fontSize: 16,
   ),
+  headline4: TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+    color: Colors.black
+  )
 );
 
 const lightColorScheme = ColorScheme(
@@ -130,6 +135,11 @@ const darkTextTheme = TextTheme(
     fontWeight: FontWeight.bold,
     fontSize: 16,
   ),
+    headline4: TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+    color: Colors.white
+  )
 );
 
 const darkColorScheme = ColorScheme(

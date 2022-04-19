@@ -15,26 +15,32 @@ class AddAddressScreen extends StatelessWidget {
         child: Container(
           margin: const EdgeInsets.all(10),
           child: Form(
-            child: Column(
-              children: [
-                const Text('Country'),
-                addVerticalSpace(10),
-                DropdownButton(items: const [], onChanged: null),
-                addVerticalSpace(20),
-                const Text('City'),
-                addVerticalSpace(10),
-                DropdownButton(items: const [], onChanged: null),
-                addVerticalSpace(20),
-                const Text('Address'),
-                addVerticalSpace(10),
-                const TextField(),
-                addVerticalSpace(20),
-                const Text('Unit'),
-                addVerticalSpace(10),
-                const TextField(),
-                addVerticalSpace(20),
-                const ElevatedButton(onPressed: null, child: Text('Submit'))
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  addVerticalSpace(10),
+                   Text('Country',style: Theme.of(context).textTheme.labelMedium),
+                  addVerticalSpace(10),
+                  
+                  DropdownButtonFormField( items:  [], onChanged: null,isExpanded: true, alignment: Alignment.center,iconSize: 32),
+                  addVerticalSpace(20),
+                   Text('City',style: Theme.of(context).textTheme.labelMedium),
+                  addVerticalSpace(10),
+                  DropdownButtonFormField(items: const [], onChanged: null,isExpanded: true, alignment: Alignment.center,iconSize:32),
+                  addVerticalSpace(20),
+                   Text('Address',style: Theme.of(context).textTheme.labelMedium),
+                  addVerticalSpace(10),
+                  const TextField(textInputAction: TextInputAction.next,),
+                  addVerticalSpace(20),
+                   Text('Unit',style: Theme.of(context).textTheme.labelMedium),
+                  addVerticalSpace(10),
+                  const TextField(textInputAction: TextInputAction.done,),
+                  addVerticalSpace(20),
+                  buttonContainer(ElevatedButton(onPressed: () {}, child: padButtonText('Submit'))),
+                ],
+              ),
             ),
           ),
         ),

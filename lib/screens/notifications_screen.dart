@@ -1,3 +1,4 @@
+import 'package:crypto_bey/utils/helper_widgets.dart';
 import 'package:flutter/material.dart';
 
 // ignore: use_key_in_widget_constructors
@@ -13,27 +14,30 @@ class NotificationsScreen extends StatelessWidget {
         child: Container(
           margin: const EdgeInsets.all(10),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Receive Order Changes Notifications'),
+               addVerticalSpace(20),
+               Text('Receive Order Changes Notifications',style: Theme.of(context).textTheme.labelMedium),
+               addVerticalSpace(20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text('Email'),
-                  Switch(value: false, onChanged: null)
+                children:  [
+                  Text('Email',style: Theme.of(context).textTheme.headline4),
+                   Switch(value: true, onChanged: (newValue){ },activeColor: Theme.of(context).colorScheme.primary,)
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text('Text (SMS)'),
-                  Switch(value: false, onChanged: null)
+                children:  [
+                  Text('Text (SMS)',style: Theme.of(context).textTheme.headline4),
+                   Switch(value: false, onChanged: (newValue){})
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text('App Notifications'),
-                  Switch(value: false, onChanged: null)
+                children:  [
+                  Text('App Notifications',style: Theme.of(context).textTheme.headline4),
+                   Switch(value: false, onChanged: (newValue){})
                 ],
               ),
             ],
