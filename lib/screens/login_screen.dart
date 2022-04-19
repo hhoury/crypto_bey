@@ -59,7 +59,7 @@ class LoginScreen extends StatelessWidget {
                         Navigator.of(context)
                             .pushNamed(ResetPasswordScreen.routeName);
                       },
-                      child: const Text('Forgot Password')),
+                      child: const Text('Forgot Password?')),
                 ),
                 addVerticalSpace(100),
                 buttonContainer(ElevatedButton(
