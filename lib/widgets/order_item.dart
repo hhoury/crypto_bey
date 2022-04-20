@@ -64,6 +64,7 @@ class OrderItem extends StatelessWidget {
         padding: const EdgeInsets.all(5),
         child: InkWell(
           child: ListTile(
+            isThreeLine: true,
             onTap: () {},
             leading: FittedBox(
               child: ClipRRect(
@@ -76,15 +77,15 @@ class OrderItem extends StatelessWidget {
                 ),
               ),
             ),
-            title: FittedBox(
-              child: Text('order #$orederId',
+            title:Text('order #$orederId',
                   style: Theme.of(context).textTheme.headline2),
-            ),
+      
             subtitle: Text(
               DateFormat.yMMMd().format(date),
               style: Theme.of(context).textTheme.subtitle1,
             ),
             trailing: FittedBox(
+              alignment: Alignment.bottomCenter,
                 child: Container(
               width: 120,
               decoration: BoxDecoration(
