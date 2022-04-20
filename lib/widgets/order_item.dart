@@ -56,7 +56,7 @@ class OrderItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       color: Theme.of(context).colorScheme.surface,
       elevation: 3,
       margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
@@ -76,8 +76,10 @@ class OrderItem extends StatelessWidget {
                 ),
               ),
             ),
-            title: Text('order #$orederId',
-                style: Theme.of(context).textTheme.headline2),
+            title: FittedBox(
+              child: Text('order #$orederId',
+                  style: Theme.of(context).textTheme.headline2),
+            ),
             subtitle: Text(
               DateFormat.yMMMd().format(date),
               style: Theme.of(context).textTheme.subtitle1,
