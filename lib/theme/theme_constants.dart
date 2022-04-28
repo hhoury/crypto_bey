@@ -18,8 +18,8 @@ const Color darkUnselectedTab = Color(0xFF808994);
 const Color lightSelectedTab = Color(0xFF303030);
 const Color lightUnSelectedTab = Color(0xFFA3A3A3);
 const Color subtitleTextColor = Color(0xFF7A8087);
-
 // #endregion
+
 const lightAppbarTheme = AppBarTheme(
     titleTextStyle: TextStyle(
         fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16),
@@ -51,26 +51,23 @@ const lightTextTheme = TextTheme(
     fontWeight: FontWeight.bold,
     fontSize: 16,
   ),
-  headline4: TextStyle(
-    fontSize: 14,
-    fontWeight: FontWeight.w600,
-    color: Colors.black
-  )
+  headline4:
+      TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.black),
+  headline6: TextStyle(color: Colors.white),
 );
 
 const lightColorScheme = ColorScheme(
-  brightness: Brightness.light,
-  primary: purpleColor,
-  onPrimary: Colors.white,
-  secondary: Colors.indigo,
-  onSecondary: Colors.white,
-  error: Colors.red,
-  onError: Colors.white,
-  background: darkColor,
-  onBackground: Colors.white,
-  surface: Colors.white,
-  onSurface: Colors.indigo,
-);
+    brightness: Brightness.light,
+    primary: purpleColor,
+    onPrimary: Colors.white,
+    secondary: Colors.indigo,
+    onSecondary: Colors.white,
+    error: Colors.red,
+    onError: Colors.white,
+    background: Colors.white,
+    onBackground: purpleColor,
+    surface: Colors.white,
+    onSurface: purpleColor);
 
 final elevatedButtonThemeData = ElevatedButtonThemeData(
   style: ButtonStyle(
@@ -83,7 +80,7 @@ final elevatedButtonThemeData = ElevatedButtonThemeData(
 );
 
 const InputDecorationTheme lightInputDecorationTheme = InputDecorationTheme(
-  constraints: BoxConstraints(maxHeight: 50),
+  constraints: BoxConstraints(minHeight: 50),
   filled: true,
   fillColor: lightTextFieldBackground,
   border: OutlineInputBorder(
@@ -112,35 +109,31 @@ const darkAppbarTheme = AppBarTheme(
     elevation: 0);
 
 const darkTextTheme = TextTheme(
-  headline1:
-      TextStyle(fontWeight: FontWeight.bold, fontSize: 22, color: Colors.white),
-  headline2:
-      TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
-  headline3: TextStyle(
-    fontWeight: FontWeight.bold,
-    fontSize: 16,
-  ),
-  labelMedium: TextStyle(
-    fontWeight: FontWeight.bold,
-    color: greyTextColor,
-    fontSize: 14,
-  ),
-  subtitle1: TextStyle(
-    fontWeight: FontWeight.bold,
-    color: subtitleTextColor,
-    fontSize: 14,
-  ),
-  button: TextStyle(
-    color: Colors.white,
-    fontWeight: FontWeight.bold,
-    fontSize: 16,
-  ),
+    headline1: TextStyle(
+        fontWeight: FontWeight.bold, fontSize: 22, color: Colors.white),
+    headline2: TextStyle(
+        fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
+    headline3: TextStyle(
+      fontWeight: FontWeight.bold,
+      fontSize: 16,
+    ),
+    labelMedium: TextStyle(
+      fontWeight: FontWeight.bold,
+      color: greyTextColor,
+      fontSize: 14,
+    ),
+    subtitle1: TextStyle(
+      fontWeight: FontWeight.bold,
+      color: subtitleTextColor,
+      fontSize: 14,
+    ),
+    button: TextStyle(
+      color: Colors.white,
+      fontWeight: FontWeight.bold,
+      fontSize: 16,
+    ),
     headline4: TextStyle(
-    fontSize: 14,
-    fontWeight: FontWeight.w600,
-    color: Colors.white
-  )
-);
+        fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white));
 
 const darkColorScheme = ColorScheme(
   brightness: Brightness.dark,
@@ -157,7 +150,7 @@ const darkColorScheme = ColorScheme(
 );
 
 const InputDecorationTheme darkInputDecorationTheme = InputDecorationTheme(
-  constraints: BoxConstraints(maxHeight: 50),
+  constraints: BoxConstraints(minHeight: 40, maxHeight: 80),
   filled: true,
   fillColor: darkTextFieldBackground,
   border: OutlineInputBorder(
@@ -185,6 +178,7 @@ ThemeData lightTheme = ThemeData(
   inputDecorationTheme: lightInputDecorationTheme,
   textTheme: lightTextTheme,
   colorScheme: lightColorScheme,
+  dialogTheme: const DialogTheme(titleTextStyle: TextStyle(color: purpleColor)),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       showSelectedLabels: false,
       showUnselectedLabels: false,

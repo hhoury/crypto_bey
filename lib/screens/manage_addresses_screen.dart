@@ -1,10 +1,9 @@
-
-import 'package:crypto_bey/screens/add_address_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/addreses.dart';
+import '../providers/addresses.dart';
 import '../widgets/addresses_list.dart';
+import 'edit_address_screen.dart';
 
 // ignore: use_key_in_widget_constructors
 class ManageAddressesScreen extends StatelessWidget {
@@ -12,7 +11,6 @@ class ManageAddressesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   
     final addressesData = Provider.of<Addresses>(context);
     return Scaffold(
       appBar: AppBar(
@@ -21,17 +19,20 @@ class ManageAddressesScreen extends StatelessWidget {
       body: SafeArea(
         child: Container(
           margin: const EdgeInsets.all(10),
-            child: Column(
-              children:  [
-                 Expanded(child: AddressesList(addressesData.addresses)),
-               const Divider(
-                  height: 1,
-                ),
-                TextButton(onPressed: () {
-                  Navigator.of(context).pushNamed(AddAddressScreen.routeName);
-                }, child: const Text('Add New Address'))
-              ],
-            ),
+          child: Column(
+            children: [
+              Expanded(child: AddressesList(addressesData.addresses)),
+              const Divider(
+                height: 1,
+              ),
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(context)
+                        .pushNamed(EditAddressScreen.routeName);
+                  },
+                  child: const Text('Add New Address'))
+            ],
+          ),
         ),
       ),
     );

@@ -77,33 +77,34 @@ class OrderItem extends StatelessWidget {
                 ),
               ),
             ),
-            title:Text('order #$orederId',
-                  style: Theme.of(context).textTheme.headline2),
-      
+            title: Text('order #$orederId',
+                style: Theme.of(context).textTheme.headline2),
             subtitle: Text(
               DateFormat.yMMMd().format(date),
               style: Theme.of(context).textTheme.subtitle1,
             ),
             trailing: FittedBox(
-              alignment: Alignment.bottomCenter,
+                alignment: Alignment.bottomCenter,
                 child: Container(
-              width: 120,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5), color: orderStatusBg),
-              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-              child: Align(
-                alignment: Alignment.center,
-                child: Text(
-                  orderStatus,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white), // Color(0xFF383838)),
-                  // style: TextStyle(
-                  //     backgroundColor: orderStatusBg,
-                  // ),
-                ),
-              ),
-            )),
+                  width: 120,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: orderStatusBg),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      orderStatus,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white), // Color(0xFF383838)),
+                      // style: TextStyle(
+                      //     backgroundColor: orderStatusBg,
+                      // ),
+                    ),
+                  ),
+                )),
           ),
         ),
       ),

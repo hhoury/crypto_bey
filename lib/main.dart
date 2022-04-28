@@ -10,7 +10,7 @@ import '../theme/theme_manager.dart';
 // #endregion
 
 // #region  PROVIDERS
-import '../providers/addreses.dart';
+import 'providers/addresses.dart';
 import '../providers/orders.dart';
 // #endregion
 
@@ -24,7 +24,7 @@ import './screens/reset_password_screen.dart';
 import './screens/change_password_screen.dart';
 import './screens/privacy_screen.dart';
 import '../screens/personal_information_screen.dart';
-import '../screens/add_address_screen.dart';
+import 'screens/edit_address_screen.dart';
 import '../screens/manage_addresses_screen.dart';
 import '../screens/my_account_screen.dart';
 // #endregion
@@ -73,8 +73,8 @@ class MyApp extends StatelessWidget {
             theme: value.getTheme(),
             initialRoute: '/',
             routes: {
-              '/': ((context) => LoginScreen()),
-              AddAddressScreen.routeName: (context) => AddAddressScreen(),
+              '/': ((context) => TabsScreen()),
+              EditAddressScreen.routeName: (context) => EditAddressScreen(),
               ChangePasswordScreen.routeName: (context) =>
                   ChangePasswordScreen(),
               LoginScreen.routeName: (context) => LoginScreen(),

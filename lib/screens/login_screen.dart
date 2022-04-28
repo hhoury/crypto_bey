@@ -1,20 +1,48 @@
 // ignore_for_file: use_key_in_widget_constructors
-import 'package:crypto_bey/screens/tabs_screen.dart';
+
+import '../utils/input_helpers.dart';
 import 'package:flutter/material.dart';
+import '../screens/tabs_screen.dart';
 import '../screens/reset_password_screen.dart';
 import '../screens/signup_screen.dart';
 import '../utils/helper_widgets.dart';
+import 'package:email_validator/email_validator.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   static const routeName = '/login';
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final _loginForm = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passController.dispose();
+  }
+
+  void _submitLogin() {
+    final isValid = _loginForm.currentState!.validate();
+    if (isValid) {
+      Navigator.of(context).pushReplacementNamed(TabsScreen.routeName);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            margin: const EdgeInsets.fromLTRB(15, 50, 15, 5),
+            padding: const EdgeInsets.all(20),
             child: Form(
+              key: _loginForm,
               child: Column(
                 children: [
                   Container(
@@ -37,8 +65,17 @@ class LoginScreen extends StatelessWidget {
                   ),
                   addVerticalSpace(10),
                   TextFormField(
+                    controller: _emailController,
                     textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.emailAddress,
+                    validator: (value) {
+                      if (value == null ||
+                          value.isEmpty ||
+                          !EmailValidator.validate(value)) {
+                        return 'Please Enter a Valid Email Address';
+                      } else {
+                        return null;
+                      }
+                    },
                   ),
                   addVerticalSpace(15),
                   Align(
@@ -48,10 +85,20 @@ class LoginScreen extends StatelessWidget {
                   ),
                   addVerticalSpace(10),
                   TextFormField(
+                    controller: _passController,
                     textInputAction: TextInputAction.done,
                     obscureText: true,
                     enableSuggestions: false,
                     autocorrect: false,
+                    validator: (value) {
+                      if (value == null ||
+                          value.isEmpty ||
+                          !validatePassword(value)) {
+                        return 'Please Enter a Valid Password';
+                      } else {
+                        return null;
+                      }
+                    },
                   ),
                   Align(
                     alignment: Alignment.centerRight,
@@ -62,24 +109,24 @@ class LoginScreen extends StatelessWidget {
                         },
                         child: const Text('Forgot Password?')),
                   ),
-                  addVerticalSpace(100),
+                  addVerticalSpace(30),
                   buttonContainer(ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context)
-                          .pushReplacementNamed(TabsScreen.routeName);
-                    },
+                    onPressed: () => _submitLogin(),
                     child: padButtonText('LOGIN'),
                     style: Theme.of(context).elevatedButtonTheme.style,
                   )),
                   addVerticalSpace(10),
-                  buttonContainer(
-                    ElevatedButton(
-                      style: Theme.of(context).elevatedButtonTheme.style,
-                      onPressed: () {
-                        Navigator.of(context)
-                            .pushReplacementNamed(SignUpScreen.routeName);
-                      },
-                      child: padButtonText('SIGN UP'),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: buttonContainer(
+                      ElevatedButton(
+                        style: Theme.of(context).elevatedButtonTheme.style,
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushReplacementNamed(SignUpScreen.routeName);
+                        },
+                        child: padButtonText('SIGN UP'),
+                      ),
                     ),
                   )
                 ],

@@ -29,6 +29,10 @@ Widget padButtonText(String text) {
   );
 }
 
+Widget inputLabel(BuildContext context, String label) {
+  return Text(label, style: Theme.of(context).textTheme.labelMedium);
+}
+
 // Widget textFormFieldContainer(Widget field) {
 //   return TextFormField(
 //     decoration: InputDecoration(
