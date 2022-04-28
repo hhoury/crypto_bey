@@ -23,7 +23,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
   // final _unitController = TextEditingController();
 
   var _editedAddress =
-      Address(id: '', country: '', name: '', address: '', unit: '');
+      Address(id: '', country: '', name: '', details: '', unit: '');
 
   var _initValues = {'country': '', 'name': '', 'address': '', 'unit': ''};
 
@@ -41,7 +41,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
             Provider.of<Addresses>(context, listen: false).findById(addressId);
         _initValues = {
           'country': _editedAddress.country,
-          'address': _editedAddress.address,
+          'details': _editedAddress.details,
           'name': _editedAddress.name,
           'unit': _editedAddress.unit
         };
@@ -135,7 +135,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                           id: _editedAddress.id,
                           country: _editedAddress.country,
                           name: value!,
-                          address: _editedAddress.address,
+                          details: _editedAddress.details,
                           unit: _editedAddress.unit);
                     },
                     validator: (value) {
@@ -177,7 +177,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                           id: _editedAddress.id,
                           country: _editedAddress.country,
                           name: _editedAddress.name,
-                          address: value!,
+                          details: value!,
                           unit: _editedAddress.unit);
                     },
                     initialValue: _initValues['address'],
@@ -200,7 +200,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                           id: _editedAddress.id,
                           country: _editedAddress.country,
                           name: _editedAddress.name,
-                          address: _editedAddress.address,
+                          details: _editedAddress.details,
                           unit: value!);
                     },
                     initialValue: _initValues['unit'],

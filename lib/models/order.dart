@@ -2,9 +2,8 @@ import '../constants/app_constants.dart';
 
 class Order {
   String id;
-  String user;
-  String receiver;
-  String address;
+  String userId;
+  String addressId;
   String note;
   double paymentAmount;
   DateTime purchaseDate;
@@ -13,9 +12,8 @@ class Order {
   Retailer retailer;
   Order(
       {required this.id,
-      required this.user,
-      required this.receiver,
-      required this.address,
+      required this.userId,
+      required this.addressId,
       required this.note,
       required this.paymentAmount,
       required this.purchaseDate,

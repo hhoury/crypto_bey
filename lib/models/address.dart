@@ -2,7 +2,7 @@ class Address {
   String id;
   String name;
   String country;
-  String address;
+  String details;
   String unit;
   bool deleted;
 
@@ -10,7 +10,7 @@ class Address {
       {required this.id,
       required this.country,
       required this.name,
-      required this.address,
+      required this.details,
       required this.unit,
       this.deleted = false});
 }

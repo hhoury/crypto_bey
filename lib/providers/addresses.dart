@@ -8,13 +8,13 @@ class Addresses with ChangeNotifier {
         id: '123456',
         country: 'USA',
         name: 'John Doe',
-        address: '1422 Larch St, Halifax CA B35-38I',
+        details: '1422 Larch St, Halifax CA B35-38I',
         unit: 'B2'),
     Address(
         id: '1234567',
         country: 'Lebanon',
         name: 'John Cena',
-        address: '1422 Larch St, Halifax CA B35-38I St, Halifax CA B35-38I',
+        details: '1422 Larch St, Halifax CA B35-38I St, Halifax CA B35-38I',
         unit: 'A2')
   ];
 
