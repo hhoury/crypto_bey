@@ -22,26 +22,41 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
   // final _addressController = TextEditingController();
   // final _unitController = TextEditingController();
 
-  var _editedAddress =
-      Address(id: '', country: '', name: '', details: '', unit: '');
+  var _editedAddress = Address(
+    id: 0,
+    country: '',
+    state: '',
+    city: '',
+    name: '',
+    address: '',
+    unit: '',
+  );
 
-  var _initValues = {'country': '', 'name': '', 'address': '', 'unit': ''};
+  var _initValues = {
+    'country': '',
+    'state': '',
+    'city': '',
+    'name': '',
+    'address': '',
+    'unit': ''
+  };
 
   var _isInit = true;
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (_isInit) {
-      final addressId = ModalRoute.of(context)?.settings.arguments as String?;
-      if (addressId == null) {
+      final addressId = ModalRoute.of(context)?.settings.arguments as int?;
+      if (addressId == null || addressId == 0) {
         return;
-      }
-      if (addressId.isNotEmpty) {
+      } else {
         _editedAddress =
             Provider.of<Addresses>(context, listen: false).findById(addressId);
         _initValues = {
           'country': _editedAddress.country,
-          'details': _editedAddress.details,
+          'state': _editedAddress.state,
+          'city': _editedAddress.city,
+          'address': _editedAddress.address,
           'name': _editedAddress.name,
           'unit': _editedAddress.unit
         };
@@ -66,10 +81,10 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
     if (isValid) {
       _editAddressForm.currentState!.save();
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
-
-      if (_editedAddress.id.isNotEmpty) {
+      // EDIT ADDRESS
+      if (_editedAddress.id != 0) {
         Provider.of<Addresses>(context, listen: false)
-            .editAddress(_editedAddress.id, _editedAddress);
+            .updateAddress(_editedAddress.id, _editedAddress);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             duration: const Duration(milliseconds: 700),
@@ -80,7 +95,9 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
             ),
           ),
         );
+        Navigator.of(context).pop();
       } else {
+        //ADD NEW ADDRESS
         Provider.of<Addresses>(context, listen: false)
             .addAddress(_editedAddress);
         ScaffoldMessenger.of(context).showSnackBar(
@@ -95,7 +112,9 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
         );
       }
       Navigator.of(context).pop();
-    } else {
+    }
+    //ADDRESS IS NOT VALID
+    else {
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -132,11 +151,14 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                     initialValue: _initValues['name'],
                     onSaved: (value) {
                       _editedAddress = Address(
-                          id: _editedAddress.id,
-                          country: _editedAddress.country,
-                          name: value!,
-                          details: _editedAddress.details,
-                          unit: _editedAddress.unit);
+                        id: _editedAddress.id,
+                        country: _editedAddress.country,
+                        state: _editedAddress.state,
+                        city: _editedAddress.city,
+                        name: value!,
+                        address: _editedAddress.address,
+                        unit: _editedAddress.unit,
+                      );
                     },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -174,11 +196,14 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                     },
                     onSaved: (value) {
                       _editedAddress = Address(
-                          id: _editedAddress.id,
-                          country: _editedAddress.country,
-                          name: _editedAddress.name,
-                          details: value!,
-                          unit: _editedAddress.unit);
+                        id: _editedAddress.id,
+                        country: _editedAddress.country,
+                        state: _editedAddress.state,
+                        city: _editedAddress.city,
+                        name: _editedAddress.name,
+                        address: value!,
+                        unit: _editedAddress.unit,
+                      );
                     },
                     initialValue: _initValues['address'],
                   ),
@@ -197,11 +222,14 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                     },
                     onSaved: (value) {
                       _editedAddress = Address(
-                          id: _editedAddress.id,
-                          country: _editedAddress.country,
-                          name: _editedAddress.name,
-                          details: _editedAddress.details,
-                          unit: value!);
+                        id: _editedAddress.id,
+                        country: _editedAddress.country,
+                        state: _editedAddress.state,
+                        city: _editedAddress.city,
+                        name: _editedAddress.name,
+                        address: _editedAddress.address,
+                        unit: value!,
+                      );
                     },
                     initialValue: _initValues['unit'],
                   ),

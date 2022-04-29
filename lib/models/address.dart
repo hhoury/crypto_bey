@@ -1,16 +1,21 @@
 class Address {
-  String id;
+  int id;
   String name;
   String country;
-  String details;
+  String state;
+  String city;
+  String address;
   String unit;
   bool deleted;
 
-  Address(
-      {required this.id,
-      required this.country,
-      required this.name,
-      required this.details,
-      required this.unit,
-      this.deleted = false});
+  Address({
+    required this.id,
+    required this.country,
+    required this.state,
+    required this.city,
+    required this.name,
+    required this.address,
+    required this.unit,
+    this.deleted = false,
+  });
 }

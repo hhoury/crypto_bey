@@ -4,22 +4,22 @@ import '../constants/app_constants.dart';
 import 'package:flutter/material.dart';
 
 class OrderItem extends StatelessWidget {
-  String orederId;
+  int orederId;
   DateTime date;
   Retailer retailer;
   OrderStatus status;
 
   String get orderStatus {
     switch (status) {
-      case OrderStatus.Cancelled:
+      case OrderStatus.CANCELLED:
         return 'Cancelled';
-      case OrderStatus.Payment:
+      case OrderStatus.AWAITING_PAYMENT:
         return 'Waiting For Payment';
-      case OrderStatus.Ordered:
+      case OrderStatus.AWAITING_ORDER:
         return 'Ordered';
-      case OrderStatus.Delivering:
+      case OrderStatus.AWAITING_DELIVERY:
         return 'Delivering';
-      case OrderStatus.Delivered:
+      case OrderStatus.DELIVERED:
         return 'Delivered';
       default:
         return 'Order';
@@ -36,15 +36,15 @@ class OrderItem extends StatelessWidget {
 
   Color get orderStatusBg {
     switch (status) {
-      case OrderStatus.Cancelled:
+      case OrderStatus.CANCELLED:
         return orderCancelledColor;
-      case OrderStatus.Payment:
+      case OrderStatus.AWAITING_PAYMENT:
         return orderWaitingForPaymentColor;
-      case OrderStatus.Ordered:
+      case OrderStatus.AWAITING_ORDER:
         return orderOrderedColor;
-      case OrderStatus.Delivering:
+      case OrderStatus.AWAITING_DELIVERY:
         return orderDeliveringColor;
-      case OrderStatus.Delivered:
+      case OrderStatus.DELIVERED:
         return orderDeliveredColor;
       default:
         return orderCancelledColor;

@@ -1,7 +1,14 @@
 // ignore_for_file: constant_identifier_names
 
-enum Retailer { Amazon, Aliexpress, Ebay, Other }
+enum Retailer { AMAZON, ALIEXPRESS, EBAY, OTHER }
 
-enum OrderStatus { Cancelled, Payment, Ordered, Delivering, Delivered }
+enum OrderStatus {
+  CANCELLED,
+  AWAITING_VERIFICATION,
+  AWAITING_PAYMENT,
+  AWAITING_ORDER,
+  AWAITING_DELIVERY,
+  DELIVERED
+}
 
 enum BlockChain { ERC20, TRC20, OMNI }

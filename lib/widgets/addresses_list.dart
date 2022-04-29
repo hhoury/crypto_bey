@@ -14,8 +14,10 @@ class AddressesList extends StatelessWidget {
           ValueKey(addresses[index].id),
           addresses[index].id,
           addresses[index].country,
+          addresses[index].state,
+          addresses[index].city,
           addresses[index].name,
-          addresses[index].details),
+          addresses[index].address),
     );
   }
 }

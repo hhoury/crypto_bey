@@ -5,11 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class AddressCard extends StatelessWidget {
-  final String id;
+  final int id;
   final String country;
+  final String state;
+  final String city;
   final String name;
   final String address;
-  const AddressCard(Key key, this.id, this.country, this.name, this.address)
+  const AddressCard(Key key, this.id, this.country, this.state, this.city,
+      this.name, this.address)
       : super(key: key);
   @override
   Widget build(BuildContext context) {

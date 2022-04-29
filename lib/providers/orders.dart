@@ -3,68 +3,99 @@ import '../constants/app_constants.dart';
 import '../models/order.dart';
 import 'package:flutter/material.dart';
 
-class NewOrderItem with ChangeNotifier {
-  final String id;
-  final Retailer retailer;
-  final String orderLink;
-  final String note;
-  final String userId;
-  final String addressId;
-  NewOrderItem(this.id, this.userId, this.retailer, this.orderLink, this.note,
-      this.addressId);
-}
+// class NewOrderItem with ChangeNotifier {
+//   int id;
+//   int userId;
+//   int addressId;
+//   String itemUrl;
+//   double paymentAmount;
+//   String? note;
+//   DateTime purchaseDate;
+//   DateTime updatedDate;
+//   OrderStatus status;
+//   bool deleted;
+//   Retailer retailer;
+//   String? cancelReason;
+//   String? trackingUrl;
+//   String? trackingNumber;
+//   String? purchaseScreenshotUrl;
+
+//   NewOrderItem({
+//     required this.id,
+//     required this.userId,
+//     required this.addressId,
+//     required this.itemUrl,
+//     required this.paymentAmount,
+//     required this.retailer,
+//     this.note,
+//     required this.purchaseDate,
+//     required this.updatedDate,
+//     this.status = OrderStatus.AWAITING_VERIFICATION,
+//     this.deleted = false,
+//   });
+// }
 
 class Orders with ChangeNotifier {
   final List<Order> _orders = [
     Order(
-        id: '1234-323456775',
-        userId: 'john cena',
-        addressId: '1',
+        id: 1,
+        userId: 1,
+        addressId: 1,
         note: 'note',
         paymentAmount: 200,
         purchaseDate: DateTime.now(),
-        status: OrderStatus.Ordered,
-        retailer: Retailer.Aliexpress),
+        itemUrl: 'itemurlhere',
+        updatedDate: DateTime.now(),
+        status: OrderStatus.AWAITING_ORDER,
+        retailer: Retailer.ALIEXPRESS),
     Order(
-        id: '1234-32',
-        userId: 'john doe',
-        addressId: '1',
+        id: 2,
+        userId: 1,
+        addressId: 1,
+        itemUrl: 'itemurlhere',
         note: 'note',
         paymentAmount: 200,
         purchaseDate: DateTime.now(),
-        status: OrderStatus.Delivering,
-        retailer: Retailer.Amazon),
+        updatedDate: DateTime.now(),
+        status: OrderStatus.AWAITING_DELIVERY,
+        retailer: Retailer.AMAZON),
     Order(
-        id: '1234-32',
-        userId: 'john doe',
-        addressId: '1',
+        id: 3,
+        userId: 1,
+        addressId: 1,
+        itemUrl: 'itemurlhere',
+        updatedDate: DateTime.now(),
         note: 'note',
         paymentAmount: 200,
         purchaseDate: DateTime.now(),
-        status: OrderStatus.Payment,
-        retailer: Retailer.Amazon),
+        status: OrderStatus.AWAITING_PAYMENT,
+        retailer: Retailer.AMAZON),
     Order(
-        id: '1234-32',
-        userId: 'john doe',
-        addressId: '1',
+        id: 4,
+        userId: 2,
+        addressId: 1,
+        itemUrl: 'itemurlhere',
+        updatedDate: DateTime.now(),
         note: 'note',
         paymentAmount: 200,
         purchaseDate: DateTime.now(),
-        status: OrderStatus.Cancelled,
-        retailer: Retailer.Amazon),
+        status: OrderStatus.CANCELLED,
+        retailer: Retailer.AMAZON),
     Order(
-        id: '1234-32',
-        userId: 'john doe',
-        addressId: '1',
+        id: 5,
+        userId: 2,
+        addressId: 1,
+        itemUrl: 'itemurlhere',
+        updatedDate: DateTime.now(),
         note: 'note',
         paymentAmount: 200,
         purchaseDate: DateTime.now(),
-        status: OrderStatus.Delivered,
-        retailer: Retailer.Amazon)
+        status: OrderStatus.DELIVERED,
+        retailer: Retailer.AMAZON)
   ];
 
   List<Order> get orders {
-    return [..._orders];
+    return [..._orders.where((element) => element.deleted == false)];
   }
 
   void addOrder(Order newOrder) {
@@ -73,7 +104,23 @@ class Orders with ChangeNotifier {
     notifyListeners();
   }
 
-  Order findById(String id) {
+  Order findById(int id) {
     return _orders.firstWhere((order) => id == order.id);
+  }
+
+  void updateOrder(int id, Order updatedOrder) {
+    final orderIndex = _orders.indexWhere((element) => element.id == id);
+    if (orderIndex >= 0) {
+      _orders[orderIndex] = updatedOrder;
+    }
+    notifyListeners();
+  }
+
+  void deleteOrder(int id) {
+    final orderIndex = _orders.indexWhere((element) => element.id == id);
+    if (orderIndex >= 0) {
+      _orders[orderIndex].deleted = true;
+    }
+    notifyListeners();
   }
 }
