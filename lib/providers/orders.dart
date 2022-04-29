@@ -3,38 +3,6 @@ import '../constants/app_constants.dart';
 import '../models/order.dart';
 import 'package:flutter/material.dart';
 
-// class NewOrderItem with ChangeNotifier {
-//   int id;
-//   int userId;
-//   int addressId;
-//   String itemUrl;
-//   double paymentAmount;
-//   String? note;
-//   DateTime purchaseDate;
-//   DateTime updatedDate;
-//   OrderStatus status;
-//   bool deleted;
-//   Retailer retailer;
-//   String? cancelReason;
-//   String? trackingUrl;
-//   String? trackingNumber;
-//   String? purchaseScreenshotUrl;
-
-//   NewOrderItem({
-//     required this.id,
-//     required this.userId,
-//     required this.addressId,
-//     required this.itemUrl,
-//     required this.paymentAmount,
-//     required this.retailer,
-//     this.note,
-//     required this.purchaseDate,
-//     required this.updatedDate,
-//     this.status = OrderStatus.AWAITING_VERIFICATION,
-//     this.deleted = false,
-//   });
-// }
-
 class Orders with ChangeNotifier {
   final List<Order> _orders = [
     Order(
