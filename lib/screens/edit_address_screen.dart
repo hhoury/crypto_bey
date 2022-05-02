@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/addresses.dart';
 import '../utils/helper_widgets.dart';
-import '../utils/input_helpers.dart';
 
 // ignore: use_key_in_widget_constructors
 class EditAddressScreen extends StatefulWidget {
@@ -16,8 +15,8 @@ class EditAddressScreen extends StatefulWidget {
 
 class _EditAddressScreenState extends State<EditAddressScreen> {
   String _countryValue = '';
-  // String stateValue = '';
-  // String cityValue = '';
+  String _stateValue = '';
+  String _cityValue = '';
   final _editAddressForm = GlobalKey<FormState>();
   // final _addressController = TextEditingController();
   // final _unitController = TextEditingController();
@@ -60,6 +59,10 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
           'name': _editedAddress.name,
           'unit': _editedAddress.unit
         };
+        _countryValue = _editedAddress.country;
+        _stateValue = _editedAddress.state;
+        _cityValue = _editedAddress.city;
+        print(_countryValue);
       }
     }
     _isInit = false;
@@ -79,6 +82,9 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
     final isValid = countryValid && _editAddressForm.currentState!.validate();
 
     if (isValid) {
+      _editedAddress.country = _countryValue;
+      _editedAddress.state = _stateValue;
+      _editedAddress.city = _cityValue;
       _editAddressForm.currentState!.save();
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       // EDIT ADDRESS
@@ -174,10 +180,19 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                   addVerticalSpace(20),
                   SelectState(
                     dropdownColor: Theme.of(context).colorScheme.background,
-                    // style: TextStyle(color: Colors.red),
                     onCountryChanged: (value) {
                       setState(() {
-                        _countryValue = removeEmoji(value).trim();
+                        _countryValue = value;
+                      });
+                    },
+                    onStateChanged: (value) {
+                      setState(() {
+                        _stateValue = value;
+                      });
+                    },
+                    onCityChanged: (value) {
+                      setState(() {
+                        _cityValue = value;
                       });
                     },
                   ),
@@ -185,6 +200,8 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                   inputLabel(context, 'Address'),
                   addVerticalSpace(10),
                   TextFormField(
+                    maxLines: null,
+                    keyboardType: TextInputType.multiline,
                     // controller: _addressController,
                     textInputAction: TextInputAction.next,
                     validator: (value) {

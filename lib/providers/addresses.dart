@@ -8,7 +8,7 @@ class Addresses with ChangeNotifier {
   final List<Address> _addresses = [
     Address(
       id: 1,
-      country: 'USA',
+      country: '🇺🇸    United States',
       state: 'Texas',
       city: 'Austin',
       name: 'John Doe',
@@ -17,7 +17,7 @@ class Addresses with ChangeNotifier {
     ),
     Address(
       id: 2,
-      country: 'Lebanon',
+      country: '🇩🇿    Algeria',
       state: 'Beirut',
       city: 'Beirut',
       name: 'John Cena',
