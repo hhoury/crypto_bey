@@ -22,11 +22,19 @@ Widget buttonContainer(Widget button) {
   );
 }
 
-Widget padButtonText(String text) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 15),
-    child: Text(text),
-  );
+Widget padButtonText(
+    {String text = '', double padding = 15, bool custom = false}) {
+  if (custom) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: padding, horizontal: 5),
+      child: Text(text),
+    );
+  } else {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: padding),
+      child: Text(text),
+    );
+  }
 }
 
 Widget inputLabel(BuildContext context, String label) {

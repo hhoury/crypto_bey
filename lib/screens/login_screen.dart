@@ -112,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   addVerticalSpace(30),
                   buttonContainer(ElevatedButton(
                     onPressed: () => _submitLogin(),
-                    child: padButtonText('LOGIN'),
+                    child: padButtonText(text: 'LOGIN'),
                     style: Theme.of(context).elevatedButtonTheme.style,
                   )),
                   addVerticalSpace(10),
@@ -125,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Navigator.of(context)
                               .pushReplacementNamed(SignUpScreen.routeName);
                         },
-                        child: padButtonText('SIGN UP'),
+                        child: padButtonText(text: 'SIGN UP'),
                       ),
                     ),
                   )

@@ -23,17 +23,19 @@ class PrivacyScreen extends StatelessWidget {
               addVerticalSpace(30),
               buttonContainer(ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed(ChangePasswordScreen.routeName);
+                  Navigator.of(context)
+                      .pushNamed(ChangePasswordScreen.routeName);
                 },
-                child: padButtonText('Change Password'),
+                child: padButtonText(text: 'Change Password'),
                 style: Theme.of(context).elevatedButtonTheme.style,
               )),
               addVerticalSpace(20),
               buttonContainer(ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed(ResetPasswordScreen.routeName);
+                  Navigator.of(context)
+                      .pushNamed(ResetPasswordScreen.routeName);
                 },
-                child: padButtonText('Reset Password'),
+                child: padButtonText(text: 'Reset Password'),
               )),
               addVerticalSpace(20),
               buttonContainer(ElevatedButton(
@@ -41,7 +43,7 @@ class PrivacyScreen extends StatelessWidget {
                   Provider.of<ThemeProvider>(context, listen: false)
                       .toggleTheme();
                 },
-                child: padButtonText('Log Out'),
+                child: padButtonText(text: 'Log Out'),
                 style: ElevatedButton.styleFrom(primary: Colors.red),
               ))
             ],

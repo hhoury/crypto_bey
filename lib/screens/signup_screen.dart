@@ -185,7 +185,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   addVerticalSpace(30),
                   buttonContainer(ElevatedButton(
                       onPressed: () => _submitSignup(),
-                      child: padButtonText('SIGNUP'))),
+                      child: padButtonText(text: 'SIGNUP'))),
                   addVerticalSpace(10),
                   buttonContainer(
                     ElevatedButton(
@@ -195,7 +195,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         Navigator.of(context)
                             .pushReplacementNamed(LoginScreen.routeName);
                       },
-                      child: padButtonText('I HAVE AN ACCOUNT'),
+                      child: padButtonText(text: 'I HAVE AN ACCOUNT'),
                     ),
                   ),
                 ],

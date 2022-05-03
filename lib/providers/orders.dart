@@ -1,3 +1,5 @@
+import 'package:crypto_bey/models/address.dart';
+
 import '../constants/app_constants.dart';
 
 import '../models/order.dart';
@@ -76,6 +78,10 @@ class Orders with ChangeNotifier {
     return _orders.firstWhere((order) => id == order.id);
   }
 
+  String? getTrackingNumber(int id) {
+    return _orders.firstWhere((order) => id == order.id).trackingNumber;
+  }
+
   void updateOrder(int id, Order updatedOrder) {
     final orderIndex = _orders.indexWhere((element) => element.id == id);
     if (orderIndex >= 0) {
@@ -90,5 +96,15 @@ class Orders with ChangeNotifier {
       _orders[orderIndex].deleted = true;
     }
     notifyListeners();
+  }
+
+  Address getAddressOfOrder(int orderId) {
+    //TODO get address of order here
+    return Address(
+        id: 1,
+        country: 'USA',
+        name: 'Hassan',
+        address: 'First Street',
+        unit: 'B1');
   }
 }

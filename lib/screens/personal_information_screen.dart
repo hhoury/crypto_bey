@@ -131,7 +131,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                   addVerticalSpace(30),
                   buttonContainer(ElevatedButton(
                       onPressed: () => _submitPersonalInfo(),
-                      child: padButtonText('SUBMIT CHANGES'))),
+                      child: padButtonText(text: 'SUBMIT CHANGES'))),
                 ],
               ),
             ),

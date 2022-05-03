@@ -16,18 +16,19 @@ class Order {
   String? trackingUrl;
   String? trackingNumber;
   String? purchaseScreenshotUrl;
+  bool paid;
 
-  Order({
-    required this.id,
-    required this.userId,
-    required this.addressId,
-    required this.itemUrl,
-    required this.paymentAmount,
-    required this.retailer,
-    this.note,
-    required this.purchaseDate,
-    required this.updatedDate,
-    this.status = OrderStatus.AWAITING_VERIFICATION,
-    this.deleted = false,
-  });
+  Order(
+      {required this.id,
+      required this.userId,
+      required this.addressId,
+      required this.itemUrl,
+      required this.paymentAmount,
+      required this.retailer,
+      this.note,
+      required this.purchaseDate,
+      required this.updatedDate,
+      this.status = OrderStatus.AWAITING_VERIFICATION,
+      this.deleted = false,
+      this.paid = false});
 }

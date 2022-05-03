@@ -54,6 +54,8 @@ const lightTextTheme = TextTheme(
   headline4:
       TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.black),
   headline6: TextStyle(color: Colors.white),
+  bodyText1:
+      TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black),
 );
 
 const lightColorScheme = ColorScheme(
@@ -109,31 +111,34 @@ const darkAppbarTheme = AppBarTheme(
     elevation: 0);
 
 const darkTextTheme = TextTheme(
-    headline1: TextStyle(
-        fontWeight: FontWeight.bold, fontSize: 22, color: Colors.white),
-    headline2: TextStyle(
-        fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
-    headline3: TextStyle(
-      fontWeight: FontWeight.bold,
-      fontSize: 16,
-    ),
-    labelMedium: TextStyle(
-      fontWeight: FontWeight.bold,
-      color: greyTextColor,
-      fontSize: 14,
-    ),
-    subtitle1: TextStyle(
-      fontWeight: FontWeight.bold,
-      color: subtitleTextColor,
-      fontSize: 14,
-    ),
-    button: TextStyle(
-      color: Colors.white,
-      fontWeight: FontWeight.bold,
-      fontSize: 16,
-    ),
-    headline4: TextStyle(
-        fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white));
+  headline1:
+      TextStyle(fontWeight: FontWeight.bold, fontSize: 22, color: Colors.white),
+  headline2:
+      TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
+  headline3: TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 16,
+  ),
+  labelMedium: TextStyle(
+    fontWeight: FontWeight.bold,
+    color: greyTextColor,
+    fontSize: 14,
+  ),
+  subtitle1: TextStyle(
+    fontWeight: FontWeight.bold,
+    color: subtitleTextColor,
+    fontSize: 14,
+  ),
+  button: TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+    fontSize: 16,
+  ),
+  headline4:
+      TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white),
+  bodyText1:
+      TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.white),
+);
 
 const darkColorScheme = ColorScheme(
   brightness: Brightness.dark,

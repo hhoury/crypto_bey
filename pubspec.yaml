@@ -74,7 +74,8 @@ flutter:
     - assets/images/logo.svg
     - assets/images/logo-svg.svg
     - assets/images/logop.png
-    - assets/images/motorcycle.svg
+    - assets/images/moto.svg
+    - assets/images/payment.svg
     - assets/images/order.svg
     - assets/images/verification.svg
     - assets/images/qr.svg

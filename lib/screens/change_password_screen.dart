@@ -113,7 +113,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 addVerticalSpace(20),
                 buttonContainer(ElevatedButton(
                     onPressed: () => _changePasswordSubmit(),
-                    child: padButtonText('Change Password')))
+                    child: padButtonText(text: 'Change Password')))
               ],
             ),
           ),

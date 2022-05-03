@@ -1,10 +1,11 @@
+import 'package:crypto_bey/screens/order_details_screen.dart';
 import 'package:intl/intl.dart';
 
 import '../constants/app_constants.dart';
 import 'package:flutter/material.dart';
 
 class OrderItem extends StatelessWidget {
-  int orederId;
+  int orderId;
   DateTime date;
   Retailer retailer;
   OrderStatus status;
@@ -51,7 +52,7 @@ class OrderItem extends StatelessWidget {
     }
   }
 
-  OrderItem(this.orederId, this.date, this.retailer, this.status);
+  OrderItem(this.orderId, this.date, this.retailer, this.status);
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +66,10 @@ class OrderItem extends StatelessWidget {
         child: InkWell(
           child: ListTile(
             isThreeLine: true,
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context)
+                  .pushNamed(OrderDetailsScreen.routeName, arguments: orderId);
+            },
             leading: FittedBox(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
@@ -77,7 +81,7 @@ class OrderItem extends StatelessWidget {
                 ),
               ),
             ),
-            title: Text('order #$orederId',
+            title: Text('order #$orderId',
                 style: Theme.of(context).textTheme.headline2),
             subtitle: Text(
               DateFormat.yMMMd().format(date),

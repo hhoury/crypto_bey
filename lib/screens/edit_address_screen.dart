@@ -254,7 +254,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                   buttonContainer(
                     ElevatedButton(
                         onPressed: () => _submitAddressForm(),
-                        child: padButtonText('Submit')),
+                        child: padButtonText(text: 'Submit')),
                   ),
                 ],
               ),

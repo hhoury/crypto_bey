@@ -69,7 +69,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   addVerticalSpace(20),
                   buttonContainer(ElevatedButton(
                       onPressed: () => _submitResetPassword(),
-                      child: padButtonText('Send Reset Link')))
+                      child: padButtonText(text: 'Send Reset Link')))
                 ],
               ),
             )),
