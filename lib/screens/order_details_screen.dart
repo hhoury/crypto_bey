@@ -12,7 +12,7 @@ import '../widgets/order_detail_bottom.dart';
 class OrderDetailsScreen extends StatelessWidget {
   static const routeName = '/order-details';
   final Widget svg =
-      SvgPicture.asset('assets/images/delivered.svg', semanticsLabel: '');
+      SvgPicture.asset('assets/images/delivered.svg', semanticsLabel: 'delivered');
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +25,11 @@ class OrderDetailsScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: Container(
-          padding: const EdgeInsets.all(10),
+          margin: const EdgeInsets.all(10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+                 addVerticalSpace(30),
               FractionallySizedBox(
                   widthFactor: 0.6,
                   child: OrderDetailTop(loadedOrder, context)),

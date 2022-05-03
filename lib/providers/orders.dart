@@ -28,6 +28,7 @@ class Orders with ChangeNotifier {
         purchaseDate: DateTime.now(),
         updatedDate: DateTime.now(),
         status: OrderStatus.AWAITING_DELIVERY,
+        paid: true,
         retailer: Retailer.AMAZON),
     Order(
         id: 3,
@@ -61,6 +62,7 @@ class Orders with ChangeNotifier {
         paymentAmount: 200,
         purchaseDate: DateTime.now(),
         status: OrderStatus.DELIVERED,
+        paid: true,
         retailer: Retailer.AMAZON)
   ];
 
@@ -107,4 +109,10 @@ class Orders with ChangeNotifier {
         address: 'First Street',
         unit: 'B1');
   }
+
+  bool cancelOrder(int orderId){
+    //TODO CANCEL ORDER API
+    return true;
+  }
+
 }

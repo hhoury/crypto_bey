@@ -59,18 +59,47 @@ class OrderDetailTop extends StatelessWidget {
       // return buttonContainer(ElevatedButton(
       //     onPressed: () {}, child: const Text('View Order Screenshot')));
       case OrderStatus.AWAITING_DELIVERY:
-        return Container(
-          decoration: BoxDecoration(
-              color: purpleColor, borderRadius: BorderRadius.circular(10)),
-          child: Row(
-            children: [
-              padButtonText(text: 'Track Package', padding: 5, custom: true),
-              SelectableText(
-                order.trackingNumber ?? '123-123',
-                style: const TextStyle(backgroundColor: secondaryButtonColor),
-              )
-            ],
-          ),
+        return Row(
+          children: [
+            Expanded(
+                flex: 1,
+                child: Container(
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primary,
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(5),
+                            bottomLeft: Radius.circular(5))),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Text('Track Package',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1
+                              ?.copyWith(color: Colors.white)),
+                    ))),
+            Expanded(
+              flex: 1,
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: secondaryButtonColor,
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(5),
+                      bottomRight: Radius.circular(5)),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: SelectableText(
+                    order.trackingNumber ?? '123-123',
+                    style: Theme.of(context)
+                        .textTheme
+                        .labelMedium
+                        ?.copyWith(color: Colors.white),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            ),
+          ],
         );
       case OrderStatus.DELIVERED:
         return inputLabel(

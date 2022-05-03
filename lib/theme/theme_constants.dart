@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 // #region COLORS
 const Color darkColor = Color(0xFF1E1F26);
+// const Color darkColor = Color(0xFF202730);
 const Color purpleColor = Color(0xFF3D68FF);
 const Color secondaryButtonColor = Color(0xFF696969);
 const Color redButtonColor = Color(0xFFFF6161);
