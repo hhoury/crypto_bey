@@ -11,10 +11,10 @@ class Orders with ChangeNotifier {
         id: 1,
         userId: 1,
         addressId: 1,
-        note: 'note',
+        note: 'Color Red, Size XL, leave it behind the door please',
         paymentAmount: 200,
         purchaseDate: DateTime.now(),
-        itemUrl: 'itemurlhere',
+        itemUrl: 'https://www.amazon.ca/TEUMI-WataD',
         updatedDate: DateTime.now(),
         status: OrderStatus.AWAITING_ORDER,
         retailer: Retailer.ALIEXPRESS),
@@ -22,8 +22,8 @@ class Orders with ChangeNotifier {
         id: 2,
         userId: 1,
         addressId: 1,
-        itemUrl: 'itemurlhere',
-        note: 'note',
+        itemUrl: 'https://www.amazon.ca/TEUMI-WataD',
+        note: 'Color Red, Size XL, leave it behind the door please',
         paymentAmount: 200,
         purchaseDate: DateTime.now(),
         updatedDate: DateTime.now(),
@@ -34,9 +34,9 @@ class Orders with ChangeNotifier {
         id: 3,
         userId: 1,
         addressId: 1,
-        itemUrl: 'itemurlhere',
+        itemUrl: 'https://www.amazon.ca/TEUMI-WataD',
         updatedDate: DateTime.now(),
-        note: 'note',
+        note: 'Color Red, Size XL, leave it behind the door please',
         paymentAmount: 200,
         purchaseDate: DateTime.now(),
         status: OrderStatus.AWAITING_PAYMENT,
@@ -45,9 +45,9 @@ class Orders with ChangeNotifier {
         id: 4,
         userId: 2,
         addressId: 1,
-        itemUrl: 'itemurlhere',
+        itemUrl: 'https://www.amazon.ca/TEUMI-WataD',
         updatedDate: DateTime.now(),
-        note: 'note',
+        note: 'Color Red, Size XL, leave it behind the door please',
         paymentAmount: 200,
         purchaseDate: DateTime.now(),
         status: OrderStatus.CANCELLED,
@@ -56,9 +56,9 @@ class Orders with ChangeNotifier {
         id: 5,
         userId: 2,
         addressId: 1,
-        itemUrl: 'itemurlhere',
+        itemUrl: 'https://www.amazon.ca/TEUMI-WataD',
         updatedDate: DateTime.now(),
-        note: 'note',
+        note: 'Color Red, Size XL, leave it behind the door please',
         paymentAmount: 200,
         purchaseDate: DateTime.now(),
         status: OrderStatus.DELIVERED,
@@ -110,9 +110,8 @@ class Orders with ChangeNotifier {
         unit: 'B1');
   }
 
-  bool cancelOrder(int orderId){
+  bool cancelOrder(int orderId) {
     //TODO CANCEL ORDER API
     return true;
   }
-
 }

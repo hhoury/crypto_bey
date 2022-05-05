@@ -9,10 +9,12 @@ import 'package:provider/provider.dart';
 
 import '../constants/app_constants.dart';
 import '../models/order.dart';
+
 class AlwaysDisabledFocusNode extends FocusNode {
   @override
   bool get hasFocus => false;
 }
+
 class OrderDetailBottom extends StatelessWidget {
   final Order order;
   final BuildContext context;
@@ -149,8 +151,8 @@ class OrderDetailBottom extends StatelessWidget {
     }
 
     Widget _buildPaymentBottom() {
-      final Widget qr =
-          SvgPicture.asset('assets/images/qr.svg', semanticsLabel: 'qr');
+      final Widget qr = SvgPicture.asset('assets/images/qr.svg',
+          semanticsLabel: 'qr', height: 120, width: 100, fit: BoxFit.cover);
       const String walletAddress = '0x123ashj21215j1kl23012354j1234';
       final TextEditingController walletAddressController =
           TextEditingController();
@@ -199,16 +201,15 @@ class OrderDetailBottom extends StatelessWidget {
           ),
           addVerticalSpace(20),
           TextField(
-            focusNode:  AlwaysDisabledFocusNode(),
+            focusNode: AlwaysDisabledFocusNode(),
             readOnly: true,
             controller: walletAddressController,
             textAlign: TextAlign.center,
             decoration: InputDecoration(
               suffixIcon: IconButton(
                 onPressed: (() {
-                  print(walletAddressController.text);
-                  Clipboard.setData(ClipboardData(text: walletAddressController.text));
-
+                  Clipboard.setData(
+                      ClipboardData(text: walletAddressController.text));
                 }),
                 icon: const Icon(
                   Icons.copy,

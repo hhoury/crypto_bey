@@ -71,11 +71,13 @@ class OrderDetailTop extends StatelessWidget {
                             bottomLeft: Radius.circular(5))),
                     child: Padding(
                       padding: const EdgeInsets.all(8),
-                      child: Text('Track Package',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyText1
-                              ?.copyWith(color: Colors.white)),
+                      child: FittedBox(
+                        child: Text('Track Package',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText1
+                                ?.copyWith(color: Colors.white)),
+                      ),
                     ))),
             Expanded(
               flex: 1,
@@ -119,7 +121,7 @@ class OrderDetailTop extends StatelessWidget {
       children: [
         addVerticalSpace(20),
         orderImage,
-        addVerticalSpace(10),
+        addVerticalSpace(20),
         orderSummary,
         addVerticalSpace(20),
       ],

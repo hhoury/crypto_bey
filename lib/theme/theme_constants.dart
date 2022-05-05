@@ -19,6 +19,8 @@ const Color darkUnselectedTab = Color(0xFF808994);
 const Color lightSelectedTab = Color(0xFF303030);
 const Color lightUnSelectedTab = Color(0xFFA3A3A3);
 const Color subtitleTextColor = Color(0xFF7A8087);
+const Color lightSurface = Color(0xFFF0F0F0);
+
 // #endregion
 
 const lightAppbarTheme = AppBarTheme(
@@ -69,7 +71,7 @@ const lightColorScheme = ColorScheme(
     onError: Colors.white,
     background: Colors.white,
     onBackground: purpleColor,
-    surface: Colors.white,
+    surface: lightSurface,
     onSurface: purpleColor);
 
 final elevatedButtonThemeData = ElevatedButtonThemeData(
