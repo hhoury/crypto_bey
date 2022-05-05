@@ -64,6 +64,7 @@ class OrderDetailTop extends StatelessWidget {
             Expanded(
                 flex: 1,
                 child: Container(
+                    constraints: const BoxConstraints(minHeight: 35),
                     decoration: BoxDecoration(
                         color: Theme.of(context).colorScheme.primary,
                         borderRadius: const BorderRadius.only(
@@ -82,6 +83,7 @@ class OrderDetailTop extends StatelessWidget {
             Expanded(
               flex: 1,
               child: Container(
+                constraints: const BoxConstraints(minHeight: 35),
                 decoration: const BoxDecoration(
                   color: secondaryButtonColor,
                   borderRadius: BorderRadius.only(
@@ -90,13 +92,17 @@ class OrderDetailTop extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(8),
-                  child: SelectableText(
-                    order.trackingNumber ?? '123-123',
-                    style: Theme.of(context)
-                        .textTheme
-                        .labelMedium
-                        ?.copyWith(color: Colors.white),
-                    textAlign: TextAlign.center,
+                  child: FittedBox(
+                    child: SelectableText(
+                      order.trackingNumber ?? '54324518-5232',
+                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                            color: Colors.white,
+                            fontFamily: 'Digital',
+                            fontSize: 22,
+                            wordSpacing: 1.3,
+                          ),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
               ),

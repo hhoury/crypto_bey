@@ -121,9 +121,12 @@ class OrderDetailBottom extends StatelessWidget {
             children: [
               Text('Note:', style: Theme.of(context).textTheme.bodyText1),
               addHorizontalSpace(10),
-              Text(
-                order.note ?? '',
-                style: Theme.of(context).textTheme.labelMedium,
+              Flexible(
+                child: Text(
+                  order.note ?? '',
+                  style: Theme.of(context).textTheme.labelMedium,
+                  overflow: TextOverflow.ellipsis,
+                ),
               )
             ],
           ),
