@@ -97,6 +97,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       Expanded(
                         flex: 2,
                         child: TextFormField(
+                          decoration: const InputDecoration(counterText: ''),
+                          maxLength: 3,
                           inputFormatters: <TextInputFormatter>[
                             FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                           ],

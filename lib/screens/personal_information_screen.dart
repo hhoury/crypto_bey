@@ -95,7 +95,10 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                       Expanded(
                           flex: 2,
                           child: TextFormField(
+                              maxLength: 3,
                               controller: _phoneCodeController,
+                              decoration:
+                                  const InputDecoration(counterText: ''),
                               inputFormatters: <TextInputFormatter>[
                                 FilteringTextInputFormatter.allow(
                                     RegExp(r'[0-9]')),
