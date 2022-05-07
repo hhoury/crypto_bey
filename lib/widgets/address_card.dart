@@ -8,11 +8,17 @@ class AddressCard extends StatelessWidget {
   final int id;
   final String country;
   final String state;
-  final String city;
+  // final String city;
   final String name;
   final String address;
-  const AddressCard(Key key, this.id, this.country, this.state, this.city,
-      this.name, this.address)
+  const AddressCard(
+      Key key,
+      this.id,
+      this.country,
+      this.state,
+      //  this.city,
+      this.name,
+      this.address)
       : super(key: key);
   @override
   Widget build(BuildContext context) {

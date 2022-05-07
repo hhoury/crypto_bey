@@ -15,7 +15,7 @@ class AddressesList extends StatelessWidget {
           addresses[index].id,
           addresses[index].country,
           addresses[index].state,
-          addresses[index].city,
+          // addresses[index].city,
           addresses[index].name,
           addresses[index].address),
     );

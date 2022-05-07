@@ -3,7 +3,7 @@ class Address {
   String name;
   String country;
   String state;
-  String city;
+  // String city;
   String address;
   String unit;
   bool deleted;
@@ -12,7 +12,7 @@ class Address {
     required this.id,
     required this.country,
     this.state = '',
-    this.city = '',
+    // this.city = '',
     required this.name,
     required this.address,
     required this.unit,

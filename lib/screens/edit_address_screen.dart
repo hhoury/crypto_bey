@@ -16,7 +16,7 @@ class EditAddressScreen extends StatefulWidget {
 class _EditAddressScreenState extends State<EditAddressScreen> {
   String _countryValue = '';
   String _stateValue = '';
-  String _cityValue = '';
+  // final String _cityValue = '';
   final _editAddressForm = GlobalKey<FormState>();
   // final _addressController = TextEditingController();
   // final _unitController = TextEditingController();
@@ -25,7 +25,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
     id: 0,
     country: '',
     state: '',
-    city: '',
+    // city: '',
     name: '',
     address: '',
     unit: '',
@@ -34,7 +34,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
   var _initValues = {
     'country': '',
     'state': '',
-    'city': '',
+    // 'city': '',
     'name': '',
     'address': '',
     'unit': ''
@@ -54,14 +54,14 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
         _initValues = {
           'country': _editedAddress.country,
           'state': _editedAddress.state,
-          'city': _editedAddress.city,
+          // 'city': _editedAddress.city,
           'address': _editedAddress.address,
           'name': _editedAddress.name,
           'unit': _editedAddress.unit
         };
         _countryValue = _editedAddress.country;
         _stateValue = _editedAddress.state;
-        _cityValue = _editedAddress.city;
+        // _cityValue = _editedAddress.city;
         print(_countryValue);
       }
     }
@@ -82,9 +82,10 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
     final isValid = countryValid && _editAddressForm.currentState!.validate();
 
     if (isValid) {
+      print(_countryValue);
       _editedAddress.country = _countryValue;
       _editedAddress.state = _stateValue;
-      _editedAddress.city = _cityValue;
+      // _editedAddress.city = _cityValue;
       _editAddressForm.currentState!.save();
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       // EDIT ADDRESS
@@ -160,7 +161,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                         id: _editedAddress.id,
                         country: _editedAddress.country,
                         state: _editedAddress.state,
-                        city: _editedAddress.city,
+                        // city: _editedAddress.city,
                         name: value!,
                         address: _editedAddress.address,
                         unit: _editedAddress.unit,
@@ -190,11 +191,13 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                         _stateValue = value;
                       });
                     },
-                    onCityChanged: (value) {
-                      setState(() {
-                        _cityValue = value;
-                      });
-                    },
+                    // onCityChanged: (value) {
+                    //   setState(() {
+                    //     _cityValue = value;
+                    //   });
+                    // },
+                    selectedCountry: _countryValue,
+                    selectedState: _stateValue,
                   ),
                   addVerticalSpace(20),
                   inputLabel(context, 'Address'),
@@ -216,7 +219,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                         id: _editedAddress.id,
                         country: _editedAddress.country,
                         state: _editedAddress.state,
-                        city: _editedAddress.city,
+                        // city: _editedAddress.city,
                         name: _editedAddress.name,
                         address: value!,
                         unit: _editedAddress.unit,
@@ -242,7 +245,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                         id: _editedAddress.id,
                         country: _editedAddress.country,
                         state: _editedAddress.state,
-                        city: _editedAddress.city,
+                        // city: _editedAddress.city,
                         name: _editedAddress.name,
                         address: _editedAddress.address,
                         unit: value!,
