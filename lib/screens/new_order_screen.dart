@@ -1,6 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:crypto_bey/constants/app_constants.dart';
+import 'package:crypto_bey/models/address.dart';
 import 'package:crypto_bey/providers/addresses.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,19 +23,20 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
     Retailer.OTHER: 'Other'
   };
   String _selectedRetailer = 'Amazon';
+  Address? _selectedAddress;
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
     _selectedRetailer = 'Amazon';
   }
 
   @override
   Widget build(BuildContext context) {
+    var addresses = Provider.of<Addresses>(context, listen: false).addresses;
+
     Widget _buildStep1() {
-      var addresses = Provider.of<Addresses>(context, listen: false).addresses;
       return SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,30 +81,52 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
             inputLabel(context, 'Shipping Address'),
             addVerticalSpace(10),
             Container(
+              padding: const EdgeInsets.all(10),
               constraints: const BoxConstraints(minHeight: 60),
               decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.surface,
                   borderRadius: BorderRadius.circular(15)),
-              child: DropdownButton<String>(
+              child: DropdownButton<Address>(
                   underline: DropdownButtonHideUnderline(child: Container()),
                   isExpanded: true,
+                  value: _selectedAddress,
                   dropdownColor: Theme.of(context).colorScheme.surface,
-                  items: ['Address 1', 'Address 2', 'Address 3']
-                      .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
+                  items: addresses
+                      .map<DropdownMenuItem<Address>>((Address address) {
+                    return DropdownMenuItem<Address>(
+                      value: address,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              address.name,
+                              style: Theme.of(context).textTheme.headline3,
+                            ),
+                            addVerticalSpace(3),
+                            Text(
+                              address.address,
+                              style: Theme.of(context).textTheme.subtitle1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            addVerticalSpace(6),
+                          ],
+                        ),
+                      ),
                     );
                   }).toList(),
-                  onChanged: (value) {}),
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedAddress = value;
+                    });
+                  }),
             ),
             addVerticalSpace(20),
-            // Row(
-            //   children: [
-            //     buttonContainer(
-            //         ElevatedButton(onPressed: () {}, child: const Text('Next')))
-            //   ],
-            // )
+            buttonContainer(ElevatedButton(
+                onPressed: () {
+                  // Navigator.of(context).pushNamed(routeName)
+                },
+                child: padButtonText(text: 'Next')))
           ],
         ),
       );

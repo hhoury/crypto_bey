@@ -62,7 +62,6 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
         _countryValue = _editedAddress.country;
         _stateValue = _editedAddress.state;
         // _cityValue = _editedAddress.city;
-        print(_countryValue);
       }
     }
     _isInit = false;

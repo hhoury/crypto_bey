@@ -23,19 +23,21 @@ class OrderDetailsScreen extends StatelessWidget {
         title: const Text('Order Detail'),
       ),
       body: SafeArea(
-        child: Container(
-          margin: const EdgeInsets.all(10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              addVerticalSpace(30),
-              FractionallySizedBox(
-                widthFactor: 0.6,
-                child: OrderDetailTop(loadedOrder, context),
-              ),
-              addVerticalSpace(10),
-              OrderDetailBottom(loadedOrder, context),
-            ],
+        child: SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                addVerticalSpace(30),
+                FractionallySizedBox(
+                  widthFactor: 0.6,
+                  child: OrderDetailTop(loadedOrder, context),
+                ),
+                addVerticalSpace(10),
+                OrderDetailBottom(loadedOrder, context),
+              ],
+            ),
           ),
         ),
       ),
