@@ -1,5 +1,11 @@
+import 'dart:convert';
+
+import 'package:crypto_bey/constants/api_constants.dart';
+
 import '../models/user.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:hive/hive.dart';
 
 class Users with ChangeNotifier {
   final List<User> _users = [
@@ -25,6 +31,16 @@ class Users with ChangeNotifier {
 
   List<User> get users {
     return [..._users.where((element) => element.deleted == false)];
+  }
+
+  Future<void> getUserProfile(String token) async {
+    var userBox = Hive.box('userBox');
+    if (userBox.containsKey('userData')) {
+      final userData = userBox.get('userData');
+      final url = Uri.parse('$USER_API/profile');
+      final response =
+          http.post(url, headers: json.decode(userData)['accessToken']);
+    }
   }
 
   void addUser(User user) {

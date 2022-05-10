@@ -1,6 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors
 // #region DART PACKAGES
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
 // #endregion
@@ -41,7 +42,8 @@ import '../screens/payment_screen.dart';
 
 // #endregion
 
-void main() {
+void main() async {
+  await Hive.initFlutter();
   WidgetsFlutterBinding.ensureInitialized();
 
   SharedPreferences.getInstance().then((prefs) {
@@ -73,7 +75,7 @@ class MyApp extends StatelessWidget {
             theme: value.getTheme(),
             initialRoute: '/',
             routes: {
-              '/': ((context) => TabsScreen()),
+              '/': ((context) => LoginScreen()),
               EditAddressScreen.routeName: (context) => EditAddressScreen(),
               ChangePasswordScreen.routeName: (context) =>
                   ChangePasswordScreen(),
