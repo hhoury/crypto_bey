@@ -1,6 +1,9 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import '../models/http_exception.dart';
+import '../providers/auth.dart';
 import '../screens/login_screen.dart';
 import '../theme/theme_constants.dart';
 import '../utils/helper_widgets.dart';
@@ -17,17 +20,19 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   final _signupForm = GlobalKey<FormState>();
 
-  final _nameController = TextEditingController();
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passController = TextEditingController();
   final _confirmPassController = TextEditingController();
   final _phoneCodeController = TextEditingController();
   final _phoneNumberController = TextEditingController();
-
+  var _isLoading = false;
   @override
   void dispose() {
     super.dispose();
-    _nameController.dispose();
+    _firstNameController.dispose();
+    _lastNameController.dispose();
     _emailController.dispose();
     _passController.dispose();
     _confirmPassController.dispose();
@@ -35,9 +40,53 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _phoneNumberController.dispose();
   }
 
-  void _submitSignup() {
+  void _showErrorDialog(String message) {
+    showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+              title: const Text('Something went wrong! \n Try Again later'),
+              content: Text(message),
+              actions: [
+                TextButton(
+                    onPressed: () => Navigator.of(ctx).pop(),
+                    child: const Text('Okay!'))
+              ],
+            ));
+  }
+
+  Future<void> _submitSignup() async {
     final isValid = _signupForm.currentState!.validate();
-    if (isValid) {
+    if (!isValid) {
+      return;
+    } else {
+      setState(() {
+        _isLoading = true;
+      });
+      try {
+        await Provider.of<Auth>(context, listen: false).signup(
+          _firstNameController.text,
+          _lastNameController.text,
+          _phoneCodeController.text + _phoneNumberController.text,
+          _emailController.text,
+          _passController.text,
+        );
+      } on HttpException catch (error) {
+        var errorMessage = 'Authentication Failed';
+        if (error.toString().contains('EXISTS')) {
+          errorMessage = 'email address already registered';
+        } else if (error.toString().contains('INVALID')) {
+          errorMessage = 'EMAIL ADDRESS IS INVALID';
+        } else if (error.toString().contains('WEAK')) {
+          errorMessage = 'PASSWORD IS TOO WEAK';
+        } else if (error.toString().contains('EMAIL_NOT_FOUND')) {
+          errorMessage = 'could not find user with that email';
+        }
+        _showErrorDialog(errorMessage);
+      } catch (error) {
+        const errorMessage = 'Authentication Failed! Please try again later.';
+        _showErrorDialog(errorMessage);
+      }
+
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         backgroundColor: Theme.of(context).backgroundColor,
         content: Text(
@@ -45,6 +94,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
           style: Theme.of(context).textTheme.button,
         ),
       ));
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -77,14 +129,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ],
                   ),
                   addVerticalSpace(20),
-                  inputLabel(context, 'Full Name'),
+                  inputLabel(context, 'First Name'),
                   addVerticalSpace(10),
                   TextFormField(
-                    controller: _nameController,
+                    controller: _firstNameController,
                     textInputAction: TextInputAction.next,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please Enter Your Full Name';
+                        return 'Please Enter Your First Name';
+                      }
+                      return null;
+                    },
+                  ),
+                  addVerticalSpace(20),
+                  inputLabel(context, 'Last Name'),
+                  addVerticalSpace(10),
+                  TextFormField(
+                    controller: _lastNameController,
+                    textInputAction: TextInputAction.next,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please Enter Your Last Name';
                       }
                       return null;
                     },
@@ -118,6 +183,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         flex: 8,
                         child: TextFormField(
                           controller: _phoneNumberController,
+                          decoration: const InputDecoration(counterText: ''),
+                          maxLength: 15,
                           inputFormatters: <TextInputFormatter>[
                             FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                           ],
@@ -192,7 +259,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   addVerticalSpace(30),
                   buttonContainer(ElevatedButton(
-                      onPressed: () => _submitSignup(),
+                      onPressed: _submitSignup,
                       child: padButtonText(text: 'SIGNUP'))),
                   addVerticalSpace(10),
                   buttonContainer(

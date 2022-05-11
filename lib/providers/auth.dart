@@ -10,8 +10,7 @@ import 'package:flutter/material.dart';
 class Auth with ChangeNotifier {
   String _refreshToken = '';
   String _accessToken = '';
-  DateTime? _refreshExpiryDate;
-  String _userId = '';
+  final String _userId = '';
   Timer? _authTimer;
 
   bool get isAuth {
@@ -19,9 +18,7 @@ class Auth with ChangeNotifier {
   }
 
   String get token {
-    if (_refreshExpiryDate != null &&
-        _refreshExpiryDate!.isAfter(DateTime.now()) &&
-        _refreshToken.isNotEmpty) {
+    if (_refreshToken.isNotEmpty) {
       return _refreshToken;
     }
     return '';
@@ -31,33 +28,60 @@ class Auth with ChangeNotifier {
     return _userId;
   }
 
-  Future<void> _login(String email, String password) async {
+  Future<void> signup(String fName, String lName, String phnNumber,
+      String email, String password) async {
+    try {
+      final url = Uri.parse('$USER_API/create');
+      final response = await http.post(url,
+          headers: API_HEADER,
+          body: json.encode({
+            'first_name': fName,
+            'last_name': lName,
+            'phone_number': phnNumber,
+            'email': email,
+            'password': password,
+          }));
+      final responseData = json.decode(response.body);
+
+      if (responseData['error'] != null || !responseData["success"]) {
+        throw HttpException(responseData['error']['message']);
+      } else {
+        //after registration success
+        // _refreshToken = responseData['refresh_token'];
+        // _accessToken = responseData['access_token'];
+        // notifyListeners();
+        // var userBox = await Hive.openBox('userBox');
+        // final userData = json.encode({
+        //   'accessToken': _accessToken,
+        //   'refreshToken': _refreshToken,
+        // });
+        // userBox.put('userData', userData);
+      }
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  Future<void> login(String email, String password) async {
     try {
       final url = Uri.parse('$USER_API/login');
       final response = await http.post(url,
+          headers: API_HEADER,
           body: json.encode({
             'email': email,
             'password': password,
           }));
       final responseData = json.decode(response.body);
-      if (responseData['error'] != null) {
+      if (responseData['error'] != null || !responseData["success"]) {
         throw HttpException(responseData['error']['message']);
       } else {
         _refreshToken = responseData['refresh_token'];
         _accessToken = responseData['access_token'];
-        _userId = responseData['userId'];
-        _refreshExpiryDate = DateTime.now().add(Duration(
-          seconds: int.parse(
-              responseData['refresh_expires_in'] ?? 2628000), //month in seconds
-        ));
-        // _autoLogout();
         notifyListeners();
         var userBox = await Hive.openBox('userBox');
         final userData = json.encode({
           'accessToken': _accessToken,
           'refreshToken': _refreshToken,
-          'userId': _userId,
-          'refreshExpiryDate': _refreshExpiryDate?.toIso8601String(),
         });
         userBox.put('userData', userData);
       }
@@ -74,21 +98,20 @@ class Auth with ChangeNotifier {
     if (responseData['error'] != null) {
       _refreshToken = '';
       _accessToken = '';
-      _userId = '';
-      _refreshExpiryDate = null;
       if (_authTimer != null) {
         _authTimer!.cancel();
         _authTimer = null;
       }
-      notifyListeners();
       var userBox = await Hive.openBox('userBox');
-      userBox.delete('userData');
-      userBox.clear();
+      await userBox.delete('userData');
+      await userBox.clear();
+      notifyListeners();
     }
   }
 
   Future<bool> tryAutoLogin() async {
     var userBox = await Hive.openBox('userBox');
+    await userBox.clear();
     if (!userBox.containsKey('userData')) {
       return false;
     } else {
@@ -96,16 +119,9 @@ class Auth with ChangeNotifier {
       if (userData.toString().isEmpty) {
         return false;
       } else {
-        _refreshToken = userData['refresh_token'];
-        _accessToken = userData['access_token'];
-        _userId = userData['userId'];
-        _refreshExpiryDate = DateTime.now().add(Duration(
-          seconds: int.parse(
-              userData['refresh_expires_in'] ?? 2628000), //month in seconds
-        ));
-
+        _refreshToken = userData['refreshToken'] ?? '';
+        _accessToken = userData['accessToken'] ?? '';
         notifyListeners();
-        // _autoLogout();
         return true;
       }
     }

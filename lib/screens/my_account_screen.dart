@@ -1,7 +1,10 @@
+import 'package:provider/provider.dart';
+
 import '../screens/manage_addresses_screen.dart';
 import '../screens/notifications_screen.dart';
 import '../screens/personal_information_screen.dart';
 import '../screens/privacy_screen.dart';
+import '../theme/theme_manager.dart';
 import '../utils/helper_widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -11,13 +14,13 @@ class MyAccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          // ignore: prefer_const_constructors
-          title: Text('My Account'),
-        ),
-        body: Container(
+    return Scaffold(
+      appBar: AppBar(
+        // ignore: prefer_const_constructors
+        title: Text('My Account'),
+      ),
+      body: SingleChildScrollView(
+        child: Container(
           margin: const EdgeInsets.all(15),
           child: Column(
             children: [
@@ -32,7 +35,7 @@ class MyAccountScreen extends StatelessWidget {
                             .pushNamed(PersonalInformationScreen.routeName);
                       },
                       child: Text(
-                        'Personal information',
+                        'Personal Information',
                         style: Theme.of(context).textTheme.headline2,
                       )),
                 ],
@@ -48,7 +51,7 @@ class MyAccountScreen extends StatelessWidget {
                             .pushNamed(ManageAddressesScreen.routeName);
                       },
                       child: Text(
-                        'Manage addresses',
+                        'Manage Addresses',
                         style: Theme.of(context).textTheme.headline2,
                       )),
                 ],
@@ -64,7 +67,7 @@ class MyAccountScreen extends StatelessWidget {
                             .pushNamed(PrivacyScreen.routeName);
                       },
                       child: Text(
-                        'privacy and security',
+                        'Privacy and Security',
                         style: Theme.of(context).textTheme.headline2,
                       )),
                 ],
@@ -101,6 +104,42 @@ class MyAccountScreen extends StatelessWidget {
                       )),
                 ],
               ),
+              // Row(
+              //   children: [
+              // Icon(Icons.dark_mode_outlined,
+              //     color: Theme.of(context).colorScheme.primary),
+              // addHorizontalSpace(10),
+              // TextButton(
+              //     onPressed: null,
+              //     child: Text(
+              //       'Dark Mode',
+              //       style: Theme.of(context).textTheme.headline2,
+              //     )),
+              Row(
+                children: [
+                  Icon(Icons.dark_mode_outlined,
+                      color: Theme.of(context).colorScheme.primary),
+                  addHorizontalSpace(20),
+                  Text(
+                    'Dark Theme',
+                    style: Theme.of(context).textTheme.headline2,
+                  ),
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Switch(
+                          activeColor: Theme.of(context).colorScheme.primary,
+                          value:
+                              Provider.of<ThemeProvider>(context, listen: false)
+                                  .darkModeOn,
+                          onChanged: (value) {
+                            Provider.of<ThemeProvider>(context, listen: false)
+                                .toggleTheme();
+                          }),
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
         ),

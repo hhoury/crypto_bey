@@ -2,9 +2,6 @@ import '../screens/change_password_screen.dart';
 import '../screens/reset_password_screen.dart';
 import '../utils/helper_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../theme/theme_manager.dart';
 
 // ignore: use_key_in_widget_constructors
 class PrivacyScreen extends StatelessWidget {
@@ -39,10 +36,7 @@ class PrivacyScreen extends StatelessWidget {
               )),
               addVerticalSpace(20),
               buttonContainer(ElevatedButton(
-                onPressed: () {
-                  Provider.of<ThemeProvider>(context, listen: false)
-                      .toggleTheme();
-                },
+                onPressed: () {},
                 child: padButtonText(text: 'Log Out'),
                 style: ElevatedButton.styleFrom(primary: Colors.red),
               ))

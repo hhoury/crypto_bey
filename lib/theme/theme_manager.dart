@@ -7,9 +7,9 @@ class ThemeProvider extends ChangeNotifier {
   ThemeData dark = darkTheme;
   ThemeData light = lightTheme;
 
-  // static bool get darkModeOn {
-  //   return _selectedTheme == dark;
-  // }
+  bool get darkModeOn {
+    return _selectedTheme == dark;
+  }
 
   ThemeProvider(bool darkThemeOn) {
     _selectedTheme = darkThemeOn ? dark : light;

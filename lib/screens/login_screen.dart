@@ -1,8 +1,11 @@
 // ignore_for_file: use_key_in_widget_constructors
 
+import 'package:provider/provider.dart';
+
+import '../models/http_exception.dart';
+import '../providers/auth.dart';
 import '../utils/input_helpers.dart';
 import 'package:flutter/material.dart';
-import '../screens/tabs_screen.dart';
 import '../screens/reset_password_screen.dart';
 import '../screens/signup_screen.dart';
 import '../utils/helper_widgets.dart';
@@ -19,6 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _loginForm = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passController = TextEditingController();
+  var _isLoading = false;
 
   @override
   void dispose() {
@@ -27,10 +31,51 @@ class _LoginScreenState extends State<LoginScreen> {
     _passController.dispose();
   }
 
-  void _submitLogin() {
+  void _showErrorDialog(String message) {
+    showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+              title: const Text('Something went wrong! \n Try Again later'),
+              content: Text(message),
+              actions: [
+                TextButton(
+                    onPressed: () => Navigator.of(ctx).pop(),
+                    child: const Text('Okay!'))
+              ],
+            ));
+  }
+
+  Future<void> _submitLogin() async {
     final isValid = _loginForm.currentState!.validate();
-    if (isValid) {
-      Navigator.of(context).pushReplacementNamed(TabsScreen.routeName);
+    if (!isValid) {
+      return;
+      // Navigator.of(context).pushReplacementNamed(TabsScreen.routeName);
+    } else {
+      setState(() {
+        _isLoading = true;
+      });
+      try {
+        await Provider.of<Auth>(context, listen: false)
+            .login(_emailController.text, _passController.text);
+      } on HttpException catch (error) {
+        var errorMessage = 'Authentication Failed';
+        if (error.toString().contains('EXISTS')) {
+          errorMessage = 'email address already registered';
+        } else if (error.toString().contains('INVALID')) {
+          errorMessage = 'EMAIL ADDRESS IS INVALID';
+        } else if (error.toString().contains('WEAK')) {
+          errorMessage = 'PASSWORD IS TOO WEAK';
+        } else if (error.toString().contains('EMAIL_NOT_FOUND')) {
+          errorMessage = 'could not find user with that email';
+        }
+        _showErrorDialog(errorMessage);
+      } catch (error) {
+        const errorMessage = 'Authentication Failed! Please try again later.';
+        _showErrorDialog(errorMessage);
+      }
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -112,24 +157,19 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   addVerticalSpace(30),
                   buttonContainer(ElevatedButton(
-                    onPressed: () => _submitLogin(),
+                    onPressed: _submitLogin,
                     child: padButtonText(text: 'LOGIN'),
                     style: Theme.of(context).elevatedButtonTheme.style,
                   )),
                   addVerticalSpace(10),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: buttonContainer(
-                      ElevatedButton(
-                        style: Theme.of(context).elevatedButtonTheme.style,
-                        onPressed: () {
-                          Navigator.of(context)
-                              .pushReplacementNamed(SignUpScreen.routeName);
-                        },
-                        child: padButtonText(text: 'SIGN UP'),
-                      ),
-                    ),
-                  )
+                  buttonContainer(ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context)
+                          .pushReplacementNamed(SignUpScreen.routeName);
+                    },
+                    child: padButtonText(text: 'SIGN UP'),
+                    style: Theme.of(context).elevatedButtonTheme.style,
+                  )),
                 ],
               ),
             ),

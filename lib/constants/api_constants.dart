@@ -14,4 +14,8 @@
 const ADDRESS_API = 'https://api.cryptobey.net/address';
 const ORDER_API = 'https://api.cryptobey.net/order';
 const NOTIFICATIONS_API = 'https://api.cryptobey.net/notification';
-const USER_API = 'http://api.cryptobey.net/user';
+const USER_API = 'https://api.cryptobey.net/user';
+const API_HEADER = {
+  'Content-type': 'application/json',
+  'Accept': 'application/json',
+};
