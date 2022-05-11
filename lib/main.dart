@@ -97,7 +97,6 @@ class MyApp extends StatelessWidget {
                             ? SplashScreen()
                             : LoginScreen()),
             routes: {
-              '/': ((context) => LoginScreen()),
               EditAddressScreen.routeName: (context) => EditAddressScreen(),
               ChangePasswordScreen.routeName: (context) =>
                   ChangePasswordScreen(),
