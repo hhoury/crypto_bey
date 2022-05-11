@@ -1,5 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors
 // #region DART PACKAGES
+import 'package:crypto_bey/providers/auth.dart';
+import 'package:crypto_bey/providers/orders.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,7 +14,6 @@ import '../theme/theme_manager.dart';
 
 // #region  PROVIDERS
 import 'providers/addresses.dart';
-import '../providers/orders.dart';
 // #endregion
 
 import '../screens/tabs_screen.dart';
@@ -63,8 +64,22 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => Addresses()),
-        ChangeNotifierProvider(create: (context) => Orders()),
+        ChangeNotifierProvider(
+          create: (context) => Auth(),
+        ),
+        ChangeNotifierProxyProvider<Auth, Addresses>(
+            create: (_) => Addresses('', '', []),
+            update: (ctx, auth, prevAddresses) => Addresses(
+                auth.token,
+                auth.userId,
+                prevAddresses?.addresses == null
+                    ? []
+                    : prevAddresses!.addresses)),
+        ChangeNotifierProxyProvider<Auth, Orders>(
+          create: (context) => Orders('', '', []),
+          update: (ctx, auth, prevOrders) => Orders(auth.token, auth.userId,
+              prevOrders?.orders == null ? [] : prevOrders!.orders),
+        )
       ],
       child: Consumer<ThemeProvider>(
         builder: (context, value, child) {

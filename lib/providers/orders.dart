@@ -6,7 +6,10 @@ import '../models/order.dart';
 import 'package:flutter/material.dart';
 
 class Orders with ChangeNotifier {
-  final List<Order> _orders = [
+  String refreshToken = '';
+  String userId = '';
+  // ignore: prefer_final_fields
+  List<Order> _orders = [
     Order(
         id: 1,
         userId: 1,
@@ -65,6 +68,8 @@ class Orders with ChangeNotifier {
         paid: true,
         retailer: Retailer.AMAZON)
   ];
+
+  Orders(this.refreshToken, this.userId, this._orders);
 
   List<Order> get orders {
     return [..._orders.where((element) => element.deleted == false)];

@@ -8,26 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:hive/hive.dart';
 
 class Users with ChangeNotifier {
-  final List<User> _users = [
-    User(
-      id: 1,
-      firstName: 'firstName',
-      lastName: 'lastName',
-      email: 'email@email.com',
-      emailVerified: true,
-      phoneNumber: '0096170040404',
-      dateCreated: DateTime.now(),
-    ),
-    User(
-      id: 2,
-      firstName: 'second user',
-      lastName: 'lastName',
-      email: 'second@email.com',
-      emailVerified: true,
-      phoneNumber: '001122334455',
-      dateCreated: DateTime.now(),
-    ),
-  ];
+  final List<User> _users = [];
 
   List<User> get users {
     return [..._users.where((element) => element.deleted == false)];

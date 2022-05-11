@@ -7,11 +7,12 @@ import 'package:flutter/material.dart';
 import '../models/address.dart';
 
 class Addresses with ChangeNotifier {
-  final List<Address> _addresses = [];
+  // ignore: prefer_final_fields
+  List<Address> _addresses = [];
   String refreshToken = '';
   String userId = '';
 
-  Addresses(this.refreshToken, this.userId);
+  Addresses(this.refreshToken, this.userId, this._addresses);
 
   List<Address> get addresses {
     return [..._addresses];
