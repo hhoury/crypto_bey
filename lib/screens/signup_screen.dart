@@ -105,6 +105,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           controller: _phoneCodeController,
                           keyboardType: TextInputType.number,
                           textInputAction: TextInputAction.next,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please Enter Your Phone Number';
+                            }
+                            return null;
+                          },
                         ),
                       ),
                       addHorizontalSpace(5),

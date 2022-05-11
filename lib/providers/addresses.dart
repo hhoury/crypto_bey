@@ -5,29 +5,11 @@ import 'package:flutter/material.dart';
 import '../models/address.dart';
 
 class Addresses with ChangeNotifier {
-  final List<Address> _addresses = [
-    Address(
-      id: 1,
-      country: '🇦🇪    United Arab Emirates',
-      state: 'Dubai',
-      // city: 'Austin',
-      name: 'John Doe',
-      address: '1422 Larch St, Halifax CA B35-38I',
-      unit: 'B2',
-    ),
-    Address(
-      id: 2,
-      country: '🇦🇪    United Arab Emirates',
-      state: 'Dubai',
-      // city: 'Beirut',
-      name: 'John Cena',
-      address: '1422 Larch St, Halifax CA B35-38I St, Halifax CA B35-38I',
-      unit: 'A2',
-    )
-  ];
+  final List<Address> _addresses = [];
+  final String refreshToken = '';
 
   List<Address> get addresses {
-    return [..._addresses.where((element) => element.deleted == false)];
+    return [..._addresses];
   }
 
   void addAddress(Address address) {

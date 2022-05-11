@@ -65,6 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   addVerticalSpace(10),
                   TextFormField(
+                    keyboardType: TextInputType.emailAddress,
                     controller: _emailController,
                     textInputAction: TextInputAction.next,
                     validator: (value) {

@@ -43,9 +43,8 @@ import '../screens/payment_screen.dart';
 // #endregion
 
 void main() async {
-  await Hive.initFlutter();
   WidgetsFlutterBinding.ensureInitialized();
-
+  await Hive.initFlutter();
   SharedPreferences.getInstance().then((prefs) {
     var isDarkTheme = prefs.getBool("darkTheme") ?? false;
     return runApp(

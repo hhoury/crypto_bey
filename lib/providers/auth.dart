@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:crypto_bey/constants/api_constants.dart';
 import 'package:crypto_bey/models/http_exception.dart';
@@ -82,6 +83,41 @@ class Auth with ChangeNotifier {
       notifyListeners();
       var userBox = await Hive.openBox('userBox');
       userBox.delete('userData');
+      userBox.clear();
     }
   }
+
+  Future<bool> tryAutoLogin() async {
+    var userBox = await Hive.openBox('userBox');
+    if (!userBox.containsKey('userData')) {
+      return false;
+    } else {
+      final userData = json.decode(userBox.get('userData', defaultValue: ''));
+      if (userData.toString().isEmpty) {
+        return false;
+      } else {
+        _refreshToken = userData['refresh_token'];
+        _accessToken = userData['access_token'];
+        _userId = userData['userId'];
+        _refreshExpiryDate = DateTime.now().add(Duration(
+          seconds: int.parse(
+              userData['refresh_expires_in'] ?? 2628000), //month in seconds
+        ));
+
+        notifyListeners();
+        // _autoLogout();
+        return true;
+      }
+    }
+  }
+
+//set a timer to execute code when time expired
+  //use dart:async library
+  // void _autoLogout() {
+  //   if (_authTimer != null) {
+  //     _authTimer!.cancel();
+  //   }
+  //   final timeToExpiry = _expiryDate!.difference(DateTime.now()).inSeconds;
+  //   _authTimer = Timer(Duration(seconds: timeToExpiry), logout);
+  // }
 }
