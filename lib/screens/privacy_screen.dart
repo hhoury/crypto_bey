@@ -1,6 +1,6 @@
-import 'package:crypto_bey/screens/change_password_screen.dart';
-import 'package:crypto_bey/screens/reset_password_screen.dart';
-import 'package:crypto_bey/utils/helper_widgets.dart';
+import '../screens/change_password_screen.dart';
+import '../screens/reset_password_screen.dart';
+import '../utils/helper_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

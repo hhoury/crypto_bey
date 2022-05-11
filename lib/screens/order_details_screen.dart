@@ -1,8 +1,8 @@
 // ignore_for_file: use_key_in_widget_constructors
 
-import 'package:crypto_bey/providers/orders.dart';
-import 'package:crypto_bey/utils/helper_widgets.dart';
-import 'package:crypto_bey/widgets/order_detail_top.dart';
+import '../providers/orders.dart';
+import '../utils/helper_widgets.dart';
+import '../widgets/order_detail_top.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';

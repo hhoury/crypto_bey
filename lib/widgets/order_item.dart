@@ -1,4 +1,4 @@
-import 'package:crypto_bey/screens/order_details_screen.dart';
+import '../screens/order_details_screen.dart';
 import 'package:intl/intl.dart';
 
 import '../constants/app_constants.dart';

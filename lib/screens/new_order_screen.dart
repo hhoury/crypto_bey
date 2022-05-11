@@ -1,8 +1,8 @@
 // ignore_for_file: use_key_in_widget_constructors
 
-import 'package:crypto_bey/constants/app_constants.dart';
-import 'package:crypto_bey/models/address.dart';
-import 'package:crypto_bey/providers/addresses.dart';
+import '../constants/app_constants.dart';
+import '../models/address.dart';
+import '../providers/addresses.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

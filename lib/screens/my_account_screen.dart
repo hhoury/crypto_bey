@@ -1,8 +1,8 @@
-import 'package:crypto_bey/screens/manage_addresses_screen.dart';
-import 'package:crypto_bey/screens/notifications_screen.dart';
-import 'package:crypto_bey/screens/personal_information_screen.dart';
-import 'package:crypto_bey/screens/privacy_screen.dart';
-import 'package:crypto_bey/utils/helper_widgets.dart';
+import '../screens/manage_addresses_screen.dart';
+import '../screens/notifications_screen.dart';
+import '../screens/personal_information_screen.dart';
+import '../screens/privacy_screen.dart';
+import '../utils/helper_widgets.dart';
 import 'package:flutter/material.dart';
 
 // ignore: use_key_in_widget_constructors
@@ -60,7 +60,8 @@ class MyAccountScreen extends StatelessWidget {
                   addHorizontalSpace(10),
                   TextButton(
                       onPressed: () {
-                        Navigator.of(context).pushNamed(PrivacyScreen.routeName);
+                        Navigator.of(context)
+                            .pushNamed(PrivacyScreen.routeName);
                       },
                       child: Text(
                         'privacy and security',

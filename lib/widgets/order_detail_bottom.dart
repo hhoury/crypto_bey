@@ -1,7 +1,7 @@
-import 'package:crypto_bey/models/address.dart';
-import 'package:crypto_bey/providers/orders.dart';
-import 'package:crypto_bey/theme/theme_constants.dart';
-import 'package:crypto_bey/utils/helper_widgets.dart';
+import '../models/address.dart';
+import '../providers/orders.dart';
+import '../theme/theme_constants.dart';
+import '../utils/helper_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';

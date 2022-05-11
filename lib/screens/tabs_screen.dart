@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:crypto_bey/screens/new_order_screen.dart';
+import '../screens/new_order_screen.dart';
 
 import '../screens/my_account_screen.dart';
 import '../screens/order_history_screen.dart';

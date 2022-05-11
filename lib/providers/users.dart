@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:crypto_bey/constants/api_constants.dart';
+import '../constants/api_constants.dart';
 
 import '../models/user.dart';
 import 'package:flutter/material.dart';

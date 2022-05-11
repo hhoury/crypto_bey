@@ -1,6 +1,6 @@
-import 'package:crypto_bey/providers/addresses.dart';
-import 'package:crypto_bey/screens/edit_address_screen.dart';
-import 'package:crypto_bey/utils/helper_widgets.dart';
+import '../providers/addresses.dart';
+import '../screens/edit_address_screen.dart';
+import '../utils/helper_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

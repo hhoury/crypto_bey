@@ -1,4 +1,4 @@
-import 'package:crypto_bey/widgets/address_card.dart';
+import '../widgets/address_card.dart';
 
 import '../models/address.dart';
 import 'package:flutter/material.dart';

@@ -1,4 +1,4 @@
-import 'package:crypto_bey/utils/helper_widgets.dart';
+import '../utils/helper_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

@@ -1,7 +1,8 @@
 // ignore_for_file: use_key_in_widget_constructors
 // #region DART PACKAGES
-import 'package:crypto_bey/providers/auth.dart';
-import 'package:crypto_bey/providers/orders.dart';
+import './providers/auth.dart';
+import './providers/orders.dart';
+import './screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -81,13 +82,20 @@ class MyApp extends StatelessWidget {
               prevOrders?.orders == null ? [] : prevOrders!.orders),
         )
       ],
-      child: Consumer<ThemeProvider>(
-        builder: (context, value, child) {
+      child: Consumer2<ThemeProvider, Auth>(
+        builder: (context, theme, auth, _) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Crypto Bey',
-            theme: value.getTheme(),
+            theme: theme.getTheme(),
             initialRoute: '/',
+            home: auth.isAuth
+                ? TabsScreen()
+                : FutureBuilder(
+                    builder: (ctx, snapshot) =>
+                        snapshot.connectionState == ConnectionState.waiting
+                            ? SplashScreen()
+                            : LoginScreen()),
             routes: {
               '/': ((context) => LoginScreen()),
               EditAddressScreen.routeName: (context) => EditAddressScreen(),

@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
-import 'package:crypto_bey/constants/api_constants.dart';
-import 'package:crypto_bey/models/http_exception.dart';
+import '../constants/api_constants.dart';
+import '../models/http_exception.dart';
 import 'package:flutter/material.dart';
 
 class Auth with ChangeNotifier {

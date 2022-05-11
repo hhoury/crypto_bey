@@ -1,5 +1,5 @@
 import 'package:country_state_city_picker/country_state_city_picker.dart';
-import 'package:crypto_bey/models/address.dart';
+import '../models/address.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/addresses.dart';

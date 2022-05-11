@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'package:crypto_bey/constants/api_constants.dart';
+import '../constants/api_constants.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/material.dart';

@@ -1,6 +1,6 @@
-import 'package:crypto_bey/models/order.dart';
-import 'package:crypto_bey/theme/theme_constants.dart';
-import 'package:crypto_bey/utils/helper_widgets.dart';
+import '../models/order.dart';
+import '../theme/theme_constants.dart';
+import '../utils/helper_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../constants/app_constants.dart';

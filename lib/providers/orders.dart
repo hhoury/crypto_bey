@@ -1,4 +1,4 @@
-import 'package:crypto_bey/models/address.dart';
+import '../models/address.dart';
 
 import '../constants/app_constants.dart';
 
