@@ -41,6 +41,20 @@ Widget inputLabel(BuildContext context, String label) {
   return Text(label, style: Theme.of(context).textTheme.labelMedium);
 }
 
+void showErrorDialog(BuildContext ctx, String message) {
+  showDialog(
+      context: ctx,
+      builder: (ctx) => AlertDialog(
+            title: const Text('Something went wrong! '),
+            content: Text(message),
+            actions: [
+              TextButton(
+                  onPressed: () => Navigator.of(ctx).pop(),
+                  child: const Text('Okay!'))
+            ],
+          ));
+}
+
 // Widget textFormFieldContainer(Widget field) {
 //   return TextFormField(
 //     decoration: InputDecoration(

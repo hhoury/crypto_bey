@@ -72,7 +72,7 @@ class Auth with ChangeNotifier {
             'password': password,
           }));
       final responseData = json.decode(response.body);
-      if (responseData['error'] != null || !responseData["success"]) {
+      if (responseData['error'] != null) {
         throw HttpException(responseData['error']['message']);
       } else {
         _refreshToken = responseData['refresh_token'];
@@ -90,28 +90,39 @@ class Auth with ChangeNotifier {
     }
   }
 
+  Future<void> changePassword(
+      String currentPassword, String newPassword) async {
+    final url = Uri.parse('$USER_API/update_password');
+    final response = http.put(url,
+        headers: API_HEADER,
+        body: json.encode(
+          {'current_password': currentPassword, 'new_password': newPassword},
+        ));
+  }
+
   Future<void> logout() async {
     final url = Uri.parse('$USER_API/logout');
-    final response =
-        await http.post(url, headers: {'refresh-token': _refreshToken});
-    final responseData = json.decode(response.body);
-    if (responseData['error'] != null) {
-      _refreshToken = '';
-      _accessToken = '';
-      if (_authTimer != null) {
-        _authTimer!.cancel();
-        _authTimer = null;
-      }
-      var userBox = await Hive.openBox('userBox');
-      await userBox.delete('userData');
-      await userBox.clear();
-      notifyListeners();
-    }
+    await http.post(url, headers: {'refresh-token': _refreshToken});
+    // final responseData = json.decode(response.body);
+    _refreshToken = '';
+    _accessToken = '';
+    // if (_authTimer != null) {
+    //   _authTimer!.cancel();
+    //   _authTimer = null;
+    // }
+    notifyListeners();
+    var userBox = await Hive.openBox('userBox');
+    userBox.delete('userData');
+    userBox.clear();
+  }
+
+  Future<void> resetPassword(String email) async {
+    final url = Uri.parse('$USER_API/reset_password');
   }
 
   Future<bool> tryAutoLogin() async {
     var userBox = await Hive.openBox('userBox');
-    await userBox.clear();
+    // await userBox.clear();
     if (!userBox.containsKey('userData')) {
       return false;
     } else {

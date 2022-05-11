@@ -1,4 +1,6 @@
+import 'package:crypto_bey/providers/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../utils/helper_widgets.dart';
 import '../utils/input_helpers.dart';
@@ -17,6 +19,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   final _currentPasswordController = TextEditingController();
   final _newPasswordController = TextEditingController();
   final _cconfirmNewPasswordController = TextEditingController();
+  var _isLoading = false;
 
   @override
   void dispose() {
@@ -26,15 +29,26 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     _cconfirmNewPasswordController.dispose();
   }
 
-  void _changePasswordSubmit() {
+  Future<void> _changePasswordSubmit() async {
     final isValid = _changePasswordForm.currentState!.validate();
     if (isValid) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          backgroundColor: Theme.of(context).backgroundColor,
-          content: Text(
-            'Your Password has been changed',
-            style: Theme.of(context).textTheme.button,
-          )));
+      try {
+        setState(() {
+          _isLoading = true;
+        });
+        await Provider.of<Auth>(context).changePassword(
+            _currentPasswordController.text, _newPasswordController.text);
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Theme.of(context).backgroundColor,
+            content: Text(
+              'Your Password has been changed',
+              style: Theme.of(context).textTheme.button,
+            )));
+
+        setState(() {
+          _isLoading = true;
+        });
+      } catch (error) {}
     }
   }
 
@@ -112,7 +126,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 ),
                 addVerticalSpace(20),
                 buttonContainer(ElevatedButton(
-                    onPressed: () => _changePasswordSubmit(),
+                    onPressed: _changePasswordSubmit,
                     child: padButtonText(text: 'Change Password')))
               ],
             ),

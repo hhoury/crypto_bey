@@ -1,3 +1,6 @@
+import 'package:crypto_bey/providers/auth.dart';
+import 'package:provider/provider.dart';
+
 import '../screens/change_password_screen.dart';
 import '../screens/reset_password_screen.dart';
 import '../utils/helper_widgets.dart';
@@ -36,7 +39,11 @@ class PrivacyScreen extends StatelessWidget {
               )),
               addVerticalSpace(20),
               buttonContainer(ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pushReplacementNamed('/');
+                  Provider.of<Auth>(context, listen: false).logout();
+                },
                 child: padButtonText(text: 'Log Out'),
                 style: ElevatedButton.styleFrom(primary: Colors.red),
               ))
