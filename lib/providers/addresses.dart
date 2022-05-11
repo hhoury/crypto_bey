@@ -1,19 +1,37 @@
 import 'dart:math';
-
+import 'package:crypto_bey/constants/api_constants.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'package:flutter/material.dart';
 
 import '../models/address.dart';
 
 class Addresses with ChangeNotifier {
   final List<Address> _addresses = [];
-  final String refreshToken = '';
+  String refreshToken = '';
+  String userId = '';
+
+  Addresses(this.refreshToken, this.userId);
 
   List<Address> get addresses {
     return [..._addresses];
   }
 
-  void addAddress(Address address) {
+  Future<void> addAddress(Address address) async {
     //add address api
+    final url = Uri.parse('$ADDRESS_API/create');
+
+    try {
+      final res = await http.post(url,
+          body: json.encode({
+            "country": address.country,
+            "city": address.state,
+            "address": address.address,
+            "unit": address.unit
+          }));
+    } catch (e) {
+      rethrow;
+    }
     address.id = Random().nextInt(100);
     _addresses.add(address);
     notifyListeners();
