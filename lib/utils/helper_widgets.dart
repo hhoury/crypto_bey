@@ -41,11 +41,11 @@ Widget inputLabel(BuildContext context, String label) {
   return Text(label, style: Theme.of(context).textTheme.labelMedium);
 }
 
-void showErrorDialog(BuildContext ctx, String message) {
+void showErrorDialog(BuildContext ctx, String title, String message) {
   showDialog(
       context: ctx,
       builder: (ctx) => AlertDialog(
-            title: const Text('Something went wrong! '),
+            title: Text(title),
             content: Text(message),
             actions: [
               TextButton(

@@ -43,8 +43,12 @@ class Auth with ChangeNotifier {
           }));
       final responseData = json.decode(response.body);
 
-      if (responseData['error'] != null || !responseData["success"]) {
-        throw HttpException(responseData['error']['message']);
+      if (responseData["success"] != null && responseData["success"]) {
+        return;
+      }
+
+      if (responseData["detail"]["errorMessage"] != null) {
+        throw HttpException(responseData["detail"]["errorMessage"]);
       } else {
         //after registration success
         // _refreshToken = responseData['refresh_token'];
@@ -72,19 +76,16 @@ class Auth with ChangeNotifier {
             'password': password,
           }));
       final responseData = json.decode(response.body);
-      if (responseData['error'] != null) {
-        throw HttpException(responseData['error']['message']);
-      } else {
-        _refreshToken = responseData['refresh_token'];
-        _accessToken = responseData['access_token'];
-        notifyListeners();
-        var userBox = await Hive.openBox('userBox');
-        final userData = json.encode({
-          'accessToken': _accessToken,
-          'refreshToken': _refreshToken,
-        });
-        userBox.put('userData', userData);
-      }
+
+      _refreshToken = responseData['refresh_token'];
+      _accessToken = responseData['access_token'];
+      notifyListeners();
+      var userBox = await Hive.openBox('userBox');
+      final userData = json.encode({
+        'accessToken': _accessToken,
+        'refreshToken': _refreshToken,
+      });
+      userBox.put('userData', userData);
     } catch (error) {
       rethrow;
     }

@@ -45,6 +45,7 @@ dependencies:
       url: https://github.com/hhoury/country_state_city_picker
   hive: ^2.1.0
   hive_flutter: ^1.1.0
+  fluttertoast: ^8.0.9
 
 dev_dependencies:
   flutter_test:

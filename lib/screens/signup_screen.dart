@@ -40,20 +40,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _phoneNumberController.dispose();
   }
 
-  void _showErrorDialog(String message) {
-    showDialog(
-        context: context,
-        builder: (ctx) => AlertDialog(
-              title: const Text('Something went wrong! \n Try Again later'),
-              content: Text(message),
-              actions: [
-                TextButton(
-                    onPressed: () => Navigator.of(ctx).pop(),
-                    child: const Text('Okay!'))
-              ],
-            ));
-  }
-
   Future<void> _submitSignup() async {
     final isValid = _signupForm.currentState!.validate();
     if (!isValid) {
@@ -71,27 +57,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
           _passController.text,
         );
       } on HttpException catch (error) {
-        var errorMessage = 'Authentication Failed';
-        if (error.toString().contains('EXISTS')) {
-          errorMessage = 'email address already registered';
-        } else if (error.toString().contains('INVALID')) {
-          errorMessage = 'EMAIL ADDRESS IS INVALID';
-        } else if (error.toString().contains('WEAK')) {
-          errorMessage = 'PASSWORD IS TOO WEAK';
-        } else if (error.toString().contains('EMAIL_NOT_FOUND')) {
-          errorMessage = 'could not find user with that email';
-        }
-        _showErrorDialog(errorMessage);
+        showErrorDialog(context, 'Registration Failed', error.message);
+        setState(() {
+          _isLoading = false;
+        });
+        return;
       } catch (error) {
-        const errorMessage = 'Authentication Failed! Please try again later.';
-        _showErrorDialog(errorMessage);
+        showErrorDialog(
+            context, 'Registration Failed', 'Please try again later.');
+        setState(() {
+          _isLoading = false;
+        });
+        return;
       }
 
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         content: Text(
           'Please check the link sent to your email',
           style: Theme.of(context).textTheme.button,
+          textAlign: TextAlign.center,
         ),
       ));
       setState(() {

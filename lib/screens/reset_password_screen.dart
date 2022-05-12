@@ -2,7 +2,6 @@ import 'package:crypto_bey/providers/auth.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:provider/provider.dart';
 
-import '../models/http_exception.dart';
 import '../utils/helper_widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -47,21 +46,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         });
         await Provider.of<Auth>(context, listen: false)
             .resetPassword(_emailController.text);
-      } on HttpException catch (error) {
-        var errorMessage = 'Authentication Failed';
-        if (error.toString().contains('EXISTS')) {
-          errorMessage = 'email address already registered';
-        } else if (error.toString().contains('INVALID')) {
-          errorMessage = 'EMAIL ADDRESS IS INVALID';
-        } else if (error.toString().contains('WEAK')) {
-          errorMessage = 'PASSWORD IS TOO WEAK';
-        } else if (error.toString().contains('EMAIL_NOT_FOUND')) {
-          errorMessage = 'could not find user with that email';
-        }
-        _showErrorDialog(errorMessage);
       } catch (error) {
-        const errorMessage = 'Reset Failed! Please try again later.';
-        _showErrorDialog(errorMessage);
+        showErrorDialog(context, 'Reset Failed!', error.toString());
       }
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           backgroundColor: Theme.of(context).colorScheme.primary,
