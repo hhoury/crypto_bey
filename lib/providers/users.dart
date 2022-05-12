@@ -14,24 +14,18 @@ class Users with ChangeNotifier {
     return [..._users.where((element) => element.deleted == false)];
   }
 
-  Future<void> getUserProfile(String token) async {
+  void getUserProfile() async {
     var userBox = Hive.box('userBox');
     if (userBox.containsKey('userData')) {
-      final userData = userBox.get('userData');
+      final userData = json.decode(userBox.get('userData', defaultValue: ''));
       final url = Uri.parse('$USER_API/profile');
-      final response =
-          http.post(url, headers: json.decode(userData)['accessToken']);
+      final response = http.get(url, headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ${userData['accessToken']}',
+      });
+      print(response);
     }
-  }
-
-  void addUser(User user) {
-    //add order api
-    _users.add(user);
-    notifyListeners();
-  }
-
-  User findById(int id) {
-    return _users.firstWhere((user) => id == user.id);
   }
 
   void updateUser(int id, User updatedUser) {

@@ -1,8 +1,9 @@
 // ignore_for_file: use_key_in_widget_constructors
 // #region DART PACKAGES
+import 'package:crypto_bey/providers/users.dart';
+
 import './providers/auth.dart';
 import './providers/orders.dart';
-import './screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,7 +17,7 @@ import '../theme/theme_manager.dart';
 // #region  PROVIDERS
 import 'providers/addresses.dart';
 // #endregion
-
+import './screens/splash_screen.dart';
 import '../screens/tabs_screen.dart';
 
 // #region  ACCOUNT screens
@@ -38,10 +39,6 @@ import '../screens/new_order_screen.dart';
 import '../screens/order_details_screen.dart';
 import '../screens/order_history_screen.dart';
 import '../screens/payment_screen.dart';
-// #endregion
-
-// #region AUTHENTICATION PAGES
-
 // #endregion
 
 void main() async {
@@ -67,6 +64,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => Auth(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => Users(),
         ),
         ChangeNotifierProxyProvider<Auth, Addresses>(
             create: (_) => Addresses('', '', []),

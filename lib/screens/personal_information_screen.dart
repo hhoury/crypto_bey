@@ -1,6 +1,8 @@
+import '../providers/users.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 import '../utils/helper_widgets.dart';
 
@@ -16,17 +18,48 @@ class PersonalInformationScreen extends StatefulWidget {
 class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
   final _personalInfoForm = GlobalKey<FormState>();
 
-  final _nameController = TextEditingController();
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
   final _emailController = TextEditingController();
   final _phoneCodeController = TextEditingController();
   final _phoneNumberController = TextEditingController();
   @override
   void dispose() {
     super.dispose();
-    _nameController.dispose();
+    _firstNameController.dispose();
+    _lastNameController.dispose();
     _emailController.dispose();
     _phoneCodeController.dispose();
     _phoneNumberController.dispose();
+  }
+
+  final _profile = {
+    'first_name': '',
+    'last_name': '',
+    'phone_number': '',
+    'email': '',
+  };
+  final _initValues = {
+    'phone_number': '',
+    'first_name': '',
+    'last_name': '',
+    'email': '',
+  };
+  final _isInit = true;
+  @override
+  void didChangeDependencies() {
+    // super.didChangeDependencies();
+    // if (_isInit) {
+    //   Provider.of<Users>(context, listen: false).getUserProfile();
+    // }
+    // _isInit = false;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<Users>(context, listen: false).getUserProfile();
   }
 
   void _submitPersonalInfo() {
@@ -56,15 +89,29 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Full Name',
+                  Text('First Name',
                       style: Theme.of(context).textTheme.labelMedium),
                   addVerticalSpace(10),
                   TextFormField(
-                    controller: _nameController,
+                    controller: _firstNameController,
                     textInputAction: TextInputAction.next,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please Enter Your Full Name';
+                        return 'Please Enter Your First Name';
+                      }
+                      return null;
+                    },
+                  ),
+                  addVerticalSpace(20),
+                  Text('Last Name',
+                      style: Theme.of(context).textTheme.labelMedium),
+                  addVerticalSpace(10),
+                  TextFormField(
+                    controller: _lastNameController,
+                    textInputAction: TextInputAction.next,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please Enter Your Last Name';
                       }
                       return null;
                     },
@@ -105,7 +152,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                               ],
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return '';
+                                  return 'Please Enter Your Phone Number';
                                 }
                                 return null;
                               },
