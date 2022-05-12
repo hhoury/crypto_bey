@@ -79,6 +79,26 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
+  Widget _buildAuthButtons() {
+    return Column(
+      children: [
+        buttonContainer(ElevatedButton(
+          onPressed: _submitLogin,
+          child: padButtonText(text: 'LOGIN'),
+          style: Theme.of(context).elevatedButtonTheme.style,
+        )),
+        addVerticalSpace(10),
+        buttonContainer(ElevatedButton(
+          onPressed: () {
+            Navigator.of(context).pushReplacementNamed(SignUpScreen.routeName);
+          },
+          child: padButtonText(text: 'SIGN UP'),
+          style: Theme.of(context).elevatedButtonTheme.style,
+        )),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -156,20 +176,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: const Text('Forgot Password?')),
                   ),
                   addVerticalSpace(30),
-                  buttonContainer(ElevatedButton(
-                    onPressed: _submitLogin,
-                    child: padButtonText(text: 'LOGIN'),
-                    style: Theme.of(context).elevatedButtonTheme.style,
-                  )),
-                  addVerticalSpace(10),
-                  buttonContainer(ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context)
-                          .pushReplacementNamed(SignUpScreen.routeName);
-                    },
-                    child: padButtonText(text: 'SIGN UP'),
-                    style: Theme.of(context).elevatedButtonTheme.style,
-                  )),
+                  _isLoading
+                      ? const Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : _buildAuthButtons(),
                 ],
               ),
             ),

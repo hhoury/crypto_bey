@@ -46,7 +46,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             )));
 
         setState(() {
-          _isLoading = true;
+          _isLoading = false;
         });
       } catch (error) {}
     }
@@ -125,9 +125,13 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   },
                 ),
                 addVerticalSpace(20),
-                buttonContainer(ElevatedButton(
-                    onPressed: _changePasswordSubmit,
-                    child: padButtonText(text: 'Change Password')))
+                _isLoading
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : buttonContainer(ElevatedButton(
+                        onPressed: _changePasswordSubmit,
+                        child: padButtonText(text: 'Change Password')))
               ],
             ),
           ),

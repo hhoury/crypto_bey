@@ -97,7 +97,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
       setState(() {
         _isLoading = false;
       });
+      Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
     }
+  }
+
+  Widget _buildButtons() {
+    return Column(
+      children: [
+        buttonContainer(ElevatedButton(
+            onPressed: _submitSignup, child: padButtonText(text: 'SIGNUP'))),
+        addVerticalSpace(10),
+        buttonContainer(
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(primary: secondaryButtonColor),
+            onPressed: () {
+              Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+            },
+            child: padButtonText(text: 'I HAVE AN ACCOUNT'),
+          ),
+        ),
+      ],
+    );
   }
 
   @override
@@ -258,21 +278,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     },
                   ),
                   addVerticalSpace(30),
-                  buttonContainer(ElevatedButton(
-                      onPressed: _submitSignup,
-                      child: padButtonText(text: 'SIGNUP'))),
-                  addVerticalSpace(10),
-                  buttonContainer(
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: secondaryButtonColor),
-                      onPressed: () {
-                        Navigator.of(context)
-                            .pushReplacementNamed(LoginScreen.routeName);
-                      },
-                      child: padButtonText(text: 'I HAVE AN ACCOUNT'),
-                    ),
-                  ),
+                  _isLoading
+                      ? const Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : _buildButtons(),
                 ],
               ),
             ),
