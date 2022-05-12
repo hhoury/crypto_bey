@@ -1,4 +1,4 @@
-import 'package:crypto_bey/providers/auth.dart';
+import '../providers/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +18,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
   final _currentPasswordController = TextEditingController();
   final _newPasswordController = TextEditingController();
-  final _cconfirmNewPasswordController = TextEditingController();
+  final _confirmNewPasswordController = TextEditingController();
   var _isLoading = false;
 
   @override
@@ -26,29 +26,41 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     super.dispose();
     _currentPasswordController.dispose();
     _newPasswordController.dispose();
-    _cconfirmNewPasswordController.dispose();
+    _confirmNewPasswordController.dispose();
   }
 
   Future<void> _changePasswordSubmit() async {
+    if (_currentPasswordController.text == _newPasswordController.text) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: Theme.of(context).errorColor,
+          content: Text(
+            'Current and New Password can\'t be the same',
+            style: Theme.of(context).textTheme.button,
+            textAlign: TextAlign.center,
+          )));
+      return;
+    }
     final isValid = _changePasswordForm.currentState!.validate();
     if (isValid) {
       try {
         setState(() {
           _isLoading = true;
         });
-        await Provider.of<Auth>(context).changePassword(
+        await Provider.of<Auth>(context, listen: false).changePassword(
             _currentPasswordController.text, _newPasswordController.text);
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             backgroundColor: Theme.of(context).backgroundColor,
             content: Text(
               'Your Password has been changed',
               style: Theme.of(context).textTheme.button,
+              textAlign: TextAlign.center,
             )));
-
-        setState(() {
-          _isLoading = false;
-        });
-      } catch (error) {}
+      } catch (error) {
+        showErrorDialog(context, 'Something Went Wrong', error.toString());
+      }
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -107,7 +119,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 inputLabel(context, 'Confirm New Password'),
                 addVerticalSpace(10),
                 TextFormField(
-                  controller: _cconfirmNewPasswordController,
+                  controller: _confirmNewPasswordController,
                   textInputAction: TextInputAction.done,
                   obscureText: true,
                   enableSuggestions: false,

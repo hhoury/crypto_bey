@@ -76,16 +76,21 @@ class Auth with ChangeNotifier {
             'password': password,
           }));
       final responseData = json.decode(response.body);
+      if (response.statusCode >= 400) {
+        throw HttpException(
+            responseData["detail"]["error_description"].toString());
+      }
 
       _refreshToken = responseData['refresh_token'];
       _accessToken = responseData['access_token'];
-      notifyListeners();
+
       var userBox = await Hive.openBox('userBox');
       final userData = json.encode({
         'accessToken': _accessToken,
         'refreshToken': _refreshToken,
       });
       userBox.put('userData', userData);
+      notifyListeners();
     } catch (error) {
       rethrow;
     }
@@ -94,11 +99,25 @@ class Auth with ChangeNotifier {
   Future<void> changePassword(
       String currentPassword, String newPassword) async {
     final url = Uri.parse('$USER_API/update_password');
-    final response = http.put(url,
-        headers: API_HEADER,
-        body: json.encode(
-          {'current_password': currentPassword, 'new_password': newPassword},
-        ));
+    try {
+      //TODO CHANGE HARDCODED EMAIL
+      final response = await http.put(url,
+          headers: API_HEADER,
+          body: json.encode(
+            {
+              'email': 'test@test.com',
+              'current_password': currentPassword,
+              'new_password': newPassword
+            },
+          ));
+      final responseData = json.decode(response.body);
+      if (response.statusCode >= 400) {
+        throw HttpException(
+            responseData["detail"]["error_description"].toString());
+      }
+    } catch (error) {
+      rethrow;
+    }
   }
 
   Future<void> logout() async {
