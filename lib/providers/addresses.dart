@@ -1,4 +1,3 @@
-import 'dart:math';
 import '../constants/api_constants.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -33,8 +32,6 @@ class Addresses with ChangeNotifier {
     } catch (e) {
       rethrow;
     }
-    address.id = Random().nextInt(100);
-    _addresses.add(address);
     notifyListeners();
   }
 

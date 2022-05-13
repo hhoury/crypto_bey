@@ -55,6 +55,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               style: Theme.of(context).textTheme.button,
               textAlign: TextAlign.center,
             )));
+        Navigator.of(context).pop();
       } catch (error) {
         showErrorDialog(context, 'Something Went Wrong', error.toString());
       }
@@ -71,80 +72,82 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         title: const Text('Change Password'),
       ),
       body: SafeArea(
-        child: Container(
-          padding: const EdgeInsets.all(20),
-          child: Form(
-            key: _changePasswordForm,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                inputLabel(context, 'Current Password'),
-                addVerticalSpace(10),
-                TextFormField(
-                  controller: _currentPasswordController,
-                  textInputAction: TextInputAction.next,
-                  obscureText: true,
-                  enableSuggestions: false,
-                  autocorrect: false,
-                  validator: (value) {
-                    if (value == null ||
-                        value.isEmpty ||
-                        !validatePassword(value)) {
-                      return 'Please Enter a Valid Password';
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
-                addVerticalSpace(20),
-                inputLabel(context, 'New Password'),
-                addVerticalSpace(10),
-                TextFormField(
-                  controller: _newPasswordController,
-                  textInputAction: TextInputAction.next,
-                  obscureText: true,
-                  enableSuggestions: false,
-                  autocorrect: false,
-                  validator: (value) {
-                    if (value == null ||
-                        value.isEmpty ||
-                        !validatePassword(value)) {
-                      return 'Please Enter a Valid Password';
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
-                addVerticalSpace(20),
-                inputLabel(context, 'Confirm New Password'),
-                addVerticalSpace(10),
-                TextFormField(
-                  controller: _confirmNewPasswordController,
-                  textInputAction: TextInputAction.done,
-                  obscureText: true,
-                  enableSuggestions: false,
-                  autocorrect: false,
-                  validator: (value) {
-                    if (value == null ||
-                        value.isEmpty ||
-                        !validatePassword(value)) {
-                      return 'Please Enter a Valid Password';
-                    } else if (value != _newPasswordController.text) {
-                      return 'Confirm Password does not match Password';
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
-                addVerticalSpace(20),
-                _isLoading
-                    ? const Center(
-                        child: CircularProgressIndicator(),
-                      )
-                    : buttonContainer(ElevatedButton(
-                        onPressed: _changePasswordSubmit,
-                        child: padButtonText(text: 'Change Password')))
-              ],
+        child: SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            child: Form(
+              key: _changePasswordForm,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  inputLabel(context, 'Current Password'),
+                  addVerticalSpace(10),
+                  TextFormField(
+                    controller: _currentPasswordController,
+                    textInputAction: TextInputAction.next,
+                    obscureText: true,
+                    enableSuggestions: false,
+                    autocorrect: false,
+                    validator: (value) {
+                      if (value == null ||
+                          value.isEmpty ||
+                          !validatePassword(value)) {
+                        return 'Please Enter a Valid Password';
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
+                  addVerticalSpace(20),
+                  inputLabel(context, 'New Password'),
+                  addVerticalSpace(10),
+                  TextFormField(
+                    controller: _newPasswordController,
+                    textInputAction: TextInputAction.next,
+                    obscureText: true,
+                    enableSuggestions: false,
+                    autocorrect: false,
+                    validator: (value) {
+                      if (value == null ||
+                          value.isEmpty ||
+                          !validatePassword(value)) {
+                        return 'Please Enter a Valid Password';
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
+                  addVerticalSpace(20),
+                  inputLabel(context, 'Confirm New Password'),
+                  addVerticalSpace(10),
+                  TextFormField(
+                    controller: _confirmNewPasswordController,
+                    textInputAction: TextInputAction.done,
+                    obscureText: true,
+                    enableSuggestions: false,
+                    autocorrect: false,
+                    validator: (value) {
+                      if (value == null ||
+                          value.isEmpty ||
+                          !validatePassword(value)) {
+                        return 'Please Enter a Valid Password';
+                      } else if (value != _newPasswordController.text) {
+                        return 'Confirm Password does not match Password';
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
+                  addVerticalSpace(20),
+                  _isLoading
+                      ? const Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : buttonContainer(ElevatedButton(
+                          onPressed: _changePasswordSubmit,
+                          child: padButtonText(text: 'Change Password')))
+                ],
+              ),
             ),
           ),
         ),

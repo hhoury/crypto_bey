@@ -91,6 +91,7 @@ class Auth with ChangeNotifier {
       });
       userBox.put('userData', userData);
       notifyListeners();
+      tryAutoLogin();
     } catch (error) {
       rethrow;
     }
@@ -100,17 +101,20 @@ class Auth with ChangeNotifier {
       String currentPassword, String newPassword) async {
     final url = Uri.parse('$USER_API/update_password');
     try {
-      //TODO CHANGE HARDCODED EMAIL
       final response = await http.put(url,
-          headers: API_HEADER,
+          headers: {
+            'access-token': _accessToken,
+            'Content-type': 'application/json',
+            'Accept': 'application/json',
+          },
           body: json.encode(
-            {
-              'email': 'test@test.com',
-              'current_password': currentPassword,
-              'new_password': newPassword
-            },
+            {'current_password': currentPassword, 'new_password': newPassword},
           ));
+      if (response.statusCode < 400) {
+        return;
+      }
       final responseData = json.decode(response.body);
+      if (responseData.toString().isEmpty) return;
       if (response.statusCode >= 400) {
         throw HttpException(
             responseData["detail"]["error_description"].toString());
@@ -122,18 +126,27 @@ class Auth with ChangeNotifier {
 
   Future<void> logout() async {
     final url = Uri.parse('$USER_API/logout');
-    await http.post(url, headers: {'refresh-token': _refreshToken});
+    final res = await http.post(url, headers: {
+      'refresh-token': _refreshToken,
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+    });
     // final responseData = json.decode(response.body);
-    _refreshToken = '';
-    _accessToken = '';
+
     // if (_authTimer != null) {
     //   _authTimer!.cancel();
     //   _authTimer = null;
     // }
-    notifyListeners();
-    var userBox = await Hive.openBox('userBox');
-    userBox.delete('userData');
-    userBox.clear();
+    if (res.statusCode < 400) {
+      _refreshToken = '';
+      _accessToken = '';
+      var userBox = await Hive.openBox('userBox');
+      userBox.delete('userData');
+      userBox.clear();
+      notifyListeners();
+    } else {
+      throw HttpException('Logout Failed!');
+    }
   }
 
   Future<void> resetPassword(String email) async {
