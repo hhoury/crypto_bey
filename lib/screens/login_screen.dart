@@ -1,5 +1,6 @@
 // ignore_for_file: use_key_in_widget_constructors
 
+import 'package:crypto_bey/screens/tabs_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/auth.dart';
@@ -48,6 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
       setState(() {
         _isLoading = false;
       });
+      Navigator.of(context).pushReplacementNamed(TabsScreen.routeName);
     }
   }
 
