@@ -1,13 +1,17 @@
+import 'package:provider/provider.dart';
+
+import '../providers/addresses.dart';
 import '../widgets/address_card.dart';
 
 import '../models/address.dart';
 import 'package:flutter/material.dart';
 
 class AddressesList extends StatelessWidget {
-  final List<Address> addresses;
-  const AddressesList(this.addresses);
+  List<Address> addresses;
+  AddressesList(this.addresses);
   @override
   Widget build(BuildContext context) {
+    addresses = Provider.of<Addresses>(context).addresses;
     return ListView.builder(
       itemCount: addresses.length,
       itemBuilder: (ctx, index) => AddressCard(

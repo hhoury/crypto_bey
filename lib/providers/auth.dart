@@ -143,10 +143,13 @@ class Auth with ChangeNotifier {
       var userBox = await Hive.openBox('userBox');
       userBox.delete('userData');
       userBox.clear();
-      notifyListeners();
     } else {
-      throw HttpException('Logout Failed!');
+      var userBox = await Hive.openBox('userBox');
+      userBox.delete('userData');
+      userBox.clear();
+      // throw HttpException('Logout Failed!');
     }
+    notifyListeners();
   }
 
   Future<void> resetPassword(String email) async {
