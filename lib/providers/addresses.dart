@@ -117,13 +117,13 @@ class Addresses with ChangeNotifier {
   Future<Address> findById(int id) async {
     final url = Uri.parse('$ADDRESS_API/get/$id');
     var _userBox = Hive.openBox('userBox');
-    final _userData =
-        await json.decode(_userBox.get('userData', defaultValue: ''));
-    final res = http.post(url, headers: {
-      'Content-type': 'application/json',
-      'Accept': 'application/json',
-      'Authorization': 'Bearer ${_userData['accessToken']}',
-    });
+    // final _userData =
+    //     await json.decode(_userBox.get('userData', defaultValue: ''));
+    // final res = http.post(url, headers: {
+    //   'Content-type': 'application/json',
+    //   'Accept': 'application/json',
+    //   'Authorization': 'Bearer ${_userData['accessToken']}',
+    // });
     // var address = json.decode(res.body);
     return _addresses.firstWhere((address) => id == address.id);
   }

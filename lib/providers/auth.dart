@@ -14,18 +14,56 @@ class Auth with ChangeNotifier {
   Timer? _authTimer;
 
   bool get isAuth {
-    return token.isNotEmpty;
+    return refreshToken.isNotEmpty;
   }
 
-  String get token {
+  String get refreshToken {
     if (_refreshToken.isNotEmpty) {
       return _refreshToken;
     }
     return '';
   }
 
+  String get accessToken {
+    if (_accessToken.isNotEmpty) {
+      return _accessToken;
+    }
+    return '';
+  }
+
   String get userId {
     return _userId;
+  }
+
+  Future<void> refreshAccessToken() async {
+    try {
+      final url = Uri.parse('$USER_API/refresh_access_token');
+      var userBox = await Hive.openBox('userBox');
+      var userData = json.decode(userBox.get('userData', defaultValue: ''));
+      final response = await http.get(url, headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        'refresh-token': '${userData['refreshToken']}',
+      });
+      final responseData = json.decode(response.body);
+      if (response.statusCode >= 400) {
+        throw HttpException(
+            responseData["detail"]["error_description"].toString());
+      }
+
+      _refreshToken = responseData['refresh_token'];
+      _accessToken = responseData['access_token'];
+
+      userData = json.encode({
+        'accessToken': _accessToken,
+        'refreshToken': _refreshToken,
+      });
+      userBox.put('userData', userData);
+      notifyListeners();
+      print(response.body);
+    } catch (error) {
+      rethrow;
+    }
   }
 
   Future<void> signup(String fName, String lName, String phnNumber,
@@ -158,7 +196,6 @@ class Auth with ChangeNotifier {
 
   Future<bool> tryAutoLogin() async {
     var userBox = await Hive.openBox('userBox');
-    // await userBox.clear();
     if (!userBox.containsKey('userData')) {
       return false;
     } else {
@@ -172,6 +209,37 @@ class Auth with ChangeNotifier {
         return true;
       }
     }
+  }
+
+  Future<dynamic> getUserProfile() async {
+    var userBox = Hive.box('userBox');
+    if (userBox.containsKey('userData')) {
+      final userData = json.decode(userBox.get('userData', defaultValue: ''));
+      final url = Uri.parse('$USER_API/profile');
+      var access = userData['accessToken'];
+      final response = await http.get(url, headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        'access-token': '$access',
+      });
+      if (response.statusCode < 300) {
+        return json.decode(response.body);
+      }
+      if (response.statusCode == 401) {
+        final responseData = json.decode(response.body);
+        if (responseData["detail"]["error_description"].toString() ==
+            'Token verification failed') {
+          await refreshAccessToken();
+          await getUserProfile();
+        }
+        return responseData;
+      }
+
+      ///return profile
+      else {}
+      print(response);
+    }
+    return null;
   }
 
 //set a timer to execute code when time expired

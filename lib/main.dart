@@ -17,7 +17,7 @@ import '../theme/theme_manager.dart';
 // #region  PROVIDERS
 import 'providers/addresses.dart';
 // #endregion
-import './screens/splash_screen.dart';
+import '../screens/splash_screen.dart';
 import '../screens/tabs_screen.dart';
 
 // #region  ACCOUNT screens
@@ -71,14 +71,16 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProxyProvider<Auth, Addresses>(
             create: (_) => Addresses('', '', []),
             update: (ctx, auth, prevAddresses) => Addresses(
-                auth.token,
+                auth.refreshToken,
                 auth.userId,
                 prevAddresses?.addresses == null
                     ? []
                     : prevAddresses!.addresses)),
         ChangeNotifierProxyProvider<Auth, Orders>(
           create: (context) => Orders('', '', []),
-          update: (ctx, auth, prevOrders) => Orders(auth.token, auth.userId,
+          update: (ctx, auth, prevOrders) => Orders(
+              auth.refreshToken,
+              auth.userId,
               prevOrders?.orders == null ? [] : prevOrders!.orders),
         )
       ],

@@ -49,8 +49,8 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
       if (addressId == null || addressId == 0) {
         return;
       } else {
-        _editedAddress =
-            Provider.of<Addresses>(context, listen: false).findById(addressId);
+        // _editedAddress =
+        //     Provider.of<Addresses>(context, listen: false).findById(addressId);
         _initValues = {
           'country': _editedAddress.country,
           'state': _editedAddress.state,

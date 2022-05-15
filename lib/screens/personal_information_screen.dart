@@ -1,4 +1,5 @@
-import '../providers/users.dart';
+import 'package:crypto_bey/providers/auth.dart';
+
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,6 +24,8 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
   final _emailController = TextEditingController();
   final _phoneCodeController = TextEditingController();
   final _phoneNumberController = TextEditingController();
+
+  dynamic _prof;
   @override
   void dispose() {
     super.dispose();
@@ -50,7 +53,9 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
   void didChangeDependencies() {
     // super.didChangeDependencies();
     // if (_isInit) {
-    //   Provider.of<Users>(context, listen: false).getUserProfile();
+    //   setState(() {
+
+    //   });
     // }
     // _isInit = false;
   }
@@ -59,13 +64,19 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Provider.of<Users>(context, listen: false).getUserProfile();
+
+    () async {
+      setState(() {
+        _prof = Provider.of<Auth>(context, listen: false).getUserProfile();
+      });
+    };
   }
 
   void _submitPersonalInfo() {
     final isValid = _personalInfoForm.currentState!.validate();
     if (isValid) {
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
+
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           backgroundColor: Theme.of(context).primaryColor,
           content: Text(
