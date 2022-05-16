@@ -35,7 +35,7 @@ class Auth with ChangeNotifier {
     return _userId;
   }
 
-  Future<void> refreshAccessToken() async {
+  refreshAccessToken() async {
     try {
       final url = Uri.parse('$USER_API/refresh_access_token');
       var userBox = await Hive.openBox('userBox');
@@ -223,7 +223,8 @@ class Auth with ChangeNotifier {
         'access-token': '$access',
       });
       if (response.statusCode < 300) {
-        return json.decode(response.body);
+        final resData = json.decode(response.body);
+        return resData;
       }
       if (response.statusCode == 401) {
         final responseData = json.decode(response.body);
