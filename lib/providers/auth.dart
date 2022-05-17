@@ -166,7 +166,6 @@ class Auth with ChangeNotifier {
       final response = await api.api.putUri(url,
           options: Options(headers: API_HEADER),
           data: {'request_password_reset': true, 'email': email});
-      print(response);
     } on DioError catch (error) {
       throw HttpException(error.response?.data['detail']['error_description']);
     } catch (error) {
@@ -236,7 +235,6 @@ class Auth with ChangeNotifier {
             'country_code': countryCode,
             'phone_number': phoneNumber
           });
-      print(response);
     } on DioError catch (error) {
       throw HttpException(error.response?.data['detail']['error_description']);
     } catch (error) {

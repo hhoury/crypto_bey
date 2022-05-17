@@ -8,17 +8,12 @@ class AddressCard extends StatelessWidget {
   final int id;
   final String country;
   final String state;
-  // final String city;
+  final String city;
   final String name;
-  final String address;
-  const AddressCard(
-      Key key,
-      this.id,
-      this.country,
-      this.state,
-      //  this.city,
-      this.name,
-      this.address)
+  final String addressLine1;
+  final String addressLine2;
+  const AddressCard(Key key, this.id, this.country, this.state, this.city,
+      this.name, this.addressLine1, this.addressLine2)
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -35,7 +30,7 @@ class AddressCard extends StatelessWidget {
               style: Theme.of(context).textTheme.headline3,
             ),
             addVerticalSpace(5),
-            Text(address, style: Theme.of(context).textTheme.subtitle1),
+            Text(addressLine1, style: Theme.of(context).textTheme.subtitle1),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [

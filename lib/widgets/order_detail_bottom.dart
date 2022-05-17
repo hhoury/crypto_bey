@@ -100,7 +100,7 @@ class OrderDetailBottom extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyText1),
               addHorizontalSpace(10),
               Text(
-                orderAddress.address,
+                orderAddress.addressLine1,
                 style: Theme.of(context).textTheme.labelMedium,
               )
             ],

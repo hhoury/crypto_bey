@@ -37,7 +37,6 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
   @override
   void initState() {
     super.initState();
-    print('init state');
     setState(() {
       _addresses = Provider.of<Addresses>(context, listen: false).addresses;
     });
@@ -118,7 +117,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                                   ),
                                   addVerticalSpace(3),
                                   Text(
-                                    address.address,
+                                    address.addressLine1,
                                     style:
                                         Theme.of(context).textTheme.subtitle1,
                                     overflow: TextOverflow.ellipsis,

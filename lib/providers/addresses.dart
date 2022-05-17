@@ -12,7 +12,9 @@ class Addresses with ChangeNotifier {
   String refreshToken = '';
   String userId = '';
   final api = Api();
-  Addresses(this.refreshToken, this.userId, this._addresses);
+  Addresses(this.refreshToken, this.userId, this._addresses) {
+    getAddresses();
+  }
 
   List<Address> get addresses {
     return [..._addresses];
@@ -22,15 +24,13 @@ class Addresses with ChangeNotifier {
     try {
       final url = Uri.parse('$ADDRESS_API/get');
       final tokens = await api.getTokens();
-
-      final res = await Api().api.getUri(
-            url,
-            options: Options(headers: {
-              'Content-type': 'application/json',
-              'Accept': 'application/json',
-              'Authorization': 'Bearer ${tokens['accessToken']}',
-            }),
-          );
+      final res = await api.api.getUri(
+        url,
+        options: Options(headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ${tokens['accessToken']}',
+        }, contentType: 'application/json'),
+      );
       final extractedAddresses = res.data as Map<int, dynamic>;
       if (extractedAddresses == null) return;
       final List<Address> loadedAddress = [];
@@ -38,19 +38,21 @@ class Addresses with ChangeNotifier {
         loadedAddress.add(Address(
           id: addressId,
           country: addressData['country'],
+          state: addressData['state'],
+          city: addressData['city'],
           name: addressData['name'],
-          address: addressData['address'],
-          unit: addressData['unit'],
+          addressLine1: addressData['line1'],
+          addressLine2: addressData['line2'],
         ));
       });
+    } on DioError catch (error) {
+      throw HttpException(error.response?.data['detail']['error_description']);
     } catch (error) {
       throw HttpException('Something went wrong!');
     }
   }
 
   Future<void> addAddress(Address address) async {
-    //add address api
-
     try {
       final url = Uri.parse('$ADDRESS_API/create');
       final tokens = await api.getTokens();
@@ -62,14 +64,17 @@ class Addresses with ChangeNotifier {
             'Authorization': 'Bearer ${tokens['accessToken']}',
           }),
           data: json.encode({
-            "country": address.country,
-            "city": address.state,
-            "address": address.address,
-            "unit": address.unit
+            'country': address.country,
+            'state': address.state,
+            'city': address.city,
+            'line1': address.addressLine1,
+            'line2': address.addressLine2
           }));
       if (res.data.statusCode >= 400) {
         throw Error();
       }
+    } on DioError catch (error) {
+      throw HttpException(error.response?.data);
     } catch (e) {
       rethrow;
     }
@@ -88,10 +93,11 @@ class Addresses with ChangeNotifier {
             'Authorization': 'Bearer ${tokens['accessToken']}',
           }),
           data: json.encode({
-            "country": newAddress.country,
-            "city": newAddress.state,
-            "address": newAddress.address,
-            "unit": newAddress.unit
+            'country': newAddress.country,
+            'state': newAddress.state,
+            'city': newAddress.city,
+            'line1': newAddress.addressLine1,
+            'line2': newAddress.addressLine2
           }));
     } catch (error) {
       rethrow;
@@ -122,7 +128,6 @@ class Addresses with ChangeNotifier {
           'Accept': 'application/json',
           'Authorization': 'Bearer ${tokens['accessToken']}',
         }));
-    print(res);
     notifyListeners();
   }
 }

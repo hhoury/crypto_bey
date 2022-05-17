@@ -17,28 +17,25 @@ class EditAddressScreen extends StatefulWidget {
 class _EditAddressScreenState extends State<EditAddressScreen> {
   String _countryValue = '';
   String _stateValue = '';
-  // final String _cityValue = '';
   final _editAddressForm = GlobalKey<FormState>();
-  // final _addressController = TextEditingController();
-  // final _unitController = TextEditingController();
 
   var _editedAddress = Address(
     id: 0,
     country: '',
     state: '',
-    // city: '',
+    city: '',
     name: '',
-    address: '',
-    unit: '',
+    addressLine1: '',
+    addressLine2: '',
   );
 
   var _initValues = {
     'country': '',
     'state': '',
-    // 'city': '',
+    'city': '',
     'name': '',
-    'address': '',
-    'unit': ''
+    'addressLine1': '',
+    'addressLine2': ''
   };
 
   var _isInit = true;
@@ -55,14 +52,13 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
         _initValues = {
           'country': _editedAddress.country,
           'state': _editedAddress.state,
-          // 'city': _editedAddress.city,
-          'address': _editedAddress.address,
+          'city': _editedAddress.city,
+          'addressLine1': _editedAddress.addressLine1,
+          'addressLine2': _editedAddress.addressLine2,
           'name': _editedAddress.name,
-          'unit': _editedAddress.unit
         };
         _countryValue = _editedAddress.country;
         _stateValue = _editedAddress.state;
-        // _cityValue = _editedAddress.city;
       }
     }
     _isInit = false;
@@ -71,11 +67,9 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
   @override
   void dispose() {
     super.dispose();
-    // _addressController.dispose();
-    // _unitController.dispose();
   }
 
-  void _submitAddressForm() {
+  Future<void> _submitAddressForm() async {
     final bool countryValid = !_countryValue.toLowerCase().contains('choose') &&
         _countryValue.isNotEmpty;
 
@@ -84,12 +78,11 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
     if (isValid) {
       _editedAddress.country = _countryValue;
       _editedAddress.state = _stateValue;
-      // _editedAddress.city = _cityValue;
       _editAddressForm.currentState!.save();
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       // EDIT ADDRESS
       if (_editedAddress.id != 0) {
-        Provider.of<Addresses>(context, listen: false)
+        await Provider.of<Addresses>(context, listen: false)
             .updateAddress(_editedAddress.id, _editedAddress);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -160,15 +153,15 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                         id: _editedAddress.id,
                         country: _editedAddress.country,
                         state: _editedAddress.state,
-                        // city: _editedAddress.city,
+                        city: _editedAddress.city,
                         name: value!,
-                        address: _editedAddress.address,
-                        unit: _editedAddress.unit,
+                        addressLine1: _editedAddress.addressLine1,
+                        addressLine2: _editedAddress.addressLine2,
                       );
                     },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter your name';
+                        return 'Please enter your receiver name';
                       } else {
                         return null;
                       }
@@ -190,13 +183,36 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                         _stateValue = value;
                       });
                     },
-                    // onCityChanged: (value) {
-                    //   setState(() {
-                    //     _cityValue = value;
-                    //   });
-                    // },
                     selectedCountry: _countryValue,
                     selectedState: _stateValue,
+                  ),
+                  addVerticalSpace(20),
+                  inputLabel(context, 'City'),
+                  addVerticalSpace(10),
+                  TextFormField(
+                    textInputAction: TextInputAction.next,
+                    initialValue: _initValues['city'],
+                    onSaved: (value) {
+                      _editedAddress = Address(
+                        id: _editedAddress.id,
+                        country: _editedAddress.country,
+                        state: _editedAddress.state,
+                        city: value!,
+                        name: _editedAddress.name,
+                        addressLine1: _editedAddress.addressLine1,
+                        addressLine2: _editedAddress.addressLine2,
+                      );
+                    },
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter City';
+                      } else {
+                        return null;
+                      }
+                    },
+                    onFieldSubmitted: (_) {
+                      _submitAddressForm();
+                    },
                   ),
                   addVerticalSpace(20),
                   inputLabel(context, 'Address'),
@@ -218,39 +234,31 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                         id: _editedAddress.id,
                         country: _editedAddress.country,
                         state: _editedAddress.state,
-                        // city: _editedAddress.city,
+                        city: _editedAddress.city,
                         name: _editedAddress.name,
-                        address: value!,
-                        unit: _editedAddress.unit,
+                        addressLine1: value!,
+                        addressLine2: _editedAddress.addressLine2,
                       );
                     },
                     initialValue: _initValues['address'],
                   ),
                   addVerticalSpace(20),
-                  inputLabel(context, 'Unit'),
+                  inputLabel(context, 'Address Details'),
                   addVerticalSpace(10),
                   TextFormField(
-                    // controller: _unitController,
                     textInputAction: TextInputAction.done,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your unit';
-                      } else {
-                        return null;
-                      }
-                    },
                     onSaved: (value) {
                       _editedAddress = Address(
                         id: _editedAddress.id,
                         country: _editedAddress.country,
                         state: _editedAddress.state,
-                        // city: _editedAddress.city,
+                        city: _editedAddress.city,
                         name: _editedAddress.name,
-                        address: _editedAddress.address,
-                        unit: value!,
+                        addressLine1: _editedAddress.addressLine1,
+                        addressLine2: value ?? '',
                       );
                     },
-                    initialValue: _initValues['unit'],
+                    initialValue: _initValues['addressLine2'],
                   ),
                   addVerticalSpace(20),
                   buttonContainer(

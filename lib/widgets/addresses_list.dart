@@ -15,13 +15,15 @@ class AddressesList extends StatelessWidget {
     return ListView.builder(
       itemCount: addresses.length,
       itemBuilder: (ctx, index) => AddressCard(
-          ValueKey(addresses[index].id),
-          addresses[index].id,
-          addresses[index].country,
-          addresses[index].state,
-          // addresses[index].city,
-          addresses[index].name,
-          addresses[index].address),
+        ValueKey(addresses[index].id),
+        addresses[index].id,
+        addresses[index].country,
+        addresses[index].state,
+        addresses[index].city,
+        addresses[index].name,
+        addresses[index].addressLine1,
+        addresses[index].addressLine2,
+      ),
     );
   }
 }

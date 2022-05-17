@@ -110,9 +110,11 @@ class Orders with ChangeNotifier {
     return Address(
         id: 1,
         country: 'USA',
+        state: 'Texas',
+        city: 'Arizona',
         name: 'Hassan',
-        address: 'First Street',
-        unit: 'B1');
+        addressLine1: 'First Street',
+        addressLine2: 'B1');
   }
 
   bool cancelOrder(int orderId) {

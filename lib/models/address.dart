@@ -3,19 +3,17 @@ class Address {
   String name;
   String country;
   String state;
-  // String city;
-  String address;
-  String unit;
-  bool deleted;
+  String city;
+  String addressLine1;
+  String addressLine2;
 
   Address({
     required this.id,
     required this.country,
     this.state = '',
-    // this.city = '',
+    this.city = '',
     required this.name,
-    required this.address,
-    required this.unit,
-    this.deleted = false,
+    required this.addressLine1,
+    this.addressLine2 = '',
   });
 }
