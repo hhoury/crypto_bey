@@ -1,3 +1,5 @@
+import 'package:crypto_bey/theme/theme_constants.dart';
+
 import '../utils/helper_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,7 +29,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       prefs.setBool('textNotification', _textNotification);
       prefs.setBool('emailNotification', _emailNotification);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          backgroundColor: Theme.of(context).colorScheme.primary,
+          backgroundColor: purpleColor,
           duration: const Duration(seconds: 1),
           content: Text(
             'Your Notifications settings has been saved',

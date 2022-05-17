@@ -1,4 +1,5 @@
 import 'package:country_state_city_picker/country_state_city_picker.dart';
+import 'package:crypto_bey/theme/theme_constants.dart';
 import '../models/address.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -93,7 +94,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             duration: const Duration(milliseconds: 700),
-            backgroundColor: Theme.of(context).colorScheme.primary,
+            backgroundColor: purpleColor,
             content: Text(
               'Your Address has been edited',
               style: Theme.of(context).textTheme.button,
@@ -108,7 +109,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             duration: const Duration(milliseconds: 700),
-            backgroundColor: Theme.of(context).colorScheme.primary,
+            backgroundColor: purpleColor,
             content: Text(
               'Your Address has been added',
               style: Theme.of(context).textTheme.button,

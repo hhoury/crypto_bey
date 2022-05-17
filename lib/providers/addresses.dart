@@ -1,11 +1,9 @@
+import 'package:crypto_bey/core/services/api.dart';
 import 'package:crypto_bey/models/http_exception.dart';
-import 'package:hive/hive.dart';
-
+import 'package:dio/dio.dart';
 import '../constants/api_constants.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/material.dart';
-
 import '../models/address.dart';
 
 class Addresses with ChangeNotifier {
@@ -13,7 +11,7 @@ class Addresses with ChangeNotifier {
   List<Address> _addresses = [];
   String refreshToken = '';
   String userId = '';
-
+  final api = Api();
   Addresses(this.refreshToken, this.userId, this._addresses);
 
   List<Address> get addresses {
@@ -23,21 +21,17 @@ class Addresses with ChangeNotifier {
   Future<void> getAddresses() async {
     try {
       final url = Uri.parse('$ADDRESS_API/get');
-      var _userBox = await Hive.openBox('userBox');
-      final _userData = json.decode(_userBox.get('userData', defaultValue: ''));
+      final tokens = await api.getTokens();
 
-      if (_userData.toString().isEmpty) {
-        throw HttpException('Something went wrong');
-      }
-      if (_userData['accessToken'].toString().isEmpty) {
-        throw HttpException('Something went wrong');
-      }
-      final res = await http.get(url, headers: {
-        'Content-type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': 'Bearer ${_userData['accessToken']}',
-      });
-      final extractedAddresses = json.decode(res.body) as Map<int, dynamic>;
+      final res = await Api().api.getUri(
+            url,
+            options: Options(headers: {
+              'Content-type': 'application/json',
+              'Accept': 'application/json',
+              'Authorization': 'Bearer ${tokens['accessToken']}',
+            }),
+          );
+      final extractedAddresses = res.data as Map<int, dynamic>;
       if (extractedAddresses == null) return;
       final List<Address> loadedAddress = [];
       extractedAddresses.forEach((addressId, addressData) {
@@ -59,29 +53,21 @@ class Addresses with ChangeNotifier {
 
     try {
       final url = Uri.parse('$ADDRESS_API/create');
-      var _userBox = await Hive.openBox('userBox');
-      final _userData = json.decode(_userBox.get('userData', defaultValue: ''));
+      final tokens = await api.getTokens();
 
-      if (_userData.toString().isEmpty) {
-        throw HttpException('Something went wrong');
-      }
-      if (_userData['accessToken'].toString().isEmpty) {
-        throw HttpException('Something went wrong');
-      }
-      final res = await http.post(url,
-          headers: {
+      final res = await api.api.postUri(url,
+          options: Options(headers: {
             'Content-type': 'application/json',
             'Accept': 'application/json',
-            'Authorization': 'Bearer ${_userData['accessToken']}',
-          },
-          body: json.encode({
+            'Authorization': 'Bearer ${tokens['accessToken']}',
+          }),
+          data: json.encode({
             "country": address.country,
             "city": address.state,
             "address": address.address,
             "unit": address.unit
           }));
-      print(res.body);
-      if (res.statusCode >= 400) {
+      if (res.data.statusCode >= 400) {
         throw Error();
       }
     } catch (e) {
@@ -93,21 +79,20 @@ class Addresses with ChangeNotifier {
   Future<void> updateAddress(int id, Address newAddress) async {
     try {
       final url = Uri.parse('$ADDRESS_API/update/$id');
-      var _userBox = await Hive.openBox('userBox');
-      final _userData = json.decode(_userBox.get('userData', defaultValue: ''));
-      final res = await http.post(url,
-          headers: {
+      final tokens = await api.getTokens();
+
+      final res = await api.api.postUri(url,
+          options: Options(headers: {
             'Content-type': 'application/json',
             'Accept': 'application/json',
-            'Authorization': 'Bearer ${_userData['accessToken']}',
-          },
-          body: json.encode({
+            'Authorization': 'Bearer ${tokens['accessToken']}',
+          }),
+          data: json.encode({
             "country": newAddress.country,
             "city": newAddress.state,
             "address": newAddress.address,
             "unit": newAddress.unit
           }));
-      print(res.body);
     } catch (error) {
       rethrow;
     }
@@ -116,7 +101,7 @@ class Addresses with ChangeNotifier {
 
   Future<Address> findById(int id) async {
     final url = Uri.parse('$ADDRESS_API/get/$id');
-    var _userBox = Hive.openBox('userBox');
+    final tokens = await api.getTokens();
     // final _userData =
     //     await json.decode(_userBox.get('userData', defaultValue: ''));
     // final res = http.post(url, headers: {
@@ -130,13 +115,14 @@ class Addresses with ChangeNotifier {
 
   void deleteAddress(int id) async {
     final url = Uri.parse('$ADDRESS_API/delete/$id');
-    var _userBox = await Hive.openBox('userBox');
-    final _userData = json.decode(_userBox.get('userData', defaultValue: ''));
-    final res = http.delete(url, headers: {
-      'Content-type': 'application/json',
-      'Accept': 'application/json',
-      'Authorization': 'Bearer ${_userData['accessToken']}',
-    });
+    final tokens = await api.getTokens();
+    final res = await api.api.deleteUri(url,
+        options: Options(headers: {
+          'Content-type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ${tokens['accessToken']}',
+        }));
+    print(res);
     notifyListeners();
   }
 }

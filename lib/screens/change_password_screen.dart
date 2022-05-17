@@ -1,3 +1,6 @@
+import 'package:crypto_bey/theme/theme_constants.dart';
+import 'package:dio/dio.dart';
+
 import '../providers/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -49,13 +52,16 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         await Provider.of<Auth>(context, listen: false).changePassword(
             _currentPasswordController.text, _newPasswordController.text);
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            backgroundColor: Theme.of(context).backgroundColor,
+            backgroundColor: purpleColor,
             content: Text(
               'Your Password has been changed',
               style: Theme.of(context).textTheme.button,
               textAlign: TextAlign.center,
             )));
         Navigator.of(context).pop();
+      } on DioError catch (error) {
+        showErrorDialog(context, 'Something Went Wrong',
+            error.response?.data['detail']['error_description']);
       } catch (error) {
         showErrorDialog(context, 'Something Went Wrong', error.toString());
       }

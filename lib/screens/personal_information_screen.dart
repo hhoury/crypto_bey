@@ -1,4 +1,7 @@
+import 'package:crypto_bey/models/http_exception.dart';
 import 'package:crypto_bey/providers/auth.dart';
+import 'package:crypto_bey/theme/theme_constants.dart';
+import 'package:dio/dio.dart';
 
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
@@ -58,25 +61,38 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
   void loadData() async {
     _prof = await Provider.of<Auth>(context, listen: false).getUserProfile();
     setState(() {
-      _phoneNumberController.text = _prof['phone_number'] ?? '';
+      _phoneNumberController.text = _prof['phone_number'].toString();
+      _phoneCodeController.text = _prof['country_code'].toString();
       _firstNameController.text = _prof['given_name'] ?? '';
       _lastNameController.text = _prof['family_name'] ?? '';
       _emailController.text = _prof['email'] ?? '';
     });
   }
 
-  void _submitPersonalInfo() {
+  Future<void> _submitPersonalInfo() async {
     final isValid = _personalInfoForm.currentState!.validate();
     if (isValid) {
-      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      try {
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+        await Provider.of<Auth>(context, listen: false).updateUserProfile(
+            _firstNameController.text,
+            _lastNameController.text,
+            _phoneCodeController.text,
+            _phoneNumberController.text);
 
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          backgroundColor: Theme.of(context).primaryColor,
-          content: Text(
-            'Your Information has been Updated',
-            style: Theme.of(context).textTheme.button,
-          )));
-      Navigator.of(context).pop();
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: purpleColor,
+            content: Text(
+              'Your Information has been Updated',
+              style: Theme.of(context).textTheme.button,
+            )));
+        Navigator.of(context).pop();
+      } on DioError catch (error) {
+        throw HttpException(
+            error.response?.data['detail']['error_description']);
+      } catch (error) {
+        rethrow;
+      }
     }
   }
 

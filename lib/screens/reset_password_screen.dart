@@ -1,4 +1,5 @@
 import 'package:crypto_bey/providers/auth.dart';
+import 'package:crypto_bey/theme/theme_constants.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:provider/provider.dart';
 
@@ -49,8 +50,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       } catch (error) {
         showErrorDialog(context, 'Reset Failed!', error.toString());
       }
+      Navigator.of(context).pop();
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          backgroundColor: Theme.of(context).colorScheme.primary,
+          backgroundColor: purpleColor,
           content: Text(
             'Please Check Email Sent to ${_emailController.text}',
             style: Theme.of(context).textTheme.button,

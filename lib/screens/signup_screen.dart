@@ -52,7 +52,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
         await Provider.of<Auth>(context, listen: false).signup(
           _firstNameController.text,
           _lastNameController.text,
-          _phoneCodeController.text + _phoneNumberController.text,
+          _phoneCodeController.text,
+          _phoneNumberController.text,
           _emailController.text,
           _passController.text,
         );
@@ -72,7 +73,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       }
 
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: purpleColor,
         content: Text(
           'Please check the link sent to your email',
           style: Theme.of(context).textTheme.button,
