@@ -1,4 +1,4 @@
-import 'package:crypto_bey/theme/theme_constants.dart';
+import '../theme/theme_constants.dart';
 
 import '../utils/helper_widgets.dart';
 import 'package:flutter/material.dart';

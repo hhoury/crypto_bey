@@ -1,7 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors
 
-import 'package:crypto_bey/screens/edit_address_screen.dart';
-import 'package:crypto_bey/theme/theme_constants.dart';
+import '../screens/edit_address_screen.dart';
+import '../theme/theme_constants.dart';
 
 import '../constants/app_constants.dart';
 import '../models/address.dart';

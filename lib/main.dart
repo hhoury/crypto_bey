@@ -1,6 +1,6 @@
 // ignore_for_file: use_key_in_widget_constructors
 // #region DART PACKAGES
-import 'package:crypto_bey/providers/users.dart';
+import '../providers/users.dart';
 
 import './providers/auth.dart';
 import './providers/orders.dart';

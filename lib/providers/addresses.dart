@@ -1,5 +1,5 @@
-import 'package:crypto_bey/core/services/api.dart';
-import 'package:crypto_bey/models/http_exception.dart';
+import '../core/services/api.dart';
+import '../models/http_exception.dart';
 import 'package:dio/dio.dart';
 import '../constants/api_constants.dart';
 import 'dart:convert';

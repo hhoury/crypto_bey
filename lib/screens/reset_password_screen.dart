@@ -1,5 +1,5 @@
-import 'package:crypto_bey/providers/auth.dart';
-import 'package:crypto_bey/theme/theme_constants.dart';
+import '../providers/auth.dart';
+import '../theme/theme_constants.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:provider/provider.dart';
 

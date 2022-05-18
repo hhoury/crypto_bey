@@ -1,5 +1,5 @@
-import 'package:crypto_bey/constants/api_constants.dart';
-import 'package:crypto_bey/models/http_exception.dart';
+import '../../constants/api_constants.dart';
+import '../../models/http_exception.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';

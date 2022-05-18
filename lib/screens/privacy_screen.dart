@@ -1,4 +1,4 @@
-import 'package:crypto_bey/providers/auth.dart';
+import '../providers/auth.dart';
 import 'package:provider/provider.dart';
 
 import '../screens/change_password_screen.dart';

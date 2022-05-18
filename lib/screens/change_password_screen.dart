@@ -1,4 +1,4 @@
-import 'package:crypto_bey/theme/theme_constants.dart';
+import '../theme/theme_constants.dart';
 import 'package:dio/dio.dart';
 
 import '../providers/auth.dart';

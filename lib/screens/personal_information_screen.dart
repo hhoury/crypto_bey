@@ -1,6 +1,6 @@
-import 'package:crypto_bey/models/http_exception.dart';
-import 'package:crypto_bey/providers/auth.dart';
-import 'package:crypto_bey/theme/theme_constants.dart';
+import '../models/http_exception.dart';
+import '../providers/auth.dart';
+import '../theme/theme_constants.dart';
 import 'package:dio/dio.dart';
 
 import 'package:email_validator/email_validator.dart';
