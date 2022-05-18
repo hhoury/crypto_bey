@@ -88,6 +88,8 @@ class Auth with ChangeNotifier {
       if (responseData["detail"]["errorMessage"] != null) {
         throw HttpException(responseData["detail"]["errorMessage"]);
       }
+    } on DioError catch (error) {
+      throw HttpException(error.response?.data['detail']['error_description']);
     } catch (error) {
       rethrow;
     }
