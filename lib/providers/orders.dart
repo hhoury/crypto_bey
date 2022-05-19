@@ -108,7 +108,7 @@ class Orders with ChangeNotifier {
   Address getAddressOfOrder(int orderId) {
     //TODO get address of order here
     return Address(
-        id: 1,
+        id: '1',
         country: 'USA',
         state: 'Texas',
         city: 'Arizona',

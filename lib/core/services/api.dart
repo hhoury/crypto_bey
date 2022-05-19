@@ -61,7 +61,6 @@ class Api with ChangeNotifier {
         url,
         options: Options(
           headers: {
-            'Content-type': 'application/json',
             'Accept': 'application/json',
             'refresh-token': refreshToken,
           },
@@ -69,9 +68,12 @@ class Api with ChangeNotifier {
         ),
       );
 
-      if (response.statusCode == 201) {
+      if (response.statusCode == 201 ||
+          response.statusCode == 200 ||
+          response.statusCode == 202) {
         // successfully got the new access token
-        accessToken = response.data;
+        accessToken = response.data['access_token'] ?? '';
+        refreshToken = response.data['refresh_token'] ?? '';
         await saveTokens(accessToken, refreshToken);
       } else {
         // refresh token is wrong so log out user.

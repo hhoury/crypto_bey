@@ -21,7 +21,18 @@ class ManageAddressesScreen extends StatelessWidget {
           margin: const EdgeInsets.all(10),
           child: Column(
             children: [
-              Expanded(child: AddressesList(addressesData.addresses)),
+              Consumer<Addresses>(
+                builder: (context, addresses, _) {
+                  return Expanded(
+                      child: FutureBuilder(
+                          future: addresses.getAddresses(),
+                          builder: (ctx, snapshot) => snapshot
+                                      .connectionState ==
+                                  ConnectionState.waiting
+                              ? const Center(child: CircularProgressIndicator())
+                              : AddressesList(addressesData.addresses)));
+                },
+              ),
               const Divider(
                 height: 1,
               ),

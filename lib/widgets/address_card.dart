@@ -1,3 +1,5 @@
+import 'package:crypto_bey/models/address.dart';
+
 import '../providers/addresses.dart';
 import '../screens/edit_address_screen.dart';
 import '../utils/helper_widgets.dart';
@@ -5,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class AddressCard extends StatelessWidget {
-  final int id;
+  final String id;
   final String country;
   final String state;
   final String city;
@@ -38,7 +40,24 @@ class AddressCard extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).pushNamed(
                           EditAddressScreen.routeName,
-                          arguments: id);
+                          arguments: Address(
+                              id: id,
+                              name: name,
+                              country: country,
+                              state: state,
+                              city: city,
+                              addressLine1: addressLine1,
+                              addressLine2: addressLine2));
+                      //     {
+                      //   'key': id,
+                      //   'id': id,
+                      //   'name': name,
+                      //   'country': country,
+                      //   'state': state,
+                      //   'city': city,
+                      //   'addressLine1': addressLine1,
+                      //   'addressLine2': addressLine2
+                      // });
                     },
                     child: const Text('Edit')),
                 TextButton(
