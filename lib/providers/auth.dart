@@ -38,36 +38,6 @@ class Auth with ChangeNotifier {
     return _userId;
   }
 
-  // Future<void> refreshAccessToken() async {
-  //   try {
-  //     final url = Uri.parse('$USER_API/refresh_access_token');
-  //     var userBox = await Hive.openBox('userBox');
-  //     var userData = json.decode(userBox.get('userData', defaultValue: ''));
-  //     final response = await http.get(url, headers: {
-  //       'Content-type': 'application/json',
-  //       'Accept': 'application/json',
-  //       'refresh-token': '${userData['refreshToken']}',
-  //     });
-  //     final responseData = json.decode(response.body);
-  //     if (response.statusCode >= 400) {
-  //       throw HttpException(
-  //           responseData["detail"]["error_description"].toString());
-  //     }
-
-  //     _refreshToken = responseData['refresh_token'];
-  //     _accessToken = responseData['access_token'];
-
-  //     userData = json.encode({
-  //       'accessToken': _accessToken,
-  //       'refreshToken': _refreshToken,
-  //     });
-  //     userBox.put('userData', userData);
-  //     notifyListeners();
-  //   } catch (error) {
-  //     rethrow;
-  //   }
-  // }
-
   Future<void> signup(String fName, String lName, String countryCode,
       String phnNumber, String email, String password) async {
     try {
@@ -193,7 +163,7 @@ class Auth with ChangeNotifier {
   Future<dynamic> getUserProfile() async {
     try {
       var tokens = await api.getTokens();
-      _refreshToken = tokens['refreshToken'] ?? '';
+      // _refreshToken = tokens['refreshToken'] ?? '';
       _accessToken = tokens['accessToken'] ?? '';
       final url = Uri.parse('$USER_API/profile');
       final res = await api.api.getUri(url,

@@ -45,20 +45,18 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
   @override
   void initState() {
     super.initState();
-    setState(() {
-      _isLoading = true;
-    });
+
     loadData();
-    setState(() {
-      _isLoading = false;
-    });
   }
 
   final Widget _loader = const Center(
     child: CircularProgressIndicator(),
   );
 
-  void loadData() async {
+  Future<void> loadData() async {
+    setState(() {
+      _isLoading = true;
+    });
     _prof = await Provider.of<Auth>(context, listen: false).getUserProfile();
     setState(() {
       _phoneNumberController.text = _prof['phone_number'].toString();
@@ -67,12 +65,18 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
       _lastNameController.text = _prof['family_name'] ?? '';
       _emailController.text = _prof['email'] ?? '';
     });
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   Future<void> _submitPersonalInfo() async {
     final isValid = _personalInfoForm.currentState!.validate();
     if (isValid) {
       try {
+        setState(() {
+          _isLoading = true;
+        });
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
         await Provider.of<Auth>(context, listen: false).updateUserProfile(
             _firstNameController.text,
@@ -86,6 +90,9 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
               'Your Information has been Updated',
               style: Theme.of(context).textTheme.button,
             )));
+        setState(() {
+          _isLoading = false;
+        });
         Navigator.of(context).pop();
       } on DioError catch (error) {
         throw HttpException(
