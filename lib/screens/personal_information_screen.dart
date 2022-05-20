@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import '../models/http_exception.dart';
 import '../providers/auth.dart';
 import '../theme/theme_constants.dart';

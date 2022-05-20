@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import '../theme/theme_constants.dart';
 import 'package:dio/dio.dart';
 

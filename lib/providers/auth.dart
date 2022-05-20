@@ -11,7 +11,7 @@ class Auth with ChangeNotifier {
   String _refreshToken = '';
   String _accessToken = '';
   final String _userId = '';
-  Timer? _authTimer;
+  // Timer? _authTimer;
   final api = Api();
 
   final _storage = const FlutterSecureStorage();
@@ -97,7 +97,7 @@ class Auth with ChangeNotifier {
     try {
       var tokens = await api.getTokens();
       _accessToken = tokens['accessToken'] ?? '';
-      final response = await api.api.putUri(url,
+      await api.api.putUri(url,
           options: Options(headers: {
             'Content-type': 'application/json',
             'Accept': 'application/json',
@@ -115,7 +115,7 @@ class Auth with ChangeNotifier {
 
   Future<void> logout() async {
     final url = Uri.parse('$USER_API/logout');
-    final res = await api.api.postUri(url,
+    await api.api.postUri(url,
         options: Options(headers: {
           'refresh-token': _refreshToken,
           'Content-type': 'application/json',
@@ -135,7 +135,7 @@ class Auth with ChangeNotifier {
   Future<void> resetPassword(String email) async {
     try {
       final url = Uri.parse('$USER_API/reset_password');
-      final response = await api.api.putUri(url,
+      await api.api.putUri(url,
           options: Options(headers: API_HEADER),
           data: {'request_password_reset': true, 'email': email});
     } on DioError catch (error) {
@@ -192,7 +192,7 @@ class Auth with ChangeNotifier {
     try {
       final tokens = await api.getTokens();
       final url = Uri.parse('$USER_API/update_info');
-      final response = await api.api.putUri(url,
+      await api.api.putUri(url,
           options: Options(
             headers: {
               'Content-type': 'application/json',
@@ -217,8 +217,8 @@ class Auth with ChangeNotifier {
   Future<void> resendVerificationEmail(String email) async {
     try {
       final url = Uri.parse('$USER_API/resend-verification-email');
-      final response =
-          api.api.putUri(url, options: Options(headers: API_HEADER));
+
+      api.api.putUri(url, options: Options(headers: API_HEADER));
     } on DioError catch (error) {
       throw HttpException(error.response?.data['detail']['error_description']);
     } catch (error) {

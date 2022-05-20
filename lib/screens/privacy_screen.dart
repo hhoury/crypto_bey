@@ -25,8 +25,8 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
           onPressed: () {
             Navigator.of(context).pushNamed(ChangePasswordScreen.routeName);
           },
-          child: padButtonText(text: 'Change Password'),
           style: Theme.of(context).elevatedButtonTheme.style,
+          child: padButtonText(text: 'Change Password'),
         )),
         addVerticalSpace(20),
         buttonContainer(ElevatedButton(
@@ -47,8 +47,8 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
             });
             Navigator.of(context).pushReplacementNamed('/');
           },
-          child: padButtonText(text: 'Log Out'),
           style: ElevatedButton.styleFrom(primary: Colors.red),
+          child: padButtonText(text: 'Log Out'),
         ))
       ],
     );

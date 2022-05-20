@@ -27,7 +27,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
   };
   String _selectedRetailer = 'Amazon';
   Address? _selectedAddress;
-  // final List<Address> _addresses = [];
+  List<Address> _addresses = [];
   final _isInit = true;
   @override
   void didChangeDependencies() {
@@ -44,22 +44,6 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
   void initState() {
     super.initState();
     _loadData();
-    loadData();
-    setState(() {
-      // _addresses = Provider.of<Addresses>(context, listen: false).addresses;
-    });
-  }
-
-  var _isLoading = false;
-  Future<void> _loadData() async {
-    setState(() {
-      _isLoading = true;
-    });
-    // _addresses = Provider.of<Addresses>(context, listen: false).addresses;
-
-    setState(() {
-      _isLoading = false;
-    });
   }
 
   final _newOrderForm = GlobalKey<FormState>();
@@ -73,22 +57,23 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
     _noteController.dispose();
   }
 
-  loadData() async {
-    await Provider.of<Addresses>(context, listen: false).getAddresses();
+  _loadData() async {
+    _addresses =
+        await Provider.of<Addresses>(context, listen: false).getAddresses();
   }
 
   @override
   Widget build(BuildContext context) {
     final addressesData = Provider.of<Addresses>(context, listen: false);
 
-    final _addresses = addressesData.addresses;
-    if (_addresses.isNotEmpty) {
+    final addresses = addressesData.addresses;
+    if (addresses.isNotEmpty) {
       setState(() {
-        _selectedAddress = _addresses[0];
+        _selectedAddress = addresses[0];
       });
     }
     Widget _buildAddressDropDown() {
-      return _addresses.isNotEmpty
+      return addresses.isNotEmpty
           ? Container(
               padding: const EdgeInsets.all(10),
               constraints: const BoxConstraints(minHeight: 60),
@@ -100,7 +85,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                   isExpanded: true,
                   value: _selectedAddress,
                   dropdownColor: Theme.of(context).colorScheme.surface,
-                  items: _addresses
+                  items: addresses
                       .map<DropdownMenuItem<Address>>((Address address) {
                     return DropdownMenuItem<Address>(
                       value: address,
@@ -132,7 +117,6 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
             )
           : Center(
               child: OutlinedButton(
-                child: const Text('Add New Address'),
                 style: OutlinedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                         side: const BorderSide(
@@ -144,6 +128,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                 onPressed: () {
                   Navigator.of(context).pushNamed(EditAddressScreen.routeName);
                 },
+                child: const Text('Add New Address'),
               ),
             );
     }

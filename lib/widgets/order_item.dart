@@ -5,10 +5,10 @@ import '../constants/app_constants.dart';
 import 'package:flutter/material.dart';
 
 class OrderItem extends StatelessWidget {
-  int orderId;
-  DateTime date;
-  Retailer retailer;
-  OrderStatus status;
+  final int orderId;
+  final DateTime date;
+  final Retailer retailer;
+  final OrderStatus status;
 
   String get orderStatus {
     switch (status) {
@@ -52,7 +52,7 @@ class OrderItem extends StatelessWidget {
     }
   }
 
-  OrderItem(this.orderId, this.date, this.retailer, this.status);
+  const OrderItem(this.orderId, this.date, this.retailer, this.status);
 
   @override
   Widget build(BuildContext context) {

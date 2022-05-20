@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:country_state_city_picker/country_state_city_picker.dart';
 import '../theme/theme_constants.dart';
 import '../models/address.dart';
@@ -10,14 +12,14 @@ import '../utils/helper_widgets.dart';
 class EditAddressScreen extends StatefulWidget {
   static const routeName = '/add-address';
   // Address? address;
-  String? id;
-  String? name;
-  String? country;
-  String? state;
-  String? city;
-  String? line1;
-  String? line2;
-  EditAddressScreen(
+  final String? id;
+  final String? name;
+  final String? country;
+  final String? state;
+  final String? city;
+  final String? line1;
+  final String? line2;
+  const EditAddressScreen(
       [this.id,
       this.name,
       this.country,
@@ -61,23 +63,23 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (_isInit) {
-      final _editedAddress =
+      final editedAddress =
           ModalRoute.of(context)?.settings.arguments as Address?;
       //!['id'] as String?;
-      if (_editedAddress == null) {
+      if (editedAddress == null) {
         return;
       } else {
         // _editedAddress = widget.address!;
         _initValues = {
-          'country': _editedAddress.country,
-          'state': _editedAddress.state,
-          'city': _editedAddress.city,
-          'addressLine1': _editedAddress.addressLine1,
-          'addressLine2': _editedAddress.addressLine2,
-          'name': _editedAddress.name,
+          'country': editedAddress.country,
+          'state': editedAddress.state,
+          'city': editedAddress.city,
+          'addressLine1': editedAddress.addressLine1,
+          'addressLine2': editedAddress.addressLine2,
+          'name': editedAddress.name,
         };
-        _countryValue = _editedAddress.country;
-        _stateValue = _editedAddress.state;
+        _countryValue = editedAddress.country;
+        _stateValue = editedAddress.state;
       }
     }
     _isInit = false;

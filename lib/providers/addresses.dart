@@ -24,7 +24,7 @@ class Addresses with ChangeNotifier {
     return [..._addresses];
   }
 
-  Future<void> getAddresses() async {
+  Future<dynamic> getAddresses() async {
     try {
       final url = Uri.parse('$ADDRESS_API/get');
       final tokens = await api.getTokens();
@@ -50,6 +50,7 @@ class Addresses with ChangeNotifier {
         ));
       }
       _addresses = loadedAddress;
+      return _addresses;
     } on DioError catch (error) {
       throw HttpException(error.response?.data['detail']['error_description']);
     } catch (error) {
@@ -62,7 +63,7 @@ class Addresses with ChangeNotifier {
       final url = Uri.parse('$ADDRESS_API/create');
       final tokens = await api.getTokens();
 
-      final res = await api.api.postUri(url,
+      await api.api.postUri(url,
           options: Options(headers: {
             'Content-type': 'application/json',
             'Accept': 'application/json',
@@ -89,7 +90,7 @@ class Addresses with ChangeNotifier {
       final url = Uri.parse('$ADDRESS_API/update/$id');
       final tokens = await api.getTokens();
 
-      final res = await api.api.postUri(url,
+      await api.api.postUri(url,
           options: Options(headers: {
             'Content-type': 'application/json',
             'Accept': 'application/json',
@@ -111,19 +112,19 @@ class Addresses with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<Address> findById(String id) async {
-    final url = Uri.parse('$ADDRESS_API/get/$id');
-    final tokens = await api.getTokens();
-    // final _userData =
-    //     await json.decode(_userBox.get('userData', defaultValue: ''));
-    // final res = http.post(url, headers: {
-    //   'Content-type': 'application/json',
-    //   'Accept': 'application/json',
-    //   'Authorization': 'Bearer ${_userData['accessToken']}',
-    // });
-    // var address = json.decode(res.body);
-    return _addresses.firstWhere((address) => id == address.id);
-  }
+  // Future<Address> findById(String id) async {
+  //   final url = Uri.parse('$ADDRESS_API/get/$id');
+  //   final tokens = await api.getTokens();
+  //   // final _userData =
+  //   //     await json.decode(_userBox.get('userData', defaultValue: ''));
+  //   // final res = http.post(url, headers: {
+  //   //   'Content-type': 'application/json',
+  //   //   'Accept': 'application/json',
+  //   //   'Authorization': 'Bearer ${_userData['accessToken']}',
+  //   // });
+  //   // var address = json.decode(res.body);
+  //   return _addresses.firstWhere((address) => id == address.id);
+  // }
 
   void deleteAddress(String id) async {
     try {
@@ -132,7 +133,7 @@ class Addresses with ChangeNotifier {
       _addresses.removeWhere(
         (element) => element.id == id,
       );
-      final res = await api.api.deleteUri(url,
+      await api.api.deleteUri(url,
           options: Options(headers: {
             'Content-type': 'application/json',
             'Accept': 'application/json',

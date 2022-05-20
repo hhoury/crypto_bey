@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import '../theme/theme_constants.dart';
 
 import '../utils/helper_widgets.dart';
@@ -17,7 +19,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   bool _textNotification = false;
   bool _emailNotification = false;
 
-  Future<void> _saveNotifications(Map<String, bool> _notifications) async {
+  Future<void> _saveNotifications(Map<String, bool> notifications) async {
     // SAVE NOTIFICATIONS TO LOCAL STORAGE
     final prefs = await SharedPreferences.getInstance();
     if (prefs.getBool('appNotification') == _appNotification &&
