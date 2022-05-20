@@ -27,28 +27,38 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
   };
   String _selectedRetailer = 'Amazon';
   Address? _selectedAddress;
-  List<Address> _addresses = [];
-  var _isInit = true;
+  // final List<Address> _addresses = [];
+  final _isInit = true;
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _selectedRetailer = 'Amazon';
-    if (_isInit) {
-      Future.delayed(
-          Duration.zero,
-          (() =>
-              Provider.of<Addresses>(context, listen: false).getAddresses()));
-    }
-    Provider.of<Addresses>(context, listen: false).getAddresses();
-    _isInit = false;
+    // if (_isInit) {
+    //   _addresses = Provider.of<Addresses>(context).addresses;
+    // }
+    // if (_addresses.isNotEmpty) _selectedAddress = _addresses[0];
+    // _isInit = false;
   }
 
   @override
   void initState() {
     super.initState();
+    _loadData();
+    loadData();
+    setState(() {
+      // _addresses = Provider.of<Addresses>(context, listen: false).addresses;
+    });
+  }
+
+  var _isLoading = false;
+  Future<void> _loadData() async {
+    setState(() {
+      _isLoading = true;
+    });
+    // _addresses = Provider.of<Addresses>(context, listen: false).addresses;
 
     setState(() {
-      _addresses = Provider.of<Addresses>(context, listen: false).addresses;
+      _isLoading = false;
     });
   }
 
@@ -63,8 +73,81 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
     _noteController.dispose();
   }
 
+  loadData() async {
+    await Provider.of<Addresses>(context, listen: false).getAddresses();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final addressesData = Provider.of<Addresses>(context, listen: false);
+
+    final _addresses = addressesData.addresses;
+    if (_addresses.isNotEmpty) {
+      setState(() {
+        _selectedAddress = _addresses[0];
+      });
+    }
+    Widget _buildAddressDropDown() {
+      return _addresses.isNotEmpty
+          ? Container(
+              padding: const EdgeInsets.all(10),
+              constraints: const BoxConstraints(minHeight: 60),
+              decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surface,
+                  borderRadius: BorderRadius.circular(15)),
+              child: DropdownButton<Address>(
+                  underline: DropdownButtonHideUnderline(child: Container()),
+                  isExpanded: true,
+                  value: _selectedAddress,
+                  dropdownColor: Theme.of(context).colorScheme.surface,
+                  items: _addresses
+                      .map<DropdownMenuItem<Address>>((Address address) {
+                    return DropdownMenuItem<Address>(
+                      value: address,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              address.name,
+                              style: Theme.of(context).textTheme.headline3,
+                            ),
+                            addVerticalSpace(3),
+                            Text(
+                              address.addressLine1,
+                              style: Theme.of(context).textTheme.subtitle1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            addVerticalSpace(6),
+                          ],
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedAddress = value;
+                    });
+                  }),
+            )
+          : Center(
+              child: OutlinedButton(
+                child: const Text('Add New Address'),
+                style: OutlinedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        side: const BorderSide(
+                          color: greyTextColor,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(10)),
+                    primary: Theme.of(context).colorScheme.primary),
+                onPressed: () {
+                  Navigator.of(context).pushNamed(EditAddressScreen.routeName);
+                },
+              ),
+            );
+    }
+
     Widget _buildStep1() {
       return SingleChildScrollView(
         child: Column(
@@ -121,94 +204,20 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
             addVerticalSpace(10),
             inputLabel(context, 'Shipping Address'),
             addVerticalSpace(10),
-            Provider.of<Addresses>(context, listen: false).addresses.isNotEmpty
-                ? Container(
-                    padding: const EdgeInsets.all(10),
-                    constraints: const BoxConstraints(minHeight: 60),
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.surface,
-                        borderRadius: BorderRadius.circular(15)),
-                    child: DropdownButton<Address>(
-                        underline:
-                            DropdownButtonHideUnderline(child: Container()),
-                        isExpanded: true,
-                        value: _selectedAddress,
-                        dropdownColor: Theme.of(context).colorScheme.surface,
-                        items: Provider.of<Addresses>(context, listen: false)
-                            .addresses
-                            .map<DropdownMenuItem<Address>>((Address address) {
-                          return DropdownMenuItem<Address>(
-                            value: address,
-                            child: SingleChildScrollView(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    address.name,
-                                    style:
-                                        Theme.of(context).textTheme.headline3,
-                                  ),
-                                  addVerticalSpace(3),
-                                  Text(
-                                    address.addressLine1,
-                                    style:
-                                        Theme.of(context).textTheme.subtitle1,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  addVerticalSpace(6),
-                                ],
-                              ),
-                            ),
-                          );
-                        }).toList(),
-                        onChanged: (value) {
-                          setState(() {
-                            _selectedAddress = value;
-                          });
-                        }),
-                  )
-                : Center(
-                    child: OutlinedButton(
-                      child: const Text('Add New Address'),
-                      style: OutlinedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              side: const BorderSide(
-                                color: greyTextColor,
-                                width: 1,
-                              ),
-                              borderRadius: BorderRadius.circular(10)),
-                          primary: Theme.of(context).colorScheme.primary),
-                      onPressed: () {
-                        Navigator.of(context)
-                            .pushNamed(EditAddressScreen.routeName);
-                      },
-                    ),
-                  ),
+            _buildAddressDropDown(),
             addVerticalSpace(20),
-            buttonContainer(ElevatedButton(
+            buttonContainer(
+              ElevatedButton(
                 onPressed: () {
                   // Navigator.of(context).pushNamed(routeName)
                 },
-                child: padButtonText(text: 'Next')))
+                child: padButtonText(text: 'Next'),
+              ),
+            )
           ],
         ),
       );
     }
-
-    // Widget _buildUploadedScreenshot() {
-    //   return Container(
-    //     padding: const EdgeInsets.all(15),
-    //     child: Column(
-    //       children: const [
-    //         Text('Uploaded Screenshot'),
-    //         SizedBox(
-    //           height: 10,
-    //         ),
-    //         //    Image.network(imageUrl)
-    //       ],
-    //     ),
-    //   );
-    // }
 
     return Scaffold(
       appBar: AppBar(

@@ -46,14 +46,14 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
   void initState() {
     super.initState();
 
-    loadData();
+    _loadData();
   }
 
   final Widget _loader = const Center(
     child: CircularProgressIndicator(),
   );
 
-  Future<void> loadData() async {
+  Future<void> _loadData() async {
     setState(() {
       _isLoading = true;
     });
