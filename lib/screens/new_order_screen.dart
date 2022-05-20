@@ -28,18 +28,39 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
   String _selectedRetailer = 'Amazon';
   Address? _selectedAddress;
   List<Address> _addresses = [];
+  var _isInit = true;
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _selectedRetailer = 'Amazon';
+    if (_isInit) {
+      Future.delayed(
+          Duration.zero,
+          (() =>
+              Provider.of<Addresses>(context, listen: false).getAddresses()));
+    }
+    Provider.of<Addresses>(context, listen: false).getAddresses();
+    _isInit = false;
   }
 
   @override
   void initState() {
     super.initState();
+
     setState(() {
       _addresses = Provider.of<Addresses>(context, listen: false).addresses;
     });
+  }
+
+  final _newOrderForm = GlobalKey<FormState>();
+  final _orderLinkController = TextEditingController(text: '');
+  final _noteController = TextEditingController(text: '');
+
+  @override
+  void dispose() {
+    super.dispose();
+    _orderLinkController.dispose();
+    _noteController.dispose();
   }
 
   @override
@@ -78,11 +99,23 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
             addVerticalSpace(20),
             inputLabel(context, 'Order Link'),
             addVerticalSpace(10),
-            const TextField(),
+            TextFormField(
+              controller: _orderLinkController,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Order Link can\'t be empty';
+                }
+                return null;
+              },
+              textInputAction: TextInputAction.next,
+              keyboardType: TextInputType.url,
+            ),
             addVerticalSpace(20),
             inputLabel(context, 'Note'),
             addVerticalSpace(10),
-            const TextField(),
+            TextFormField(
+              controller: _noteController,
+            ),
             addVerticalSpace(10),
             const Divider(),
             addVerticalSpace(10),

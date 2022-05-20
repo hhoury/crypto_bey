@@ -1,4 +1,4 @@
-import 'package:crypto_bey/models/address.dart';
+import '../models/address.dart';
 
 import '../providers/addresses.dart';
 import '../screens/edit_address_screen.dart';
