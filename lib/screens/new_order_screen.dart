@@ -1,8 +1,5 @@
 // ignore_for_file: use_key_in_widget_constructors
 
-import '../screens/edit_address_screen.dart';
-import '../theme/theme_constants.dart';
-
 import '../constants/app_constants.dart';
 import '../models/address.dart';
 import '../providers/addresses.dart';
@@ -28,22 +25,26 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
   String _selectedRetailer = 'Amazon';
   Address? _selectedAddress;
   List<Address> _addresses = [];
-  final _isInit = true;
+  var _isInit = true;
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _selectedRetailer = 'Amazon';
-    // if (_isInit) {
-    //   _addresses = Provider.of<Addresses>(context).addresses;
-    // }
-    // if (_addresses.isNotEmpty) _selectedAddress = _addresses[0];
-    // _isInit = false;
+    if (_isInit) {
+      _loadData();
+      if (_addresses.isNotEmpty) {
+        setState(() {
+          _selectedAddress = _addresses[0];
+        });
+      }
+    }
+
+    _isInit = false;
   }
 
   @override
   void initState() {
     super.initState();
-    _loadData();
   }
 
   final _newOrderForm = GlobalKey<FormState>();
@@ -58,79 +59,84 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
   }
 
   _loadData() async {
-    _addresses =
-        await Provider.of<Addresses>(context, listen: false).getAddresses();
+    _addresses = await Provider.of<Addresses>(context).getAddresses();
   }
 
   @override
   Widget build(BuildContext context) {
-    final addressesData = Provider.of<Addresses>(context, listen: false);
-
-    final addresses = addressesData.addresses;
-    if (addresses.isNotEmpty) {
-      setState(() {
-        _selectedAddress = addresses[0];
-      });
-    }
     Widget _buildAddressDropDown() {
-      return addresses.isNotEmpty
-          ? Container(
-              padding: const EdgeInsets.all(10),
-              constraints: const BoxConstraints(minHeight: 60),
-              decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surface,
-                  borderRadius: BorderRadius.circular(15)),
-              child: DropdownButton<Address>(
-                  underline: DropdownButtonHideUnderline(child: Container()),
-                  isExpanded: true,
-                  value: _selectedAddress,
-                  dropdownColor: Theme.of(context).colorScheme.surface,
-                  items: addresses
-                      .map<DropdownMenuItem<Address>>((Address address) {
-                    return DropdownMenuItem<Address>(
-                      value: address,
-                      child: SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              address.name,
-                              style: Theme.of(context).textTheme.headline3,
-                            ),
-                            addVerticalSpace(3),
-                            Text(
-                              address.addressLine1,
-                              style: Theme.of(context).textTheme.subtitle1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            addVerticalSpace(6),
-                          ],
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedAddress = value;
-                    });
-                  }),
-            )
-          : Center(
-              child: OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        side: const BorderSide(
-                          color: greyTextColor,
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.circular(10)),
-                    primary: Theme.of(context).colorScheme.primary),
-                onPressed: () {
-                  Navigator.of(context).pushNamed(EditAddressScreen.routeName);
-                },
-                child: const Text('Add New Address'),
-              ),
-            );
+      return Consumer<Addresses>(
+        builder: (context, addresses, _) {
+          return FutureBuilder(
+              future: addresses.getAddresses(),
+              builder: (ctx, snapshot) => snapshot.connectionState ==
+                      ConnectionState.waiting
+                  ? const Center(child: CircularProgressIndicator())
+                  : Container(
+                      padding: const EdgeInsets.all(10),
+                      constraints: const BoxConstraints(minHeight: 60),
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.surface,
+                          borderRadius: BorderRadius.circular(15)),
+                      child: DropdownButton<Address>(
+                          underline:
+                              DropdownButtonHideUnderline(child: Container()),
+                          isExpanded: true,
+                          value: _selectedAddress,
+                          dropdownColor: Theme.of(context).colorScheme.surface,
+                          items: _addresses.map<DropdownMenuItem<Address>>(
+                              (Address address) {
+                            return DropdownMenuItem<Address>(
+                              value: address,
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      address.name,
+                                      style:
+                                          Theme.of(context).textTheme.headline3,
+                                    ),
+                                    addVerticalSpace(3),
+                                    Text(
+                                      address.addressLine1,
+                                      style:
+                                          Theme.of(context).textTheme.subtitle1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    addVerticalSpace(6),
+                                  ],
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedAddress = value;
+                            });
+                          }),
+                    ));
+        },
+      );
+
+      //  _addresses.isNotEmpty
+      //     ?
+      //     : Center(
+      //         child: OutlinedButton(
+      //           style: OutlinedButton.styleFrom(
+      //               shape: RoundedRectangleBorder(
+      //                   side: const BorderSide(
+      //                     color: greyTextColor,
+      //                     width: 1,
+      //                   ),
+      //                   borderRadius: BorderRadius.circular(10)),
+      //               primary: Theme.of(context).colorScheme.primary),
+      //           onPressed: () {
+      //             Navigator.of(context).pushNamed(EditAddressScreen.routeName);
+      //           },
+      //           child: const Text('Add New Address'),
+      //         ),
+      //       );
     }
 
     Widget _buildStep1() {
