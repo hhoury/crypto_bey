@@ -74,7 +74,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                   ? const Center(child: CircularProgressIndicator())
                   : Container(
                       padding: const EdgeInsets.all(10),
-                      constraints: const BoxConstraints(minHeight: 60),
+                      constraints: const BoxConstraints(minHeight: 80),
                       decoration: BoxDecoration(
                           color: Theme.of(context).colorScheme.surface,
                           borderRadius: BorderRadius.circular(15)),
@@ -97,7 +97,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                                       style:
                                           Theme.of(context).textTheme.headline3,
                                     ),
-                                    addVerticalSpace(3),
+                                    addVerticalSpace(5),
                                     Text(
                                       address.addressLine1,
                                       style:
@@ -118,25 +118,6 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                     ));
         },
       );
-
-      //  _addresses.isNotEmpty
-      //     ?
-      //     : Center(
-      //         child: OutlinedButton(
-      //           style: OutlinedButton.styleFrom(
-      //               shape: RoundedRectangleBorder(
-      //                   side: const BorderSide(
-      //                     color: greyTextColor,
-      //                     width: 1,
-      //                   ),
-      //                   borderRadius: BorderRadius.circular(10)),
-      //               primary: Theme.of(context).colorScheme.primary),
-      //           onPressed: () {
-      //             Navigator.of(context).pushNamed(EditAddressScreen.routeName);
-      //           },
-      //           child: const Text('Add New Address'),
-      //         ),
-      //       );
     }
 
     Widget _buildStep1() {
