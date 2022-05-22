@@ -1,5 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors
 // #region DART PACKAGES
+import '../screens/confirm_order_screen.dart';
+
 import '../providers/users.dart';
 
 import './providers/auth.dart';
@@ -111,6 +113,7 @@ class MyApp extends StatelessWidget {
               NewOrderScreen.routeName: (context) => NewOrderScreen(),
               NotificationsScreen.routeName: (context) => NotificationsScreen(),
               OrderDetailsScreen.routeName: (context) => OrderDetailsScreen(),
+              ConfirmOrderScreen.routeName: (context) => ConfirmOrderScreen(),
               OrderHistoryScreen.routeName: (context) => OrderHistoryScreen(),
               PaymentScreen.routeName: (context) => PaymentScreen(),
               PersonalInformationScreen.routeName: (context) =>

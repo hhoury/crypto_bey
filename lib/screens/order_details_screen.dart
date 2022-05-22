@@ -15,9 +15,9 @@ class OrderDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final productId = ModalRoute.of(context)!.settings.arguments as int;
+    final orderId = ModalRoute.of(context)!.settings.arguments as int;
     final loadedOrder =
-        Provider.of<Orders>(context, listen: false).findById(productId);
+        Provider.of<Orders>(context, listen: false).findById(orderId);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Order Detail'),
