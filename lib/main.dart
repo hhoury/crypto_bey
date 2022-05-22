@@ -35,7 +35,6 @@ import '../screens/my_account_screen.dart';
 // #endregion
 
 // #region  ORDERS PAGES
-import '../screens/new_order_confirm_screen.dart';
 import '../screens/new_order_screen.dart';
 import '../screens/order_details_screen.dart';
 import '../screens/order_history_screen.dart';
@@ -108,8 +107,6 @@ class MyApp extends StatelessWidget {
               ManageAddressesScreen.routeName: (context) =>
                   ManageAddressesScreen(),
               MyAccountScreen.routeName: (context) => MyAccountScreen(),
-              NewOrderConfirmationScreen.routeName: (context) =>
-                  NewOrderConfirmationScreen(),
               NewOrderScreen.routeName: (context) => NewOrderScreen(),
               NotificationsScreen.routeName: (context) => NotificationsScreen(),
               OrderDetailsScreen.routeName: (context) => OrderDetailsScreen(),

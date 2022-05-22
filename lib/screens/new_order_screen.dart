@@ -156,6 +156,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                 inputLabel(context, 'Retailer'),
                 addVerticalSpace(10),
                 DropdownButtonFormField<String>(
+                    alignment: Alignment.center,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please Select a Retailer';
@@ -169,6 +170,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                     items: ['Amazon', 'Aliexpress', 'Ebay', 'Other']
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
+                        alignment: Alignment.center,
                         value: value,
                         child: Text(value),
                       );
