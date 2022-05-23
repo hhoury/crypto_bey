@@ -1,6 +1,10 @@
 import 'package:crypto_bey/models/address.dart';
 import 'package:crypto_bey/utils/helper_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../models/order.dart';
+import '../providers/orders.dart';
 
 class ConfirmOrderScreen extends StatelessWidget {
   static const routeName = '/confirm-order';
@@ -8,13 +12,12 @@ class ConfirmOrderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void _submitNewOrder() {
-      // Provider.of<Orders>(context,listen: false).addOrder(Order(id: id, userId: userId, addressId: addressId, itemUrl: itemUrl, paymentAmount: paymentAmount, retailer: retailer, purchaseDate: purchaseDate, updatedDate: updatedDate))
+    void _submitNewOrder() async {
+    await  Provider.of<Orders>(context,listen: false).addOrder(Order(id: id, userId: userId, addressId: addressId, itemUrl: itemUrl, paymentAmount: paymentAmount, retailer: retailer, purchaseDate: purchaseDate, updatedDate: updatedDate))
     }
     final order =
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
     final shippingAddress = order['address'] as Address;
-    print(order['note']);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Confirm Order'),
