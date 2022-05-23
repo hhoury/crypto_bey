@@ -1,3 +1,10 @@
+import 'dart:convert';
+
+import 'package:crypto_bey/models/http_exception.dart';
+import 'package:dio/dio.dart';
+
+import '../constants/api_constants.dart';
+import '../core/services/api.dart';
 import '../models/address.dart';
 
 import '../constants/app_constants.dart';
@@ -8,6 +15,7 @@ import 'package:flutter/material.dart';
 class Orders with ChangeNotifier {
   String refreshToken = '';
   String userId = '';
+  final api = Api();
   // ignore: prefer_final_fields
   List<Order> _orders = [
     Order(
@@ -75,9 +83,27 @@ class Orders with ChangeNotifier {
     return [..._orders.where((element) => element.deleted == false)];
   }
 
-  void addOrder(Order newOrder) {
+  Future<void> addOrder(
+      String itemUrl, int retailer, int addressId, String note) async {
     //add order api
-    _orders.insert(0, newOrder);
+    try {
+      final url = Uri.parse('$ORDER_API/create_order');
+      final tokens = await api.getTokens();
+      await api.api.postUri(url,
+          options: Options(headers: {
+            'Content-type': 'application/json',
+            'Accept': 'application/json',
+            'access-token': '${tokens['accessToken']}',
+          }),
+          data: json.encode({
+            'item_url': itemUrl,
+            'retailer': retailer,
+            'address_id': addressId,
+            'note': note,
+          }));
+    } on DioError catch (error) {
+      throw HttpException(error.response!.statusMessage!);
+    }
     notifyListeners();
   }
 

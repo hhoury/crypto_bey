@@ -39,19 +39,10 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
         setState(() {
           _selectedAddress = _addresses[0];
         });
-        print('...');
       }
     }
 
     _isInit = false;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    if (_addresses.isNotEmpty) {
-      print('...');
-    }
   }
 
   final _newOrderForm = GlobalKey<FormState>();
@@ -80,7 +71,6 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
   _loadData() async {
     _addresses =
         await Provider.of<Addresses>(context, listen: false).getAddresses();
-    print('_loaddata');
   }
 
   @override
@@ -116,10 +106,10 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  address.name,
-                                  style: Theme.of(context).textTheme.headline3,
-                                ),
+                                Text(address.name,
+                                    style: Theme.of(context).textTheme.headline3
+                                    // ?.copyWith(color: purpleColor),
+                                    ),
                                 addVerticalSpace(15),
                                 Text(
                                   address.addressLine1,
