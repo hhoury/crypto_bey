@@ -13,7 +13,7 @@ class ConfirmOrderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     void _submitNewOrder() async {
-    await  Provider.of<Orders>(context,listen: false).addOrder(Order(id: id, userId: userId, addressId: addressId, itemUrl: itemUrl, paymentAmount: paymentAmount, retailer: retailer, purchaseDate: purchaseDate, updatedDate: updatedDate))
+      //await  Provider.of<Orders>(context,listen: false).addOrder()
     }
     final order =
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
